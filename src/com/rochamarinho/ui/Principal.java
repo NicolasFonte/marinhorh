@@ -16,6 +16,8 @@ package com.rochamarinho.ui;
  */
 public class Principal extends javax.swing.JFrame {
 
+    CadastrarAdvogado advPanel = new CadastrarAdvogado();
+    
     /** Creates new form Principal */
     public Principal() {
         initComponents();
@@ -32,7 +34,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAdvogado = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuItemCadastrar = new javax.swing.JMenuItem();
         menuFilial = new javax.swing.JMenu();
         menuTaxa = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -41,8 +43,13 @@ public class Principal extends javax.swing.JFrame {
 
         menuAdvogado.setText("Advogados");
 
-        jMenuItem1.setText("Cadastrar");
-        menuAdvogado.add(jMenuItem1);
+        menuItemCadastrar.setText("Cadastrar");
+        menuItemCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCadastrarActionPerformed(evt);
+            }
+        });
+        menuAdvogado.add(menuItemCadastrar);
 
         jMenuBar1.add(menuAdvogado);
 
@@ -70,6 +77,11 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuItemCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCadastrarActionPerformed
+       this.setContentPane(advPanel);
+       
+    }//GEN-LAST:event_menuItemCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,9 +121,9 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuAdvogado;
     private javax.swing.JMenu menuFilial;
+    private javax.swing.JMenuItem menuItemCadastrar;
     private javax.swing.JMenu menuTaxa;
     // End of variables declaration//GEN-END:variables
 }
