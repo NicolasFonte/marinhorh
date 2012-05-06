@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * Principal.java
  *
  * Created on 29/04/2012, 16:31:28 pelo Nicolas
@@ -17,6 +12,8 @@ package com.rochamarinho.ui;
 public class Principal extends javax.swing.JFrame {
 
     CadastrarAdvogado advPanel = new CadastrarAdvogado();
+    
+    
     
     /** Creates new form Principal */
     public Principal() {
