@@ -6,7 +6,7 @@
 /*
  * Principal.java
  *
- * Created on 29/04/2012, 16:31:28
+ * Created on 29/04/2012, 16:31:28 pelo Nicolas
  */
 package com.rochamarinho.ui;
 
