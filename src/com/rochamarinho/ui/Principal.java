@@ -11,10 +11,6 @@ package com.rochamarinho.ui;
  */
 public class Principal extends javax.swing.JFrame {
 
-    CadastrarAdvogado advPanel = new CadastrarAdvogado();
-    
-    
-    
     /** Creates new form Principal */
     public Principal() {
         initComponents();
@@ -32,9 +28,15 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAdvogado = new javax.swing.JMenu();
         menuItemCadastrar = new javax.swing.JMenuItem();
+        itemMenuBuscar = new javax.swing.JMenuItem();
         menuFilial = new javax.swing.JMenu();
+        itemMenuFilialCadastrar = new javax.swing.JMenuItem();
+        itemMenuFilialBusca = new javax.swing.JMenuItem();
         menuTaxa = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,15 +50,36 @@ public class Principal extends javax.swing.JFrame {
         });
         menuAdvogado.add(menuItemCadastrar);
 
+        itemMenuBuscar.setText("Buscar");
+        menuAdvogado.add(itemMenuBuscar);
+
         jMenuBar1.add(menuAdvogado);
 
         menuFilial.setText("Filiais");
+
+        itemMenuFilialCadastrar.setText("Cadastrar");
+        menuFilial.add(itemMenuFilialCadastrar);
+
+        itemMenuFilialBusca.setText("Buscar");
+        menuFilial.add(itemMenuFilialBusca);
+
         jMenuBar1.add(menuFilial);
 
         menuTaxa.setText("Taxas");
+
+        jMenuItem1.setText("Setar Nova Caixa Padrao");
+        menuTaxa.add(jMenuItem1);
+
         jMenuBar1.add(menuTaxa);
 
         jMenu4.setText("Relatorios");
+
+        jMenuItem2.setText("Todos Advogados");
+        jMenu4.add(jMenuItem2);
+
+        jMenuItem3.setText("Advogados Por Filial");
+        jMenu4.add(jMenuItem3);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -76,48 +99,22 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCadastrarActionPerformed
-       this.setContentPane(advPanel);
-       
+
+        CadastrarAdvogado advPanel = new CadastrarAdvogado();
+        this.setContentPane(advPanel);
+        this.pack();
+
     }//GEN-LAST:event_menuItemCadastrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemMenuBuscar;
+    private javax.swing.JMenuItem itemMenuFilialBusca;
+    private javax.swing.JMenuItem itemMenuFilialCadastrar;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu menuAdvogado;
     private javax.swing.JMenu menuFilial;
     private javax.swing.JMenuItem menuItemCadastrar;

@@ -11,6 +11,16 @@ import javax.persistence.Id;
  */
 @Entity
 public class Taxa implements Serializable {
+
+    public Taxa() {
+    }
+
+    public Taxa(double valor) {
+        this.valor = valor;
+    }
+    
+    
+    
     @Id @GeneratedValue
     private Long id;
     

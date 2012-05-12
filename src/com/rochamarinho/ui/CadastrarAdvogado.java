@@ -10,12 +10,19 @@
  */
 package com.rochamarinho.ui;
 
+import com.rochamarinho.controller.AdvogadoController;
+import com.rochamarinho.utils.BackendException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nicolas
  */
 public class CadastrarAdvogado extends javax.swing.JPanel {
 
+    AdvogadoController advController = new AdvogadoController();
+    
+    
     /** Creates new form CadastrarAdvogado */
     public CadastrarAdvogado() {
         initComponents();
@@ -32,32 +39,150 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
         txtNome = new javax.swing.JTextField();
         lblNomeAdvogado = new javax.swing.JLabel();
+        txtDistribuicao = new javax.swing.JTextField();
+        lblDistribuicao = new javax.swing.JLabel();
+        btnCadastrarAdvogado = new javax.swing.JButton();
+        lblPin = new javax.swing.JLabel();
+        txtPin = new javax.swing.JTextField();
+        txtTaxa = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
 
-        lblNomeAdvogado.setText("Nome");
+        lblNomeAdvogado.setText("Nome:");
+
+        lblDistribuicao.setText("Distribuição:");
+
+        btnCadastrarAdvogado.setText("cadastrar");
+        btnCadastrarAdvogado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarAdvogadoActionPerformed(evt);
+            }
+        });
+
+        lblPin.setText("PIN:");
+
+        txtTaxa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTaxaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Taxa:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Filial:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(240, Short.MAX_VALUE)
+                .addComponent(btnCadastrarAdvogado)
+                .addGap(72, 72, 72))
             .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(lblNomeAdvogado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNomeAdvogado)
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtPin, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDistribuicao)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTaxa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDistribuicao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))))
+                .addGap(228, 228, 228))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblPin)
+                .addContainerGap(375, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPin)
+                    .addComponent(txtPin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNomeAdvogado))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(btnCadastrarAdvogado))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDistribuicao)
+                            .addComponent(txtDistribuicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtTaxaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaxaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTaxaActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void btnCadastrarAdvogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAdvogadoActionPerformed
+    
+        String advNomeText = txtNome.getText();
+        String advTaxaText = txtTaxa.getText();
+        String advPinText = txtPin.getText();
+        String advDistribuicaoText = txtDistribuicao.getText();
+        
+        double distribuicaoDouble = Double.valueOf(advDistribuicaoText);        
+        double taxaDouble = Double.valueOf(advDistribuicaoText);
+        
+        try{
+        
+        advController.cadastrarAdvogado(advPinText, advNomeText, distribuicaoDouble, taxaDouble, "");
+        } catch ( BackendException ex )
+        {
+            JOptionPane.showMessageDialog(null, "advogado nao cadastrado");
+        }
+        
+    }//GEN-LAST:event_btnCadastrarAdvogadoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrarAdvogado;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblDistribuicao;
     private javax.swing.JLabel lblNomeAdvogado;
+    private javax.swing.JLabel lblPin;
+    private javax.swing.JTextField txtDistribuicao;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtPin;
+    private javax.swing.JTextField txtTaxa;
     // End of variables declaration//GEN-END:variables
 }

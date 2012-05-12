@@ -2,6 +2,7 @@ package com.rochamarinho.controller;
 
 import com.rochamarinho.backend.impl.MySQLAdvogadoBackend;
 import com.rochamarinho.model.Advogado;
+import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
 import java.util.List;
 
@@ -16,13 +17,18 @@ public class AdvogadoController {
     public AdvogadoController() {
     }
 
-    public void cadastrarAdvogado(String nome,double salarioBase) throws BackendException
+    public void cadastrarAdvogado(String pin,String nome,double distribuicao,double valorTaxa,String FilialNome) throws BackendException
     {
         
         Advogado adv = new Advogado();
+        adv.setPin(pin);
+        adv.setTaxa(new Taxa(valorTaxa));
         adv.setNome(nome);
-        adv.setSalarioBase(salarioBase);
+        adv.setDistribuicao(distribuicao);
         getBackend().create(adv);
+        
+        
+        
     }
     
     public List<Advogado> listarAdvogados()
