@@ -29,7 +29,7 @@ public class Principal extends javax.swing.JFrame {
         itemMenuFilialCadastrar = new javax.swing.JMenuItem();
         itemMenuFilialBusca = new javax.swing.JMenuItem();
         menuTaxa = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        itemMenuAlterarTaxa = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -65,8 +65,13 @@ public class Principal extends javax.swing.JFrame {
 
         menuTaxa.setText("Taxas");
 
-        jMenuItem1.setText("Setar Nova Taxa Padrao");
-        menuTaxa.add(jMenuItem1);
+        itemMenuAlterarTaxa.setText("Setar Nova Taxa Padrao");
+        itemMenuAlterarTaxa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuAlterarTaxaActionPerformed(evt);
+            }
+        });
+        menuTaxa.add(itemMenuAlterarTaxa);
 
         jMenuBar1.add(menuTaxa);
 
@@ -104,13 +109,19 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_menuItemCadastrarActionPerformed
 
+    private void itemMenuAlterarTaxaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuAlterarTaxaActionPerformed
+        AlterarTaxa alterarTaxaPanel = new AlterarTaxa();
+        this.setContentPane(alterarTaxaPanel);
+        this.pack();
+    }//GEN-LAST:event_itemMenuAlterarTaxaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemMenuAlterarTaxa;
     private javax.swing.JMenuItem itemMenuBuscar;
     private javax.swing.JMenuItem itemMenuFilialBusca;
     private javax.swing.JMenuItem itemMenuFilialCadastrar;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu menuAdvogado;

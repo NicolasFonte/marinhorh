@@ -49,10 +49,13 @@
             <Property name="text" type="java.lang.String" value="Taxas"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="itemMenuAlterarTaxa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Setar Nova Taxa Padrao"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuAlterarTaxaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

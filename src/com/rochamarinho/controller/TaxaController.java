@@ -28,6 +28,7 @@ public class TaxaController {
     public void atualizaTaxa(double valor) throws BackendException
     {
         Taxa taxa = new Taxa(valor);
+        taxa.setId(1L);
         getBackend().update(taxa);
     }
     
