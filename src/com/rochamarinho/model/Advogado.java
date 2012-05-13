@@ -19,9 +19,7 @@ public class Advogado implements Serializable {
     @GeneratedValue
     private Long id;    
     
-    @OneToOne(cascade = CascadeType.ALL)
-    private Taxa taxa;    
-    
+    private double taxa;    
     private String pin;
     private String nome;    
     private double distribuicao;
@@ -34,11 +32,11 @@ public class Advogado implements Serializable {
         this.distribuicao = distribuicao;
     }
 
-    public Taxa getTaxa() {
+    public double getTaxa() {
         return taxa;
     }
 
-    public void setTaxa(Taxa taxa) {
+    public void setTaxa(double taxa) {
         this.taxa = taxa;
     }
     

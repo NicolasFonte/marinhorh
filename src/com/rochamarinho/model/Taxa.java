@@ -12,20 +12,19 @@ import javax.persistence.Id;
 @Entity
 public class Taxa implements Serializable {
 
-    public Taxa() {
-    }
-
-    public Taxa(double valor) {
-        this.valor = valor;
-    }
-    
-    
-    
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
     
     private double valor;
 
+    public Taxa() {
+    }
+
+    public Taxa( double valor) {
+        this.valor = valor;
+    }
+    
     public double getValor() {
         return valor;
     }

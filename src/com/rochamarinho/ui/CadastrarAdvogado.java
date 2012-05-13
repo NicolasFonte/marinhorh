@@ -11,7 +11,11 @@
 package com.rochamarinho.ui;
 
 import com.rochamarinho.controller.AdvogadoController;
+import com.rochamarinho.controller.TaxaController;
+import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,11 +25,12 @@ import javax.swing.JOptionPane;
 public class CadastrarAdvogado extends javax.swing.JPanel {
 
     AdvogadoController advController = new AdvogadoController();
-    
+    TaxaController taxaController = new TaxaController();
     
     /** Creates new form CadastrarAdvogado */
     public CadastrarAdvogado() {
         initComponents();
+        setDefaultTaxaText();
     }
 
     /** This method is called from within the constructor to
@@ -160,7 +165,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         String advDistribuicaoText = txtDistribuicao.getText();
         
         double distribuicaoDouble = Double.valueOf(advDistribuicaoText);        
-        double taxaDouble = Double.valueOf(advDistribuicaoText);
+        double taxaDouble = Double.valueOf(advTaxaText);
         
         try{
         
@@ -168,10 +173,28 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         } catch ( BackendException ex )
         {
             JOptionPane.showMessageDialog(null, "advogado nao cadastrado");
+            
         }
+        
         
     }//GEN-LAST:event_btnCadastrarAdvogadoActionPerformed
 
+    protected void setDefaultTaxaText() 
+    {
+        Taxa taxa;
+        
+        try {
+            taxa = taxaController.getTaxa();
+        } catch (BackendException ex) {
+            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, "taxa nao foi carregada", ex);
+            taxa = new Taxa(0);
+        }
+        
+        txtTaxa.setText(String.valueOf(taxa.getValor()));
+        
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarAdvogado;
     private javax.swing.JComboBox jComboBox1;

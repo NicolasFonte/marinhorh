@@ -7,9 +7,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

@@ -7,6 +7,7 @@ import com.rochamarinho.utils.BackendException;
  *
  * @author nicolas
  */
+
 public interface TaxaBackend {
 
     void create (Taxa t) throws BackendException;
