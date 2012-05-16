@@ -35,6 +35,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Rocha Marinho");
 
         jMenuBar1.setName("Rocha Marinho"); // NOI18N
 

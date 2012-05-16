@@ -36,6 +36,7 @@ public class AlterarTaxa extends javax.swing.JPanel {
         lblNovoValor = new javax.swing.JLabel();
         txtTaxaNovoValor = new javax.swing.JTextField();
         btnAlterarValorTaxa = new javax.swing.JButton();
+        btnCancelarAlteracaoTaxa = new javax.swing.JButton();
 
         lblNovoValor.setText("Digite o novo valor: ");
 
@@ -43,6 +44,13 @@ public class AlterarTaxa extends javax.swing.JPanel {
         btnAlterarValorTaxa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarValorTaxaActionPerformed(evt);
+            }
+        });
+
+        btnCancelarAlteracaoTaxa.setText("cancelar");
+        btnCancelarAlteracaoTaxa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarAlteracaoTaxaActionPerformed(evt);
             }
         });
 
@@ -54,12 +62,15 @@ public class AlterarTaxa extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblNovoValor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTaxaNovoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(245, Short.MAX_VALUE)
-                .addComponent(btnAlterarValorTaxa)
-                .addGap(72, 72, 72))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAlterarValorTaxa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addComponent(btnCancelarAlteracaoTaxa)
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtTaxaNovoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(149, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,9 +79,11 @@ public class AlterarTaxa extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNovoValor)
                     .addComponent(txtTaxaNovoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
-                .addComponent(btnAlterarValorTaxa)
-                .addGap(55, 55, 55))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlterarValorTaxa)
+                    .addComponent(btnCancelarAlteracaoTaxa))
+                .addGap(61, 61, 61))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -90,11 +103,18 @@ public class AlterarTaxa extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "error on update");            
         }
 
+        JOptionPane.showMessageDialog(null, "taxa atualizada com sucesso");        
+        this.setVisible(false);
 
     }//GEN-LAST:event_btnAlterarValorTaxaActionPerformed
 
+    private void btnCancelarAlteracaoTaxaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarAlteracaoTaxaActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelarAlteracaoTaxaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarValorTaxa;
+    private javax.swing.JButton btnCancelarAlteracaoTaxa;
     private javax.swing.JLabel lblNovoValor;
     private javax.swing.JTextField txtTaxaNovoValor;
     // End of variables declaration//GEN-END:variables
