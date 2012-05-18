@@ -17,15 +17,13 @@ public class AdvogadoController {
     }
 
     public void cadastrarAdvogado(String pin,String nome,double distribuicao,double valorTaxa,String FilialNome) throws BackendException
-    {
-        
+    {        
         Advogado adv = new Advogado();
         adv.setPin(pin);
         adv.setTaxa(valorTaxa);
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);
-        getBackend().create(adv);
-        
+        getBackend().create(adv);        
     }
     
     public List<Advogado> listarAdvogados()
@@ -37,8 +35,7 @@ public class AdvogadoController {
         if (backend == null)
         {
             backend = new MySQLAdvogadoBackend();
-        }
-        
+        }        
         return backend;
     }
 

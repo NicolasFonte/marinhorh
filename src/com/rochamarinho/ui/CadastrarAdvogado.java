@@ -11,9 +11,13 @@
 package com.rochamarinho.ui;
 
 import com.rochamarinho.controller.AdvogadoController;
+import com.rochamarinho.controller.FilialController;
 import com.rochamarinho.controller.TaxaController;
+import com.rochamarinho.model.Filial;
 import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -26,11 +30,13 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
     AdvogadoController advController = new AdvogadoController();
     TaxaController taxaController = new TaxaController();
+    FilialController filialController = new FilialController();
     
     /** Creates new form CadastrarAdvogado */
     public CadastrarAdvogado() {
         initComponents();
         setDefaultTaxaText();
+        setFiliaisNoComboBox();
     }
 
     /** This method is called from within the constructor to
@@ -51,7 +57,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         txtPin = new javax.swing.JTextField();
         txtTaxa = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        filialComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         btnCancelarCadastro = new javax.swing.JButton();
 
@@ -76,10 +82,10 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
         jLabel1.setText("Taxa:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        filialComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                filialComboBoxActionPerformed(evt);
             }
         });
 
@@ -113,7 +119,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtTaxa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filialComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDistribuicao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))))
                 .addGap(228, 228, 228))
             .addGroup(layout.createSequentialGroup()
@@ -148,7 +154,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                     .addComponent(jLabel1))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -162,9 +168,9 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTaxaActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void filialComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filialComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_filialComboBoxActionPerformed
 
     private void btnCadastrarAdvogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAdvogadoActionPerformed
     
@@ -178,7 +184,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         
         try{
         
-        advController.cadastrarAdvogado(advPinText, advNomeText, distribuicaoDouble, taxaDouble, "");
+           advController.cadastrarAdvogado(advPinText, advNomeText, distribuicaoDouble, taxaDouble, "");
         } catch ( BackendException ex )
         {
             JOptionPane.showMessageDialog(null, "advogado nao cadastrado");
@@ -213,7 +219,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarAdvogado;
     private javax.swing.JButton btnCancelarCadastro;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox filialComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblDistribuicao;
@@ -224,4 +230,18 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     private javax.swing.JTextField txtPin;
     private javax.swing.JTextField txtTaxa;
     // End of variables declaration//GEN-END:variables
+
+    public void setFiliaisNoComboBox() {
+        List<Filial> filiais = null;
+        try {
+            filiais = filialController.listarFiliais();
+        } catch (BackendException ex) {
+            JOptionPane.showConfirmDialog(null, "Nao foi possivel carregar a lista de filiais");
+            filiais = new ArrayList<Filial>();
+        }
+        
+        for ( Filial f: filiais ) {
+            filialComboBox.addItem(f.getNome());
+        }
+    }
 }

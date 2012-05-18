@@ -86,9 +86,14 @@ public class MySQLFilialBackend implements FilialBackend {
     public List<Advogado> advogadosPorFilial(Filial filial) throws BackendException {
         
          Filial f = read(filial.getId());         
-         return f.getAdvogados();
-         
-        
+         return f.getAdvogados();       
+    }
+    
+    public void addAdvogadoNaFilial(Filial filial, Advogado advogado) throws BackendException
+    {       
+        Filial f = read(filial.getId());        
+        f.getAdvogados().add(advogado);        
+        update(f);        
     }
 
     
