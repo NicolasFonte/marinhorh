@@ -19,6 +19,10 @@ public class FilialController {
     }
     
     public FilialBackend getBackend() {
+        if (backend == null)
+        {
+            backend = new MySQLFilialBackend();
+        }
         return backend;
     }
 

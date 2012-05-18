@@ -57,6 +57,11 @@ public class Principal extends javax.swing.JFrame {
         menuFilial.setText("Filiais");
 
         itemMenuFilialCadastrar.setText("Cadastrar");
+        itemMenuFilialCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuFilialCadastrarActionPerformed(evt);
+            }
+        });
         menuFilial.add(itemMenuFilialCadastrar);
 
         itemMenuFilialBusca.setText("Buscar");
@@ -115,6 +120,12 @@ public class Principal extends javax.swing.JFrame {
         this.setContentPane(alterarTaxaPanel);
         this.pack();
     }//GEN-LAST:event_itemMenuAlterarTaxaActionPerformed
+
+    private void itemMenuFilialCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuFilialCadastrarActionPerformed
+        CadastrarFilial filPanel = new CadastrarFilial();
+        this.setContentPane(filPanel);
+        this.pack();
+    }//GEN-LAST:event_itemMenuFilialCadastrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemMenuAlterarTaxa;
