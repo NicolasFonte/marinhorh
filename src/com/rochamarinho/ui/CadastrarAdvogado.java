@@ -14,6 +14,8 @@ import com.rochamarinho.controller.AdvogadoController;
 import com.rochamarinho.controller.TaxaController;
 import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
+import com.rochamarinho.utils.ValidaCpf;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -31,6 +33,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     public CadastrarAdvogado() {
         initComponents();
         setDefaultTaxaText();
+        setDefaultMaskCpf();
     }
 
     /** This method is called from within the constructor to
@@ -54,6 +57,8 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         btnCancelarCadastro = new javax.swing.JButton();
+        lblCpf = new javax.swing.JLabel();
+        jtfCpf = new javax.swing.JFormattedTextField();
 
         lblNomeAdvogado.setText("Nome:");
 
@@ -92,6 +97,14 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             }
         });
 
+        lblCpf.setText("CPF:");
+
+        jtfCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfCpfFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,26 +118,31 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtPin, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDistribuicao)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtTaxa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDistribuicao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))))
-                .addGap(228, 228, 228))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblPin)
-                .addContainerGap(375, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTaxa, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtDistribuicao)
+                            .addComponent(jtfCpf))))
+                .addGap(222, 222, 222))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(188, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCadastrarAdvogado)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelarCadastro)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPin)
+                    .addComponent(lblCpf))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -146,7 +164,11 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCpf)
+                    .addComponent(jtfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -166,12 +188,16 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    
     private void btnCadastrarAdvogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAdvogadoActionPerformed
     
         String advNomeText = txtNome.getText();
         String advTaxaText = txtTaxa.getText();
         String advPinText = txtPin.getText();
         String advDistribuicaoText = txtDistribuicao.getText();
+       // String advCpf = jtfCpf.getText();
+        //advCpf = advCpf.replace(".", "");
+        //advCpf = advCpf.replace("-", "");
         
         double distribuicaoDouble = Double.valueOf(advDistribuicaoText);        
         double taxaDouble = Double.valueOf(advTaxaText);
@@ -179,6 +205,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         try{
         
         advController.cadastrarAdvogado(advPinText, advNomeText, distribuicaoDouble, taxaDouble, "");
+        JOptionPane.showMessageDialog(null, jtfCpf.getText());
         } catch ( BackendException ex )
         {
             JOptionPane.showMessageDialog(null, "advogado nao cadastrado");
@@ -194,7 +221,19 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarCadastroActionPerformed
 
-    protected void setDefaultTaxaText() 
+    private void jtfCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCpfFocusLost
+        String advCpf = jtfCpf.getText();
+        advCpf = advCpf.replace(".", "");
+        advCpf = advCpf.replace("-", "");
+      boolean validar = new ValidaCpf().isCpf(advCpf);
+      if (!(validar)){
+          JOptionPane.showMessageDialog(null, "CPF inválido! Favor digitar um CPF Válido, obedecendo o formato: (xxx.xxx.xxx.-xx)!");
+          jtfCpf.requestFocus();
+      }
+    }//GEN-LAST:event_jtfCpfFocusLost
+
+    //nicolas, tornei esse metodo private, pois estava reclamando quando na sua chamada. Ler depois e apaga!
+    private void setDefaultTaxaText() 
     {
         Taxa taxa;
         
@@ -209,6 +248,19 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         
     }
     
+    private void setDefaultMaskCpf()
+    {
+         try{     
+    jtfCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+            new javax.swing.text.MaskFormatter("###.###.###-##")));
+    
+}catch (ParseException ex)
+{
+    JOptionPane.showMessageDialog(null, "Por gentileza, Digite um CPF Válido!");
+}
+    
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarAdvogado;
@@ -216,6 +268,8 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JFormattedTextField jtfCpf;
+    private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblDistribuicao;
     private javax.swing.JLabel lblNomeAdvogado;
     private javax.swing.JLabel lblPin;
