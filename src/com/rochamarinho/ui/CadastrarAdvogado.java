@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * CadastrarAdvogado.java
  *
  * Created on 06/05/2012, 17:22:24
@@ -82,7 +77,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
         jLabel1.setText("Taxa:");
 
-        filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "default" }));
         filialComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filialComboBoxActionPerformed(evt);
@@ -118,16 +113,16 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtTaxa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                            .addComponent(filialComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDistribuicao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))))
+                            .addComponent(txtTaxa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                            .addComponent(txtDistribuicao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                            .addComponent(filialComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(228, 228, 228))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblPin)
-                .addContainerGap(375, Short.MAX_VALUE))
+                .addContainerGap(411, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(188, Short.MAX_VALUE)
+                .addContainerGap(224, Short.MAX_VALUE)
                 .addComponent(btnCadastrarAdvogado)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelarCadastro)
@@ -240,8 +235,11 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             filiais = new ArrayList<Filial>();
         }
         
+        
+        List<String> filiaisNomes = new ArrayList<String>();
         for ( Filial f: filiais ) {
-            filialComboBox.addItem(f.getNome());
+            filiaisNomes.add(f.getNome());
         }
+        filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(filiaisNomes.toArray()));
     }
 }

@@ -35,9 +35,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txtTaxa" alignment="0" pref="73" max="32767" attributes="0"/>
-                          <Component id="filialComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDistribuicao" alignment="0" pref="73" max="32767" attributes="1"/>
+                          <Component id="txtTaxa" alignment="0" pref="109" max="32767" attributes="0"/>
+                          <Component id="txtDistribuicao" alignment="0" pref="109" max="32767" attributes="1"/>
+                          <Component id="filialComboBox" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -46,10 +46,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblPin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="375" max="32767" attributes="0"/>
+              <EmptySpace pref="411" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="188" max="32767" attributes="0"/>
+              <EmptySpace pref="224" max="32767" attributes="0"/>
               <Component id="btnCadastrarAdvogado" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="btnCancelarCadastro" min="-2" max="-2" attributes="0"/>
@@ -137,18 +137,16 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="filialComboBox">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;default&quot; })" type="code"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filialComboBoxActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
