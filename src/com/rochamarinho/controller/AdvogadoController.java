@@ -16,10 +16,10 @@ public class AdvogadoController {
     public AdvogadoController() {
     }
 
-    public void cadastrarAdvogado(String pin,String nome,double distribuicao,double valorTaxa,String FilialNome) throws BackendException
+    public void cadastrarAdvogado(String cpf,String nome,double distribuicao,double valorTaxa,String FilialNome) throws BackendException
     {        
         Advogado adv = new Advogado();
-        adv.setPin(pin);
+        adv.setCpf(cpf);
         adv.setTaxa(valorTaxa);
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);

@@ -113,7 +113,9 @@ public class MySQLAdvogadoBackendTest {
     {
         Advogado adv1 = createDefaultAdvogado();
         Advogado adv2 = createDefaultAdvogado();
+        adv2.setCpf("123435");
         Advogado adv3 = createDefaultAdvogado();
+        adv3.setCpf("1234353");
         
         backend.create(adv1);
         backend.create(adv2);
@@ -124,11 +126,25 @@ public class MySQLAdvogadoBackendTest {
         assertEquals(3,reloaded.size());
         
     }
+    
+    @Test
+    public void testThatAdvogadosCanBeRetriviedByCpf() throws BackendException
+    {
+        Advogado adv1 = createDefaultAdvogado();
+        
+        
+        backend.create(adv1);
+        Advogado reloaded = backend.byCpf("01236702336");
+        assertNotNull(reloaded);
+        
+        
+    }
      
     protected Advogado createDefaultAdvogado()
     {
         String name = "advogado " + Math.random();
-        Advogado defaultOne = new Advogado();        
+        Advogado defaultOne = new Advogado();
+        defaultOne.setCpf("01236702336");
         
         defaultOne.setNome(name);       
         return defaultOne;

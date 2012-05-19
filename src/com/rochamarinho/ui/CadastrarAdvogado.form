@@ -19,14 +19,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblNomeAdvogado" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtPin" alignment="0" max="32767" attributes="1"/>
-                          <Component id="txtNome" alignment="0" pref="73" max="32767" attributes="1"/>
-                      </Group>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblDistribuicao" min="-2" max="-2" attributes="0"/>
@@ -35,18 +27,26 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txtTaxa" alignment="0" pref="109" max="32767" attributes="0"/>
-                          <Component id="txtDistribuicao" alignment="0" pref="109" max="32767" attributes="1"/>
+                          <Component id="txtTaxa" alignment="0" pref="135" max="32767" attributes="0"/>
+                          <Component id="txtDistribuicao" alignment="0" pref="135" max="32767" attributes="1"/>
                           <Component id="filialComboBox" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblNomeAdvogado" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jftCpf" alignment="0" pref="135" max="32767" attributes="0"/>
+                          <Component id="txtNome" alignment="0" min="-2" pref="73" max="-2" attributes="1"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblPin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="411" max="32767" attributes="0"/>
+              <Component id="lblCpf" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="413" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="224" max="32767" attributes="0"/>
@@ -62,8 +62,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblPin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jftCpf" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -118,12 +118,10 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarAdvogadoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblPin">
+    <Component class="javax.swing.JLabel" name="lblCpf">
       <Properties>
-        <Property name="text" type="java.lang.String" value="PIN:"/>
+        <Property name="text" type="java.lang.String" value="cpf:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPin">
     </Component>
     <Component class="javax.swing.JTextField" name="txtTaxa">
       <Events>
@@ -159,6 +157,12 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarCadastroActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jftCpf">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jftCpfActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jftCpfFocusLost"/>
       </Events>
     </Component>
   </SubComponents>

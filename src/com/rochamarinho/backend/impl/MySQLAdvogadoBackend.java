@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -63,5 +64,13 @@ public class MySQLAdvogadoBackend implements AdvogadoBackend {
         List<Advogado> list = session.createCriteria(Advogado.class).list();
         tx.commit();
         return list;
+    }
+
+    @Override
+    public Advogado byCpf(String validCpf) throws BackendException {
+        Transaction tx = session.beginTransaction();
+        Advogado adv = (Advogado) session.createCriteria(Advogado.class).add(Restrictions.eq("cpf", validCpf)).uniqueResult();
+        tx.commit();
+        return adv;
     }
 }

@@ -11,5 +11,5 @@ import java.util.List;
 public interface AdvogadoBackend extends CRUDBackend<Advogado> {
 
     List<Advogado> list() throws BackendException;
-    
+    Advogado byCpf(String validCpf) throws BackendException;
 }

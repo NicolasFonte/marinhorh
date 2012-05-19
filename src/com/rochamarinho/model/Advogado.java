@@ -2,6 +2,7 @@ package com.rochamarinho.model;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,7 +21,17 @@ public class Advogado implements Serializable {
     private Long id;    
     
     private double taxa;    
-    private String pin;
+    
+    @Column(nullable=false, unique=true)
+    private String cpf;
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
     private String nome;    
     private double distribuicao;
 
@@ -55,14 +66,6 @@ public class Advogado implements Serializable {
     
     public void setId(Long id) {
         this.id = id;
-    }
-
-        public String getPin() {
-        return pin;
-    }
-
-    public void setPin(String pin) {
-        this.pin = pin;
     }
     
 }
