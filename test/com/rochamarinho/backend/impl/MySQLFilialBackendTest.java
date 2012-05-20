@@ -129,6 +129,9 @@ public class MySQLFilialBackendTest {
         Advogado adv1 = new Advogado();        
         Advogado adv2 = new Advogado();
         
+        adv1.setCpf("01236702336");
+        adv2.setCpf("01236702337");
+        
         filial.getAdvogados().add(adv2);
         filial.getAdvogados().add(adv1);
         
@@ -138,6 +141,21 @@ public class MySQLFilialBackendTest {
         assertEquals(2,recarregar.size());
         
     }
+    
+    @Test
+    public void MostrarQueFilialPodeSerRecuperadaPeloNome() throws BackendException
+    {
+        Filial f = createDefaultFilial();
+        String nome = f.getNome();
+        
+        backend.create(f);
+        
+        Filial recovered = backend.buscarPorNome(nome);
+        
+        assertEquals(nome, recovered.getNome());
+        
+    }
+    
     
     protected Filial createDefaultFilial()
     {

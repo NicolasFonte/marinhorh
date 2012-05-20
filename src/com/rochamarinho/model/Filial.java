@@ -4,10 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 /**
  *
@@ -18,9 +23,11 @@ public class Filial implements Serializable {
     
     @Id @GeneratedValue
     private Long id;
+    @Column(nullable=false, unique=true)
     private String nome;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @NotFound(action=NotFoundAction.IGNORE) 
     List<Advogado> advogados;
 
     public List<Advogado> getAdvogados() {
@@ -29,6 +36,11 @@ public class Filial implements Serializable {
             advogados = new ArrayList<Advogado>();
         }
         return advogados;
+    }
+    
+    public void addAdvogado(Advogado adv)
+    {
+        getAdvogados().add(adv);
     }
 
     public void setAdvogados(List<Advogado> advogados) {

@@ -50,6 +50,11 @@ public class Principal extends javax.swing.JFrame {
         menuAdvogado.add(menuItemCadastrar);
 
         itemMenuBuscar.setText("Buscar");
+        itemMenuBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuBuscarActionPerformed(evt);
+            }
+        });
         menuAdvogado.add(itemMenuBuscar);
 
         jMenuBar1.add(menuAdvogado);
@@ -126,6 +131,12 @@ public class Principal extends javax.swing.JFrame {
         this.setContentPane(filPanel);
         this.pack();
     }//GEN-LAST:event_itemMenuFilialCadastrarActionPerformed
+
+    private void itemMenuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuBuscarActionPerformed
+        BuscarAdvogado buscar = new BuscarAdvogado();
+        this.setContentPane(buscar);
+        this.pack();
+    }//GEN-LAST:event_itemMenuBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemMenuAlterarTaxa;

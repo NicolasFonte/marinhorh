@@ -19,12 +19,13 @@ public class Advogado implements Serializable {
     @Id
     @GeneratedValue
     private Long id;    
-    
     private double taxa;    
-    
+    private String nome;    
+    private double distribuicao;
     @Column(nullable=false, unique=true)
     private String cpf;
 
+    
     public String getCpf() {
         return cpf;
     }
@@ -32,9 +33,7 @@ public class Advogado implements Serializable {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    private String nome;    
-    private double distribuicao;
-
+    
     public double getDistribuicao() {
         return distribuicao;
     }

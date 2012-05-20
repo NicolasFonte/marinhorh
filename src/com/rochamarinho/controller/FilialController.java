@@ -48,5 +48,13 @@ public class FilialController {
         
     }
     
+    public Filial filialDeAdvogado(String cpf) throws BackendException
+    {
+        return getBackend().buscarFilialDeAdvogadoPorCpf(cpf);
+    }
+
+
+    
+    
     
 }

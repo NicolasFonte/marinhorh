@@ -121,22 +121,23 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtTaxa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(txtDistribuicao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(filialComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(filialComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtTaxa, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtDistribuicao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblNomeAdvogado)
                         .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jftCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jftCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))))
                 .addGap(202, 202, 202))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblCpf)
-                .addContainerGap(413, Short.MAX_VALUE))
+                .addContainerGap(475, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(224, Short.MAX_VALUE)
+                .addContainerGap(286, Short.MAX_VALUE)
                 .addComponent(btnCadastrarAdvogado)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelarCadastro)
@@ -159,8 +160,8 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                     .addComponent(txtDistribuicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,23 +184,30 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
     private void btnCadastrarAdvogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAdvogadoActionPerformed
 
+        boolean existeFilial = existeFilial();
+        if ( existeFilial == false ) return;
+        
+        
         String advNomeText = txtNome.getText();
-        String advTaxaText = txtTaxa.getText();
-        String advPinText = jftCpf.getText();
+        String advTaxaText = txtTaxa.getText();        
+        String advCpfText = jftCpf.getText().replace(".", "").replace("-", "");        
+        
         String advDistribuicaoText = txtDistribuicao.getText();
-
+        String nomeFilial = (String) filialComboBox.getSelectedItem();        
+        
         double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
         double taxaDouble = Double.valueOf(advTaxaText);
-
         try {
 
-            advController.cadastrarAdvogado(advPinText, advNomeText, distribuicaoDouble, taxaDouble, "");
+            advController.cadastrarAdvogado(advCpfText, advNomeText, distribuicaoDouble, taxaDouble, nomeFilial);
+          
         } catch (BackendException ex) {
             JOptionPane.showMessageDialog(null, "advogado nao cadastrado");
 
         }
-
+        
         JOptionPane.showMessageDialog(null, "advogado cadastrado com sucesso");
+        
         this.setVisible(false);
 
     }//GEN-LAST:event_btnCadastrarAdvogadoActionPerformed
@@ -277,5 +285,14 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             filiaisNomes.add(f.getNome());
         }
         filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(filiaisNomes.toArray()));
+    }
+
+    private boolean existeFilial() {
+        if ( filialComboBox.getItemCount() == 0)
+        {
+            JOptionPane.showConfirmDialog(null, "um advogado precisa estar associado a uma filial, cadastre uma filial.");
+            return false;
+        }
+        return true;
     }
 }

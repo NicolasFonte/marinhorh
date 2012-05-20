@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -89,12 +90,44 @@ public class MySQLFilialBackend implements FilialBackend {
          return f.getAdvogados();       
     }
     
+    @Override
     public void addAdvogadoNaFilial(Filial filial, Advogado advogado) throws BackendException
     {       
         Filial f = read(filial.getId());        
         f.getAdvogados().add(advogado);        
         update(f);        
     }
+    
+    
+    public Filial buscarPorNome(String nome) throws BackendException
+    {
+        Transaction tx = session.beginTransaction();
+        Filial filial = (Filial) session.createCriteria(Filial.class).add(Restrictions.eq("nome", nome)).uniqueResult();
+        if (filial == null) throw new BackendException("filial nao existe no banco");        
+        tx.commit();
+        return filial;
+    }
+
+    @Override
+    public Filial buscarFilialDeAdvogadoPorCpf(String cpf) throws BackendException {
+        
+        List<Filial> list = list();
+        for ( Filial filialEach: list )
+        {            
+            for ( Advogado advEach : filialEach.getAdvogados())
+            {
+                if ( advEach.getCpf().equals(cpf) )
+                {
+                    return filialEach;
+                }
+            }
+            
+        }
+        return null;
+        
+    }
+    
+    
 
     
 }
