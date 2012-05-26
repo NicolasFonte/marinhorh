@@ -1,6 +1,7 @@
 package com.rochamarinho.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Advogado implements Serializable {
 
+    public Advogado() {
+    
+        valores = new ArrayList<ValorMes>();
+    }
+
     @Id
     @GeneratedValue
     private Long id;
@@ -27,10 +33,22 @@ public class Advogado implements Serializable {
     private double distribuicao;
     @Column(nullable = false, unique = true)
     private String cpf;
-    public transient Map<Integer, Double> mesSalario;
-
+    
     @OneToMany
-    private List<Pagamento> historicoPagamento; 
+    private List<Pagamento> historicoPagamento;    
+    
+    @OneToMany
+    private List<ValorMes> valores;
+    
+    double [] listaDePorcentagensAleatorias = {0.4,0.425,0.45,0.475,0.5,0.525,0.55,0.575,0.6,0.625,0.650,0.675,0.7 };
+    
+    public List<Pagamento> getHistoricoPagamento() {
+        return historicoPagamento;
+    }
+
+    public void setHistoricoPagamento(List<Pagamento> historicoPagamento) {
+        this.historicoPagamento = historicoPagamento;
+    }
     
     public String getCpf() {
         return cpf;
@@ -78,24 +96,49 @@ public class Advogado implements Serializable {
         
         double mediaMensal = salarioAnual / 12;
         System.out.println("media mensal " + mediaMensal);
-        
-        double porcentagemParaVariacaoDoSalario = 0.5;
+        double porcentagemParaVariacaoDoSalario = escolherUmaPorcentagemAleatoria();
 
-        mesSalario = new HashMap<Integer, Double>();
-
+        String [] meses = {"janeiro","fevereiro","marco","abrl","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"};
         int i = 1;
+        ValorMes umValor;
+            
         while (i < 12) {
 
             Double valor1 = (mediaMensal + ( (porcentagemParaVariacaoDoSalario * mediaMensal) /100  ));
             Double valor2 = (mediaMensal - ( (porcentagemParaVariacaoDoSalario * mediaMensal) /100  ));
-                        
-            mesSalario.put(i,valor1);
-            i++;        
-            mesSalario.put(i, valor2);
+            
+            umValor = new ValorMes();
+            
+            umValor.setValor(valor1);
+            umValor.setMes(meses[i-1]);         
+            valores.add(umValor);
+            
+            i++;
+            
+            umValor = new ValorMes();
+            
+            umValor.setValor(valor2);
+            umValor.setMes(meses[i-1]);
+            valores.add(umValor);
+            
             porcentagemParaVariacaoDoSalario++;
             i++;
         
         }
 
+    }
+
+    private double escolherUmaPorcentagemAleatoria() {
+        int numero = (int) Math.round( 13 * Math.random());
+        System.out.println("numero aleatorio 1-13 : " + numero);
+        return listaDePorcentagensAleatorias[numero];
+    }
+    
+    public List<ValorMes> getValores() {
+        return valores;
+    }
+
+    public void setValores(List<ValorMes> valores) {
+        this.valores = valores;
     }
 }

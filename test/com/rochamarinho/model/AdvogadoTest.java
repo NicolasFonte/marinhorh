@@ -33,15 +33,11 @@ public class AdvogadoTest {
         
         adv.gerarSalarios();
         int i = 1;
-        for (Double salario : adv.mesSalario.values())
-        {            
-            System.out.println("salario mes : " + i + " valor: " + salario);
-            i++;
-        }
         
-        for (Integer indice: adv.mesSalario.keySet())
+        for (ValorMes salarioMes : adv.getValores())
         {
-            System.out.println(indice);
+            
+            System.out.println("salario valor-mes: " + salarioMes.getValor() + " || " + salarioMes.getMes());
         }
         
                 
