@@ -5,6 +5,8 @@
  */
 package com.rochamarinho.ui;
 
+import com.rochamarinho.model.Report;
+
 /**
  *
  * @author nicolas
@@ -31,7 +33,7 @@ public class Principal extends javax.swing.JFrame {
         menuTaxa = new javax.swing.JMenu();
         itemMenuAlterarTaxa = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuItemSalarioAdvogados = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,8 +90,13 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu4.setText("Relatorios");
 
-        jMenuItem2.setText("Todos Advogados");
-        jMenu4.add(jMenuItem2);
+        menuItemSalarioAdvogados.setText("Salario Advogados");
+        menuItemSalarioAdvogados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSalarioAdvogadosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(menuItemSalarioAdvogados);
 
         jMenuItem3.setText("Advogados Por Filial");
         jMenu4.add(jMenuItem3);
@@ -138,6 +145,13 @@ public class Principal extends javax.swing.JFrame {
         this.pack();
     }//GEN-LAST:event_itemMenuBuscarActionPerformed
 
+    private void menuItemSalarioAdvogadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSalarioAdvogadosActionPerformed
+
+        Report.gerarRelatorioTodosAdvogados();
+
+
+    }//GEN-LAST:event_menuItemSalarioAdvogadosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemMenuAlterarTaxa;
     private javax.swing.JMenuItem itemMenuBuscar;
@@ -145,11 +159,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemMenuFilialCadastrar;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu menuAdvogado;
     private javax.swing.JMenu menuFilial;
     private javax.swing.JMenuItem menuItemCadastrar;
+    private javax.swing.JMenuItem menuItemSalarioAdvogados;
     private javax.swing.JMenu menuTaxa;
     // End of variables declaration//GEN-END:variables
 }

@@ -139,7 +139,7 @@ public class Advogado implements Serializable {
         this.salarioTotal = salarioTotal;
     }
 
-    private double escolherUmaPorcentagemAleatoria() {
+    protected double escolherUmaPorcentagemAleatoria() {
         int numero = (int) Math.round( 13 * Math.random());
         System.out.println("numero aleatorio 1-13 : " + numero);
         if ( numero < 0 ) numero = 0;
