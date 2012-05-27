@@ -139,6 +139,28 @@ public class MySQLAdvogadoBackendTest {
         
         
     }
+    
+    @Test
+    public void testeQueOAdvogadoSabeGuardarSeusSalariosEPagamentos() throws BackendException
+    {
+        Advogado adv = createDefaultAdvogado();
+        
+        adv.setTaxa(10);
+        adv.setDistribuicao(1000);
+        adv.gerarSalarios();
+        
+        
+        backend.create(adv);        
+        
+        List<Advogado> reloaded = backend.list();
+        assertEquals(1,reloaded.size());
+        
+        Advogado reloadedOne = reloaded.get(0);
+        
+        assertEquals(13200.0,reloadedOne.getSalarioTotal(),0.5);
+        
+        
+    }
      
     protected Advogado createDefaultAdvogado()
     {

@@ -2,6 +2,7 @@ package com.rochamarinho.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -16,10 +17,11 @@ public class ValorMes implements Serializable {
     public ValorMes() {
     }
     
-    @Id
+    @Id @GeneratedValue
     private Long id;
-    String mes;
-    Double valor;
+    
+    private String mes;
+    private Double valor;
 
     
     public String getMes() {

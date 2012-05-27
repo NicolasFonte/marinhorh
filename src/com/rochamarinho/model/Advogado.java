@@ -34,13 +34,15 @@ public class Advogado implements Serializable {
     @Column(nullable = false, unique = true)
     private String cpf;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Pagamento> historicoPagamento;    
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ValorMes> valores;
     
-    double [] listaDePorcentagensAleatorias = {0.4,0.425,0.45,0.475,0.5,0.525,0.55,0.575,0.6,0.625,0.650,0.675,0.7 };
+    private double salarioTotal;
+    
+    private transient double [] listaDePorcentagensAleatorias = {0.4,0.425,0.45,0.475,0.5,0.525,0.55,0.575,0.6,0.625,0.650,0.675,0.7 };
     
     public List<Pagamento> getHistoricoPagamento() {
         return historicoPagamento;
@@ -92,13 +94,14 @@ public class Advogado implements Serializable {
 
     public void gerarSalarios() {
         double salarioAnual = (12 * distribuicao) * (1 + (taxa / 100));
+        this.salarioTotal = salarioAnual;
         System.out.println("salario anual " + salarioAnual);
         
         double mediaMensal = salarioAnual / 12;
         System.out.println("media mensal " + mediaMensal);
         double porcentagemParaVariacaoDoSalario = escolherUmaPorcentagemAleatoria();
 
-        String [] meses = {"janeiro","fevereiro","marco","abrl","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"};
+        String [] meses = {"janeiro","fevereiro","marco","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"};
         int i = 1;
         ValorMes umValor;
             
@@ -128,10 +131,20 @@ public class Advogado implements Serializable {
 
     }
 
+    public double getSalarioTotal() {
+        return salarioTotal;
+    }
+
+    public void setSalarioTotal(double salarioTotal) {
+        this.salarioTotal = salarioTotal;
+    }
+
     private double escolherUmaPorcentagemAleatoria() {
         int numero = (int) Math.round( 13 * Math.random());
         System.out.println("numero aleatorio 1-13 : " + numero);
-        return listaDePorcentagensAleatorias[numero];
+        if ( numero < 0 ) numero = 0;
+        
+        return listaDePorcentagensAleatorias[numero-1];
     }
     
     public List<ValorMes> getValores() {
