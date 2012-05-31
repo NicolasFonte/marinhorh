@@ -40,6 +40,9 @@ public class CadastrarFilial extends javax.swing.JPanel {
         btnCadastrarFilial = new javax.swing.JButton();
         btnCancelarCadastro = new javax.swing.JButton();
 
+        setMinimumSize(new java.awt.Dimension(500, 300));
+        setPreferredSize(getMinimumSize());
+
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
@@ -78,7 +81,7 @@ public class CadastrarFilial extends javax.swing.JPanel {
                         .addComponent(btnCadastrarFilial)
                         .addGap(51, 51, 51)
                         .addComponent(btnCancelarCadastro)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

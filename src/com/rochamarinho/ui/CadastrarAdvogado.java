@@ -59,6 +59,9 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         btnCancelarCadastro = new javax.swing.JButton();
         jftCpf = new javax.swing.JFormattedTextField();
 
+        setMinimumSize(new java.awt.Dimension(500, 300));
+        setPreferredSize(getMinimumSize());
+
         lblNomeAdvogado.setText("Nome:");
 
         lblDistribuicao.setText("Distribuição:");
@@ -130,14 +133,14 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                         .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jftCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))))
+                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))))
                 .addGap(202, 202, 202))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblCpf)
-                .addContainerGap(475, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(286, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCadastrarAdvogado)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelarCadastro)
@@ -170,7 +173,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrarAdvogado)
                     .addComponent(btnCancelarCadastro))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

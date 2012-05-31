@@ -23,6 +23,8 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        lblLogo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAdvogado = new javax.swing.JMenu();
         menuItemCadastrar = new javax.swing.JMenuItem();
@@ -36,8 +38,14 @@ public class Principal extends javax.swing.JFrame {
         menuItemSalarioAdvogados = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Rocha Marinho");
+        setTitle("..:: Rocha, Marinho e Sales Advogados ::..");
+        setMinimumSize(new java.awt.Dimension(500, 300));
+
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rochamarinho/utils/logo.png"))); // NOI18N
+        lblLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenuBar1.setName("Rocha Marinho"); // NOI18N
 
@@ -109,11 +117,17 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(lblLogo)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(lblLogo)
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,7 +173,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemMenuFilialCadastrar;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JMenu menuAdvogado;
     private javax.swing.JMenu menuFilial;
     private javax.swing.JMenuItem menuItemCadastrar;

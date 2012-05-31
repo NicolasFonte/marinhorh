@@ -38,6 +38,9 @@ public class AlterarTaxa extends javax.swing.JPanel {
         btnAlterarValorTaxa = new javax.swing.JButton();
         btnCancelarAlteracaoTaxa = new javax.swing.JButton();
 
+        setMinimumSize(new java.awt.Dimension(500, 300));
+        setPreferredSize(getMinimumSize());
+
         lblNovoValor.setText("Digite o novo valor: ");
 
         btnAlterarValorTaxa.setText("alterar");
@@ -65,12 +68,12 @@ public class AlterarTaxa extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAlterarValorTaxa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                         .addComponent(btnCancelarAlteracaoTaxa)
                         .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtTaxaNovoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(149, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,7 +82,7 @@ public class AlterarTaxa extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNovoValor)
                     .addComponent(txtTaxaNovoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterarValorTaxa)
                     .addComponent(btnCancelarAlteracaoTaxa))

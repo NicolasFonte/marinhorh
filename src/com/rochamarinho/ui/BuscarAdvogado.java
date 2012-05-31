@@ -70,6 +70,9 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         btnGravar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
+        setMinimumSize(new java.awt.Dimension(500, 300));
+        setPreferredSize(getMinimumSize());
+
         lblCpf.setText("Digite o Cpf: ");
 
         lblMostrarNome.setText("advNome");
@@ -152,7 +155,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
                             .addComponent(txtNome)
                             .addComponent(txtDistribuicao)
                             .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +187,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
                     .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTaxa)
                     .addComponent(btnGravar))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
