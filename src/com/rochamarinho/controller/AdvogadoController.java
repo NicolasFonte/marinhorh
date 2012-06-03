@@ -26,7 +26,7 @@ public class AdvogadoController {
     }
 
     public boolean cadastrarAdvogado(String oab,String nome,double distribuicao,
-                    double valorTaxa,String filialNome,String associacaoTexto, String nascimentoTexto,String email ) throws BackendException, ParseException
+                    double valorTaxa,String filialNome,String associacaoTexto, String nascimentoTexto,String email, String uf ) throws BackendException, ParseException
     {        
         
         Filial filial = getFilialBackend().buscarPorNome(filialNome);        
@@ -37,13 +37,15 @@ public class AdvogadoController {
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);
         adv.setEmail(email);
-        
+        adv.setUf(uf);
         
         Date associacaoData = formatter.parse(associacaoTexto);
         Date nascimentoData = formatter.parse(nascimentoTexto);
         
         adv.setAssociacao(associacaoData);
         adv.setNascimento(nascimentoData);
+        
+        adv.gerarSalarios();// IMPORTANTE!
         
         filial.addAdvogado(adv);
         

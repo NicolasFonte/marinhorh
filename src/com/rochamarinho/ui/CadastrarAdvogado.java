@@ -244,32 +244,37 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
 
         String advNomeText = txtNome.getText();
-        String advTaxaText = txtTaxa.getText();        
-        String advOabText = fmtOab.getText().replace(".", "").replace("-", "");        
-        
-        String advDistribuicaoText = txtDistribuicao.getText();
-        String nomeFilial = (String) filialComboBox.getSelectedItem();        
-        
+        String advTaxaText = txtTaxa.getText().replace("%", "").replace(",", ".");
+        String advOabText = fmtOab.getText().replace(".", "").replace(" ", "");
+
+        String advDistribuicaoText = txtDistribuicao.getText().replace(".", "").replace(",", ".");
+        String nomeFilial = (String) filialComboBox.getSelectedItem();
+
         String dataAssociacaoTexto = fmtAssociacao.getText();
         String dataNascimentoTexto = fmtNascimento.getText();
-        String email = txtEmail.getText();
+        String email = txtEmail.getText() + lblDominio.getText();
+        String ufTexto = (String) UfOabComboBox.getSelectedItem();
 
-
-
+        advOabText = ufTexto + advOabText;
+        
+        
         double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
         double taxaDouble = Double.valueOf(advTaxaText);
         try {
 
             advController.cadastrarAdvogado(advOabText, advNomeText,
-                    distribuicaoDouble, taxaDouble, nomeFilial, dataAssociacaoTexto, dataNascimentoTexto, email);
-
-        } catch (BackendException ex) {
-            JOptionPane.showMessageDialog(null, "advogado nao cadastrado");
+                    distribuicaoDouble, taxaDouble, nomeFilial, dataAssociacaoTexto, dataNascimentoTexto, email, ufTexto);
 
         } catch (ParseException pex) {
-            
-            
+
+            JOptionPane.showMessageDialog(null, "advogado nao cadastrado devido a data incorreta");
+            return;
+        } catch (BackendException ex) {
+            JOptionPane.showMessageDialog(null, "advogado nao cadastrado");
+            return;
         }
+
+
 
         JOptionPane.showMessageDialog(null, "advogado cadastrado com sucesso");
 
@@ -285,17 +290,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     }//GEN-LAST:event_fmtOabActionPerformed
 
     private void fmtOabFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtOabFocusLost
-        String advCpf = fmtOab.getText();
-        advCpf = advCpf.replace(".", "");
-        advCpf = advCpf.replace("-", "");
-
-        boolean validar = new ValidaCpf().isCpf(advCpf);
-        if (!(validar)) {
-
-            JOptionPane.showMessageDialog(null, "CPF inválido! Favor digitar um CPF Válido, obedecendo o formato: (xxx.xxx.xxx.-xx)!");
-            fmtOab.requestFocus();
-        }
-
     }//GEN-LAST:event_fmtOabFocusLost
 
     private void UfOabComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UfOabComboBoxActionPerformed
@@ -303,37 +297,29 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     }//GEN-LAST:event_UfOabComboBoxActionPerformed
 
     private void btnLimparCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCadastroActionPerformed
-  
-        txtNome.setText("");
-        UfOabComboBox.setToolTipText("TESTE");
-        fmtOab.setText("");
-        txtEmail.setText("");
-        txtDistribuicao.setText("");
-        txtTaxa.setText("");
-        fmtNascimento.setText("");
-        fmtAssociacao.setText("");
-        filialComboBox.setToolTipText("Escolha a Filial:");
-        setDefaultMasks();
+
+        limpar();
+
     }//GEN-LAST:event_btnLimparCadastroActionPerformed
 
     private void setDefaultMasks() {
         try {
             fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##/##/####")));
-            
+
             fmtAssociacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##/##/####")));
-            
+
             fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##.####")));
-            
+
             txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("###.###,##")));
-            
+                    new javax.swing.text.MaskFormatter("#.###,##")));
+
             txtTaxa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("#,#%")));
             filialComboBox.setToolTipText("Escolha a Filial:");
-                                    
+
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Por gentileza, Preecha os campos corretamente!");
         }
@@ -399,5 +385,18 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             return false;
         }
         return true;
+    }
+
+    private void limpar() {
+        txtNome.setText("");
+        UfOabComboBox.setToolTipText("TESTE");
+        fmtOab.setText("");
+        txtEmail.setText("");
+        txtDistribuicao.setText("");
+        txtTaxa.setText("");
+        fmtNascimento.setText("");
+        fmtAssociacao.setText("");
+        filialComboBox.setToolTipText("Escolha a Filial:");
+        setDefaultMasks();
     }
 }
