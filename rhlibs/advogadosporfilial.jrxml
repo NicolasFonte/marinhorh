@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagamentomes" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="advogadosporfilial" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="10"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="nomefilial" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<parameter name="mes" class="java.lang.String">
-		<defaultValueExpression><![CDATA["janeiro"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select adv.nome ,vm.valor, f.nome as filial
@@ -17,6 +20,7 @@ adv.id = avm.Advogado_id and
 avm.valores_id = vm.id and
 f.id = Filial_Advogado.Filial_id and
 Filial_Advogado.advogados_id = adv.id and
+f.nome = $P{nomefilial} and
 vm.mes = $P{mes};]]>
 	</queryString>
 	<field name="nome" class="java.lang.String"/>
@@ -25,16 +29,20 @@ vm.mes = $P{mes};]]>
 	<group name="Group1">
 		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
 		<groupHeader>
-			<band height="40"/>
+			<band height="40">
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+				</rectangle>
+			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="39"/>
+			<band height="6"/>
 		</groupFooter>
 	</group>
 	<group name="Group2">
 		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
 		<groupHeader>
-			<band height="30"/>
+			<band height="31"/>
 		</groupHeader>
 	</group>
 	<background>
@@ -43,16 +51,9 @@ vm.mes = $P{mes};]]>
 	<title>
 		<band height="70" splitType="Stretch">
 			<staticText>
-				<reportElement style="Title" x="0" y="5" width="263" height="33"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Ubuntu"/>
-				</textElement>
-				<text><![CDATA[]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="SubTitle" x="63" y="39" width="200" height="22" forecolor="#FFFFFF"/>
+				<reportElement style="SubTitle" x="47" y="48" width="200" height="22" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Right"/>
-				<text><![CDATA[Rocha, Marinho e Sales]]></text>
+				<text><![CDATA[Wood SubTitle]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -68,24 +69,24 @@ vm.mes = $P{mes};]]>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="27" y="2" width="100" height="20"/>
+				<reportElement x="62" y="2" width="100" height="20"/>
 				<textElement/>
-				<text><![CDATA[Nome]]></text>
+				<text><![CDATA[nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="226" y="2" width="127" height="20"/>
+				<reportElement x="255" y="2" width="100" height="20"/>
 				<textElement/>
-				<text><![CDATA[Valor]]></text>
+				<text><![CDATA[valor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="436" y="2" width="100" height="20"/>
+				<reportElement x="413" y="0" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[filial]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="32" splitType="Stretch">
+		<band height="89" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
 				<graphicElement>
@@ -93,17 +94,17 @@ vm.mes = $P{mes};]]>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="12" y="0" width="171" height="20"/>
+				<reportElement x="62" y="15" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="226" y="0" width="127" height="20"/>
+				<reportElement x="247" y="20" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="0" width="100" height="20"/>
+				<reportElement x="413" y="35" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{filial}]]></textFieldExpression>
 			</textField>

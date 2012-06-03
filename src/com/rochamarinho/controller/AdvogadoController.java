@@ -5,8 +5,12 @@ import com.rochamarinho.backend.impl.MySQLFilialBackend;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.model.Filial;
 import com.rochamarinho.utils.BackendException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,7 +26,7 @@ public class AdvogadoController {
     }
 
     public boolean cadastrarAdvogado(String oab,String nome,double distribuicao,
-                    double valorTaxa,String filialNome,String associacaoTexto, String nascimentoTexto,String email ) throws BackendException
+                    double valorTaxa,String filialNome,String associacaoTexto, String nascimentoTexto,String email ) throws BackendException, ParseException
     {        
         
         Filial filial = getFilialBackend().buscarPorNome(filialNome);        
@@ -33,12 +37,13 @@ public class AdvogadoController {
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);
         adv.setEmail(email);
-
-        //datas!
-        //formatter
         
         
+        Date associacaoData = formatter.parse(associacaoTexto);
+        Date nascimentoData = formatter.parse(nascimentoTexto);
         
+        adv.setAssociacao(associacaoData);
+        adv.setNascimento(nascimentoData);
         
         filial.addAdvogado(adv);
         
@@ -65,10 +70,12 @@ public class AdvogadoController {
         this.advogadoBackend = backend;
     }
 
-    public Advogado byCpf(String cpf) throws BackendException {        
-        return getBackend().byCpf(cpf);
-        
+    
+    public Advogado byOab(String validOab) throws BackendException
+    {
+        return getBackend().byOab(validOab);    
     }
+    
     
     public MySQLFilialBackend getFilialBackend() {
         if (filialBackend == null)
@@ -82,9 +89,9 @@ public class AdvogadoController {
         this.filialBackend = filialBackend;
     }
     
-    public void atualizarAdvogado(String cpf, String nome, double distribuicao, double taxa) throws BackendException
+    public void atualizarAdvogado(String oab, String nome, double distribuicao, double taxa) throws BackendException
     {
-        Advogado adv = getBackend().byCpf(cpf);
+        Advogado adv = getBackend().byOab(oab);
         
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);
@@ -94,9 +101,9 @@ public class AdvogadoController {
         
     }
 
-    public void deletarAdvogado(String cpf) throws BackendException {
+    public void deletarAdvogado(String oab) throws BackendException {
         
-        Advogado adv = advogadoBackend.byCpf(cpf);        
+        Advogado adv = advogadoBackend.byOab(oab);        
         getBackend().remove(adv);
         
     }

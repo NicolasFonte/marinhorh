@@ -134,7 +134,7 @@ public class MySQLAdvogadoBackendTest {
         
         
         backend.create(adv1);
-        Advogado reloaded = backend.byCpf("01236702336");
+        Advogado reloaded = backend.byOab("01236702336");
         assertNotNull(reloaded);
         
         
@@ -158,6 +158,31 @@ public class MySQLAdvogadoBackendTest {
         Advogado reloadedOne = reloaded.get(0);
         
         assertEquals(13200.0,reloadedOne.getSalarioTotal(),0.5);
+        
+        
+    }
+    
+    @Test
+    public void testarBuscarNomeParcial() throws BackendException
+    {
+        Advogado adv = new Advogado();
+        adv.setNome("marlosouza");
+        adv.setDistribuicao(1000);
+        adv.setOab("oab");
+        
+        backend.create(adv);
+        
+        Advogado reloadedPrefix = backend.byNome("mar");
+        assertNotNull(reloadedPrefix);
+        
+        Advogado reloadedSufix = backend.byNome("za");
+        assertNotNull(reloadedSufix);
+        
+        Advogado reloadedCapital = backend.byNome("MAR");
+        assertNotNull(reloadedCapital);
+        
+        Advogado invalido = backend.byNome("naoexistente");
+        assertNull(invalido);
         
         
     }

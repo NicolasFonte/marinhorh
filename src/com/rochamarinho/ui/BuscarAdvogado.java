@@ -196,7 +196,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         String maybeCpf = jftCpf.getText();
         Advogado adv = null;
         try {
-            adv = advController.byCpf(maybeCpf);
+            adv = advController.byOab(maybeCpf);
         } catch (BackendException ex) {
             mostrarMensagem("erro na busca do cpf");
             return;
@@ -230,7 +230,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
 
     private void btnEditarAdvogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAdvogadoActionPerformed
         
-        String cpf = jftCpf.getText().replace(".", "").replace("-", "");
+        String oab = jftCpf.getText().replace(".", "").replace("-", "");
         
         txtDistribuicao.setVisible(true);
         txtNome.setVisible(true);
@@ -238,7 +238,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         
         Advogado adv = null;
         try {
-            adv = advController.byCpf(cpf);
+            adv = advController.byOab(oab);
         } catch (BackendException ex) {
             
         }

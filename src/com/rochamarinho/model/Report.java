@@ -86,6 +86,30 @@ public class Report {
 
     }
 
-    public static void gerarRelatorioAdvogadosPorFilial() {
+    public static void gerarRelatorioAdvogadosPorFilial( String nomeFilial) {
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        int monthIndex = calendar.get(Calendar.MONTH);
+        String monthName = escolherCorretoMes(monthIndex);
+        JasperReport jasperReport;
+
+        
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("mes", monthName);
+        map.put("filial", nomeFilial);
+        
+        Connection con = Conexao.getConexao();
+
+        try {
+            jasperReport = JasperCompileManager.compileReport("rhlibs/advogadosporfilial.jrxml");
+            JasperPrint print = JasperFillManager.fillReport(jasperReport, map, con);
+            JasperViewer.viewReport(print, true);
+        } catch (JRException ex) {
+            Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+        
     }
 }

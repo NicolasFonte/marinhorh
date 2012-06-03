@@ -66,11 +66,22 @@ public class MySQLAdvogadoBackend implements AdvogadoBackend {
         return list;
     }
 
+
     @Override
-    public Advogado byCpf(String validCpf) throws BackendException {
+    public Advogado byOab(String validOab) throws BackendException {
         Transaction tx = session.beginTransaction();
-        Advogado adv = (Advogado) session.createCriteria(Advogado.class).add(Restrictions.eq("cpf", validCpf)).uniqueResult();
+        Advogado adv = (Advogado) session.createCriteria(Advogado.class).add(Restrictions.eq("oab", validOab)).uniqueResult();
         tx.commit();
         return adv;
+    }
+
+    @Override
+    public Advogado byNome(String nomeParcial) throws BackendException {
+        
+        Transaction tx = session.beginTransaction();
+        Advogado adv = (Advogado) session.createCriteria(Advogado.class).add(Restrictions.like("nome" , "%" + nomeParcial + "%" )).uniqueResult();
+        tx.commit();
+        return adv;
+        
     }
 }

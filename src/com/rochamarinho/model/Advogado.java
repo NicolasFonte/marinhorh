@@ -41,7 +41,7 @@ public class Advogado implements Serializable {
     private double salarioTotal;
     private String email;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date admissao;
+    private Date associacao;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date nascimento;
     private String uf;
@@ -62,12 +62,12 @@ public class Advogado implements Serializable {
         this.email = email;
     }
 
-    public Date getAdmissao() {
-        return admissao;
+    public Date getAssociacao() {
+        return associacao;
     }
 
-    public void setAdmissao(Date admissao) {
-        this.admissao = admissao;
+    public void setAssociacao(Date associacao) {
+        this.associacao = associacao;
     }
 
     public Date getNascimento() {

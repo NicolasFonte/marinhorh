@@ -239,36 +239,41 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     private void btnCadastrarAdvogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAdvogadoActionPerformed
 
         boolean existeFilial = existeFilial();
-        if ( existeFilial == false ) return;
-        
-        
+        if (existeFilial == false) {
+            return;
+        }
+
+
         String advNomeText = txtNome.getText();
-        String advTaxaText = txtTaxa.getText();        
-        String advOabText = jftOab.getText().replace(".", "").replace("-", "");        
-        
+        String advTaxaText = txtTaxa.getText();
+        String advOabText = jftOab.getText().replace(".", "").replace("-", "");
+
         String advDistribuicaoText = txtDistribuicao.getText();
-        String nomeFilial = (String) filialComboBox.getSelectedItem();        
-        
+        String nomeFilial = (String) filialComboBox.getSelectedItem();
+
         String dataAssociacaoTexto = fmtAdmissao.getText();
         String dataNascimentoTexto = fmtNascimento.getText();
         String email = txtEmail.getText();
-        
-        
-        
+
+
+
         double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
         double taxaDouble = Double.valueOf(advTaxaText);
         try {
 
             advController.cadastrarAdvogado(advOabText, advNomeText,
-                    distribuicaoDouble, taxaDouble, nomeFilial, dataAssociacaoTexto,dataNascimentoTexto,email);
-          
+                    distribuicaoDouble, taxaDouble, nomeFilial, dataAssociacaoTexto, dataNascimentoTexto, email);
+
         } catch (BackendException ex) {
             JOptionPane.showMessageDialog(null, "advogado nao cadastrado");
 
+        } catch (ParseException pex) {
+            
+            
         }
-        
+
         JOptionPane.showMessageDialog(null, "advogado cadastrado com sucesso");
-        
+
         this.setVisible(false);
 
     }//GEN-LAST:event_btnCadastrarAdvogadoActionPerformed
@@ -298,12 +303,12 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         try {
             fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##/##/####")));
-            
+
             fmtAdmissao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##/##/####")));
-            
-            
-            
+
+
+
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Por gentileza, Digite um CPF Válido!");
         }
@@ -363,8 +368,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     }
 
     private boolean existeFilial() {
-        if ( filialComboBox.getItemCount() == 0)
-        {
+        if (filialComboBox.getItemCount() == 0) {
             JOptionPane.showConfirmDialog(null, "um advogado precisa estar associado a uma filial, cadastre uma filial.");
             return false;
         }

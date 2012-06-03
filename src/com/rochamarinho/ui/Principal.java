@@ -36,7 +36,7 @@ public class Principal extends javax.swing.JFrame {
         itemMenuAlterarTaxa = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         menuItemSalarioAdvogados = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        itemMenuAdvogadosPorFilial = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -106,8 +106,13 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu4.add(menuItemSalarioAdvogados);
 
-        jMenuItem3.setText("Advogados Por Filial");
-        jMenu4.add(jMenuItem3);
+        itemMenuAdvogadosPorFilial.setText("Advogados Por Filial");
+        itemMenuAdvogadosPorFilial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuAdvogadosPorFilialActionPerformed(evt);
+            }
+        });
+        jMenu4.add(itemMenuAdvogadosPorFilial);
 
         jMenuBar1.add(jMenu4);
 
@@ -166,7 +171,17 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_menuItemSalarioAdvogadosActionPerformed
 
+    private void itemMenuAdvogadosPorFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuAdvogadosPorFilialActionPerformed
+       
+        
+        
+        Report.gerarRelatorioAdvogadosPorFilial("padraoporenquanto");
+        
+        
+    }//GEN-LAST:event_itemMenuAdvogadosPorFilialActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemMenuAdvogadosPorFilial;
     private javax.swing.JMenuItem itemMenuAlterarTaxa;
     private javax.swing.JMenuItem itemMenuBuscar;
     private javax.swing.JMenuItem itemMenuFilialBusca;
@@ -174,7 +189,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JMenu menuAdvogado;
     private javax.swing.JMenu menuFilial;
