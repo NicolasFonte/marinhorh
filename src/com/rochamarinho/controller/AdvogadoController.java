@@ -78,6 +78,11 @@ public class AdvogadoController {
         return getBackend().byOab(validOab);    
     }
     
+    public List<Advogado> porNome(String nomeParcial) throws BackendException
+    {
+        return getBackend().byNome(nomeParcial);
+    }
+    
     
     public MySQLFilialBackend getFilialBackend() {
         if (filialBackend == null)

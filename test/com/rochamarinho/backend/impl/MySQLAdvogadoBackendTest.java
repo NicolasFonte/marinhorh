@@ -170,20 +170,27 @@ public class MySQLAdvogadoBackendTest {
         adv.setDistribuicao(1000);
         adv.setOab("oab");
         
+        Advogado adv2 = new Advogado();
+        adv2.setNome("amarildo");
+        adv2.setDistribuicao(1000);
+        adv2.setOab("oab2");
+        
+        
         backend.create(adv);
+        backend.create(adv2);
         
-        Advogado reloadedPrefix = backend.byNome("mar");
-        assertNotNull(reloadedPrefix);
+        List<Advogado> reloadedPrefix = backend.byNome("mar");
+        assertEquals(2,reloadedPrefix.size());
         
-        Advogado reloadedSufix = backend.byNome("za");
-        assertNotNull(reloadedSufix);
         
-        Advogado reloadedCapital = backend.byNome("MAR");
-        assertNotNull(reloadedCapital);
+        List<Advogado> reloadedSufix = backend.byNome("za");
+        assertEquals(1,reloadedSufix.size());
         
-        Advogado invalido = backend.byNome("naoexistente");
-        assertNull(invalido);
+        List<Advogado> reloadedCapital = backend.byNome("MAR");
+        assertEquals(2,reloadedCapital.size());
         
+        List<Advogado> invalido = backend.byNome("naoexistente");
+        assertEquals(0,invalido.size());
         
     }
      

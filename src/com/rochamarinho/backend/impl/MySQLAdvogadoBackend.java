@@ -76,12 +76,12 @@ public class MySQLAdvogadoBackend implements AdvogadoBackend {
     }
 
     @Override
-    public Advogado byNome(String nomeParcial) throws BackendException {
+    public List<Advogado> byNome(String nomeParcial) throws BackendException {
         
         Transaction tx = session.beginTransaction();
-        Advogado adv = (Advogado) session.createCriteria(Advogado.class).add(Restrictions.like("nome" , "%" + nomeParcial + "%" )).uniqueResult();
+        List<Advogado> advogados =  session.createCriteria(Advogado.class).add(Restrictions.like("nome" , "%" + nomeParcial + "%" )).list();
         tx.commit();
-        return adv;
+        return advogados;
         
     }
 }
