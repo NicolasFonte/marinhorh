@@ -116,7 +116,7 @@ public class MySQLFilialBackend implements FilialBackend {
         {            
             for ( Advogado advEach : filialEach.getAdvogados())
             {
-                if ( advEach.getCpf().equals(cpf) )
+                if ( advEach.getOab().equals(cpf) )
                 {
                     return filialEach;
                 }

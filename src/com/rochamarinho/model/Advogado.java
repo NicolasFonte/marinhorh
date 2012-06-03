@@ -2,6 +2,7 @@ package com.rochamarinho.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -21,10 +23,9 @@ import javax.persistence.OneToOne;
 public class Advogado implements Serializable {
 
     public Advogado() {
-    
+
         valores = new ArrayList<ValorMes>();
     }
-
     @Id
     @GeneratedValue
     private Long id;
@@ -32,18 +33,52 @@ public class Advogado implements Serializable {
     private String nome;
     private double distribuicao;
     @Column(nullable = false, unique = true)
-    private String cpf;
-    
+    private String oab;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Pagamento> historicoPagamento;    
-    
+    private List<Pagamento> historicoPagamento;
     @OneToMany(cascade = CascadeType.ALL)
     private List<ValorMes> valores;
-    
     private double salarioTotal;
-    
-    private transient double [] listaDePorcentagensAleatorias = {0.4,0.425,0.45,0.475,0.5,0.525,0.55,0.575,0.6,0.625,0.650,0.675,0.7 };
-    
+    private String email;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date admissao;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date nascimento;
+    private String uf;
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getAdmissao() {
+        return admissao;
+    }
+
+    public void setAdmissao(Date admissao) {
+        this.admissao = admissao;
+    }
+
+    public Date getNascimento() {
+        return nascimento;
+    }
+
+    public void setNascimento(Date nascimento) {
+        this.nascimento = nascimento;
+    }
+    private transient double[] listaDePorcentagensAleatorias = {0.4, 0.425, 0.45, 0.475, 0.5, 0.525, 0.55, 0.575, 0.6, 0.625, 0.650, 0.675, 0.7};
+
     public List<Pagamento> getHistoricoPagamento() {
         return historicoPagamento;
     }
@@ -51,13 +86,13 @@ public class Advogado implements Serializable {
     public void setHistoricoPagamento(List<Pagamento> historicoPagamento) {
         this.historicoPagamento = historicoPagamento;
     }
-    
-    public String getCpf() {
-        return cpf;
+
+    public String getOab() {
+        return oab;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setOab(String oab) {
+        this.oab = oab;
     }
 
     public double getDistribuicao() {
@@ -96,37 +131,37 @@ public class Advogado implements Serializable {
         double salarioAnual = (12 * distribuicao) * (1 + (taxa / 100));
         this.salarioTotal = salarioAnual;
         System.out.println("salario anual " + salarioAnual);
-        
+
         double mediaMensal = salarioAnual / 12;
         System.out.println("media mensal " + mediaMensal);
         double porcentagemParaVariacaoDoSalario = escolherUmaPorcentagemAleatoria();
 
-        String [] meses = {"janeiro","fevereiro","marco","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"};
+        String[] meses = {"janeiro", "fevereiro", "marco", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"};
         int i = 1;
         ValorMes umValor;
-            
+
         while (i < 12) {
 
-            Double valor1 = (mediaMensal + ( (porcentagemParaVariacaoDoSalario * mediaMensal) /100  ));
-            Double valor2 = (mediaMensal - ( (porcentagemParaVariacaoDoSalario * mediaMensal) /100  ));
-            
+            Double valor1 = (mediaMensal + ((porcentagemParaVariacaoDoSalario * mediaMensal) / 100));
+            Double valor2 = (mediaMensal - ((porcentagemParaVariacaoDoSalario * mediaMensal) / 100));
+
             umValor = new ValorMes();
-            
+
             umValor.setValor(valor1);
-            umValor.setMes(meses[i-1]);         
+            umValor.setMes(meses[i - 1]);
             valores.add(umValor);
-            
+
             i++;
-            
+
             umValor = new ValorMes();
-            
+
             umValor.setValor(valor2);
-            umValor.setMes(meses[i-1]);
+            umValor.setMes(meses[i - 1]);
             valores.add(umValor);
-            
+
             porcentagemParaVariacaoDoSalario++;
             i++;
-        
+
         }
 
     }
@@ -140,13 +175,15 @@ public class Advogado implements Serializable {
     }
 
     protected double escolherUmaPorcentagemAleatoria() {
-        int numero = (int) Math.round( 13 * Math.random());
+        int numero = (int) Math.round(13 * Math.random());
         System.out.println("numero aleatorio 1-13 : " + numero);
-        if ( numero < 0 ) numero = 0;
-        
-        return listaDePorcentagensAleatorias[numero-1];
+        if (numero < 0) {
+            numero = 0;
+        }
+
+        return listaDePorcentagensAleatorias[numero - 1];
     }
-    
+
     public List<ValorMes> getValores() {
         return valores;
     }

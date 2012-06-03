@@ -26,7 +26,7 @@ public class AdvogadoTest {
     @Test
     public void testeGeracaoDeSalariosParaAdvogadosCorreto()
     {
-        adv.setCpf("01236702336");
+        adv.setOab("01236702336");
         adv.setDistribuicao(1000);
         adv.setNome("advogado");
         adv.setTaxa(10);

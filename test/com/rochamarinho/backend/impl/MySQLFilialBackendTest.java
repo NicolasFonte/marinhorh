@@ -129,8 +129,8 @@ public class MySQLFilialBackendTest {
         Advogado adv1 = new Advogado();        
         Advogado adv2 = new Advogado();
         
-        adv1.setCpf("01236702336");
-        adv2.setCpf("01236702337");
+        adv1.setOab("01236702336");
+        adv2.setOab("01236702337");
         
         filial.getAdvogados().add(adv2);
         filial.getAdvogados().add(adv1);

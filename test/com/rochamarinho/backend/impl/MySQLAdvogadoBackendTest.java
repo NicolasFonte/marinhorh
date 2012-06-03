@@ -113,9 +113,9 @@ public class MySQLAdvogadoBackendTest {
     {
         Advogado adv1 = createDefaultAdvogado();
         Advogado adv2 = createDefaultAdvogado();
-        adv2.setCpf("123435");
+        adv2.setOab("123435");
         Advogado adv3 = createDefaultAdvogado();
-        adv3.setCpf("1234353");
+        adv3.setOab("1234353");
         
         backend.create(adv1);
         backend.create(adv2);
@@ -166,7 +166,7 @@ public class MySQLAdvogadoBackendTest {
     {
         String name = "advogado " + Math.random();
         Advogado defaultOne = new Advogado();
-        defaultOne.setCpf("01236702336");
+        defaultOne.setOab("01236702336");
         
         defaultOne.setNome(name);       
         return defaultOne;

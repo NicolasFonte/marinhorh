@@ -5,6 +5,7 @@ import com.rochamarinho.backend.impl.MySQLFilialBackend;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.model.Filial;
 import com.rochamarinho.utils.BackendException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -15,20 +16,29 @@ public class AdvogadoController {
 
     private MySQLAdvogadoBackend advogadoBackend;
     private MySQLFilialBackend filialBackend;
-
+    static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    
     public AdvogadoController() {
     }
 
-    public boolean cadastrarAdvogado(String cpf,String nome,double distribuicao,double valorTaxa,String filialNome) throws BackendException
+    public boolean cadastrarAdvogado(String oab,String nome,double distribuicao,
+                    double valorTaxa,String filialNome,String associacaoTexto, String nascimentoTexto,String email ) throws BackendException
     {        
         
         Filial filial = getFilialBackend().buscarPorNome(filialNome);        
                 
         Advogado adv = new Advogado();
-        adv.setCpf(cpf);
+        adv.setOab(oab);
         adv.setTaxa(valorTaxa);
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);
+        adv.setEmail(email);
+
+        //datas!
+        //formatter
+        
+        
+        
         
         filial.addAdvogado(adv);
         
