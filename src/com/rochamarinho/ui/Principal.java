@@ -42,7 +42,8 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("..:: Rocha, Marinho e Sales Advogados ::..");
-        setMinimumSize(new java.awt.Dimension(500, 300));
+        setMinimumSize(new java.awt.Dimension(500, 350));
+        setPreferredSize(getMinimumSize());
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rochamarinho/utils/logo.png"))); // NOI18N
         lblLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -127,7 +128,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addComponent(lblLogo)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         pack();

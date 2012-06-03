@@ -34,7 +34,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         initComponents();
         setDefaultTaxaText();
         setFiliaisNoComboBox();
-        //setDefaultMaskCpf(); nao usando cpf mais.
+        setDefaultMasks();
     }
 
     /** This method is called from within the constructor to
@@ -48,26 +48,29 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
         txtNome = new javax.swing.JTextField();
         lblNomeAdvogado = new javax.swing.JLabel();
-        txtDistribuicao = new javax.swing.JTextField();
         lblDistribuicao = new javax.swing.JLabel();
         btnCadastrarAdvogado = new javax.swing.JButton();
         lblOab = new javax.swing.JLabel();
-        txtTaxa = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         filialComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         btnCancelarCadastro = new javax.swing.JButton();
-        jftOab = new javax.swing.JFormattedTextField();
+        fmtOab = new javax.swing.JFormattedTextField();
         lblNascimento = new javax.swing.JLabel();
-        lblAdmissao = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        lblUf = new javax.swing.JLabel();
+        lblAssociacao = new javax.swing.JLabel();
+        UfOabComboBox = new javax.swing.JComboBox();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         fmtNascimento = new javax.swing.JFormattedTextField();
-        fmtAdmissao = new javax.swing.JFormattedTextField();
+        fmtAssociacao = new javax.swing.JFormattedTextField();
+        lblDominio = new javax.swing.JLabel();
+        btnLimparCadastro = new javax.swing.JButton();
+        txtDistribuicao = new javax.swing.JFormattedTextField();
+        txtTaxa = new javax.swing.JFormattedTextField();
 
-        setMinimumSize(new java.awt.Dimension(500, 300));
+        setMinimumSize(new java.awt.Dimension(500, 350));
+        setNextFocusableComponent(txtNome);
+        setPreferredSize(getMinimumSize());
 
         lblNomeAdvogado.setText("Nome:");
 
@@ -81,12 +84,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         });
 
         lblOab.setText("Oab:");
-
-        txtTaxa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTaxaActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Taxa:");
 
@@ -106,131 +103,133 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             }
         });
 
-        jftOab.addActionListener(new java.awt.event.ActionListener() {
+        fmtOab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jftOabActionPerformed(evt);
+                fmtOabActionPerformed(evt);
             }
         });
-        jftOab.addFocusListener(new java.awt.event.FocusAdapter() {
+        fmtOab.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jftOabFocusLost(evt);
+                fmtOabFocusLost(evt);
             }
         });
 
         lblNascimento.setText("Nascimento:");
 
-        lblAdmissao.setText("Admissão:");
+        lblAssociacao.setText("Associacao:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lblUf.setText("UF:");
+        UfOabComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UF","AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO" }));
+        UfOabComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UfOabComboBoxActionPerformed(evt);
+            }
+        });
 
         lblEmail.setText("E-mail:");
+
+        lblDominio.setText("@rochamarinho.adv.br");
+
+        btnLimparCadastro.setText("Limpar");
+        btnLimparCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCadastroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(btnCadastrarAdvogado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addComponent(btnLimparCadastro)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelarCadastro))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(lblDistribuicao)
-                                    .addComponent(lblNomeAdvogado)))
+                                    .addComponent(lblNascimento)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lblOab)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblEmail)
+                                    .addComponent(lblDistribuicao)
+                                    .addComponent(lblOab)
+                                    .addComponent(lblNomeAdvogado))))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtDistribuicao, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTaxa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNascimento)
-                                    .addComponent(lblAdmissao))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jftOab, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(57, 57, 57)
-                                        .addComponent(lblUf))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                                        .addComponent(lblEmail)))
-                                .addGap(13, 13, 13)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(fmtAdmissao, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-                                    .addComponent(fmtNascimento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnCadastrarAdvogado)
-                        .addGap(66, 66, 66)
-                        .addComponent(btnCancelarCadastro)))
-                .addGap(63, 63, 63))
+                                .addComponent(lblDominio))
+                            .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(fmtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                                    .addComponent(txtDistribuicao))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAssociacao)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(fmtAssociacao, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                                    .addComponent(txtTaxa)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fmtOab, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNome))))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblOab)
-                    .addComponent(jftOab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUf))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomeAdvogado)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblDistribuicao)
-                        .addComponent(txtDistribuicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblNascimento)
-                        .addComponent(fmtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblOab)
+                    .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fmtOab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDominio))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDistribuicao)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblAdmissao)
-                        .addComponent(fmtAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblEmail)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(21, 21, 21)
+                    .addComponent(txtDistribuicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNascimento)
+                    .addComponent(fmtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAssociacao)
+                    .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarCadastro)
-                    .addComponent(btnCadastrarAdvogado))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCadastrarAdvogado)
+                    .addComponent(btnLimparCadastro))
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtTaxaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaxaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTaxaActionPerformed
 
     private void filialComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filialComboBoxActionPerformed
         // TODO add your handling code here:
@@ -244,12 +243,12 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         
         String advNomeText = txtNome.getText();
         String advTaxaText = txtTaxa.getText();        
-        String advOabText = jftOab.getText().replace(".", "").replace("-", "");        
+        String advOabText = fmtOab.getText().replace(".", "").replace("-", "");        
         
         String advDistribuicaoText = txtDistribuicao.getText();
         String nomeFilial = (String) filialComboBox.getSelectedItem();        
         
-        String dataAssociacaoTexto = fmtAdmissao.getText();
+        String dataAssociacaoTexto = fmtAssociacao.getText();
         String dataNascimentoTexto = fmtNascimento.getText();
         String email = txtEmail.getText();
         
@@ -277,11 +276,11 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarCadastroActionPerformed
 
-    private void jftOabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jftOabActionPerformed
-    }//GEN-LAST:event_jftOabActionPerformed
+    private void fmtOabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fmtOabActionPerformed
+    }//GEN-LAST:event_fmtOabActionPerformed
 
-    private void jftOabFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jftOabFocusLost
-        String advCpf = jftOab.getText();
+    private void fmtOabFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtOabFocusLost
+        String advCpf = fmtOab.getText();
         advCpf = advCpf.replace(".", "");
         advCpf = advCpf.replace("-", "");
 
@@ -289,23 +288,49 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         if (!(validar)) {
 
             JOptionPane.showMessageDialog(null, "CPF inválido! Favor digitar um CPF Válido, obedecendo o formato: (xxx.xxx.xxx.-xx)!");
-            jftOab.requestFocus();
+            fmtOab.requestFocus();
         }
 
-    }//GEN-LAST:event_jftOabFocusLost
+    }//GEN-LAST:event_fmtOabFocusLost
+
+    private void UfOabComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UfOabComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UfOabComboBoxActionPerformed
+
+    private void btnLimparCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCadastroActionPerformed
+  
+        txtNome.setText("");
+        UfOabComboBox.setToolTipText("TESTE");
+        fmtOab.setText("");
+        txtEmail.setText("");
+        txtDistribuicao.setText("");
+        txtTaxa.setText("");
+        fmtNascimento.setText("");
+        fmtAssociacao.setText("");
+        filialComboBox.setToolTipText("Escolha a Filial:");
+        setDefaultMasks();
+    }//GEN-LAST:event_btnLimparCadastroActionPerformed
 
     private void setDefaultMasks() {
         try {
             fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##/##/####")));
             
-            fmtAdmissao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+            fmtAssociacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##/##/####")));
             
+            fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                    new javax.swing.text.MaskFormatter("##.####")));
             
+            txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                    new javax.swing.text.MaskFormatter("###.###,##")));
             
+            txtTaxa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                    new javax.swing.text.MaskFormatter("#,#%")));
+            filialComboBox.setToolTipText("Escolha a Filial:");
+                                    
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Por gentileza, Digite um CPF Válido!");
+            JOptionPane.showMessageDialog(null, "Por gentileza, Preecha os campos corretamente!");
         }
     }
 
@@ -323,26 +348,27 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox UfOabComboBox;
     private javax.swing.JButton btnCadastrarAdvogado;
     private javax.swing.JButton btnCancelarCadastro;
+    private javax.swing.JButton btnLimparCadastro;
     private javax.swing.JComboBox filialComboBox;
-    private javax.swing.JFormattedTextField fmtAdmissao;
+    private javax.swing.JFormattedTextField fmtAssociacao;
     private javax.swing.JFormattedTextField fmtNascimento;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JFormattedTextField fmtOab;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JFormattedTextField jftOab;
-    private javax.swing.JLabel lblAdmissao;
+    private javax.swing.JLabel lblAssociacao;
     private javax.swing.JLabel lblDistribuicao;
+    private javax.swing.JLabel lblDominio;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNascimento;
     private javax.swing.JLabel lblNomeAdvogado;
     private javax.swing.JLabel lblOab;
-    private javax.swing.JLabel lblUf;
-    private javax.swing.JTextField txtDistribuicao;
+    private javax.swing.JFormattedTextField txtDistribuicao;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtTaxa;
+    private javax.swing.JFormattedTextField txtTaxa;
     // End of variables declaration//GEN-END:variables
 
     public void setFiliaisNoComboBox() {
