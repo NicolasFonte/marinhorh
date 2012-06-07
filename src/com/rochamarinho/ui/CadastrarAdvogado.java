@@ -12,6 +12,7 @@ import com.rochamarinho.model.Filial;
 import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
 import com.rochamarinho.utils.ValidaCpf;
+import java.awt.Color;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +71,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
         setMinimumSize(new java.awt.Dimension(500, 350));
         setNextFocusableComponent(txtNome);
-        setPreferredSize(getMinimumSize());
 
         lblNomeAdvogado.setText("Nome:");
 
@@ -126,6 +126,15 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         });
 
         lblEmail.setText("E-mail:");
+
+        fmtNascimento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fmtNascimentoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fmtNascimentoFocusLost(evt);
+            }
+        });
 
         lblDominio.setText("@rochamarinho.adv.br");
 
@@ -302,10 +311,30 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnLimparCadastroActionPerformed
 
+    private void fmtNascimentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtNascimentoFocusLost
+     /**   try {
+            fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                        new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+       fmtNascimento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    }//GEN-LAST:event_fmtNascimentoFocusLost
+
+    private void fmtNascimentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtNascimentoFocusGained
+       try {
+           fmtNascimento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 0)));
+            fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                        new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_fmtNascimentoFocusGained
+
     private void setDefaultMasks() {
         try {
-            fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("##/##/####")));
+            //fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+              //      new javax.swing.text.MaskFormatter("##/##/####")));
 
             fmtAssociacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##/##/####")));
