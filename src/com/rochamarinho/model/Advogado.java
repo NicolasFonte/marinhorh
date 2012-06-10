@@ -36,8 +36,10 @@ public class Advogado implements Serializable {
     private String oab;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Pagamento> historicoPagamento;
+    
     @OneToMany(cascade = CascadeType.ALL)
     private List<ValorMes> valores;
+    
     private double salarioTotal;
     private String email;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -132,37 +134,43 @@ public class Advogado implements Serializable {
         this.salarioTotal = salarioAnual;
         System.out.println("salario anual " + salarioAnual);
 
-        double mediaMensal = salarioAnual / 12;
-        System.out.println("media mensal " + mediaMensal);
-        double porcentagemParaVariacaoDoSalario = escolherUmaPorcentagemAleatoria();
-
         String[] meses = {"janeiro", "fevereiro", "marco", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"};
-        int i = 1;
-        ValorMes umValor;
 
-        while (i < 12) {
-
-            Double valor1 = (mediaMensal + ((porcentagemParaVariacaoDoSalario * mediaMensal) / 100));
-            Double valor2 = (mediaMensal - ((porcentagemParaVariacaoDoSalario * mediaMensal) / 100));
-
-            umValor = new ValorMes();
-
-            umValor.setValor(valor1);
-            umValor.setMes(meses[i - 1]);
-            valores.add(umValor);
-
-            i++;
-
-            umValor = new ValorMes();
-
-            umValor.setValor(valor2);
-            umValor.setMes(meses[i - 1]);
-            valores.add(umValor);
-
-            porcentagemParaVariacaoDoSalario++;
-            i++;
-
+        int monthIndex = 12;
+        
+        double totalAReceber = salarioAnual;
+        double media = 0;
+        boolean aumentarOuDiminuir = true;
+        while ( monthIndex != 0 )
+        {
+            media = totalAReceber / monthIndex;
+            double valorMes = 0;
+            double porcentagemParaAddOuSubtrair = Math.random(); //
+            
+            double decidirSeSomaOuSubtrai = Math.random();
+            
+            aumentarOuDiminuir = decidirSeSomaOuSubtrai >= 0.5 ? true : false;
+            
+            if ( aumentarOuDiminuir ) 
+            {
+                valorMes = media + (media * ( porcentagemParaAddOuSubtrair / 100 )); 
+            } else 
+            {
+                valorMes = media - (media * ( porcentagemParaAddOuSubtrair / 100 )); 
+            }
+            
+            ValorMes valorMesAdvogado = new ValorMes();
+            valorMesAdvogado.setMes(meses[monthIndex-1]);
+            valorMesAdvogado.setValor(valorMes);
+            
+            valores.add(valorMesAdvogado);
+            
+            monthIndex--;
+            totalAReceber = totalAReceber - valorMes;
+            
+            
         }
+        
 
     }
 

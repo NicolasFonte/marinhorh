@@ -29,7 +29,7 @@ public class AdvogadoTest {
         adv.setOab("01236702336");
         adv.setDistribuicao(1000);
         adv.setNome("advogado");
-        adv.setTaxa(10);
+        adv.setTaxa(4);
         
         adv.gerarSalarios();
         int i = 1;
@@ -38,6 +38,7 @@ public class AdvogadoTest {
         {
             
             System.out.println("salario valor-mes: " + salarioMes.getValor() + " || " + salarioMes.getMes());
+            assertTrue(salarioMes.getValor() > 1000.0);
         }
         
                 

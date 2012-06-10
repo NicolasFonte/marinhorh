@@ -175,8 +175,9 @@ public class Principal extends javax.swing.JFrame {
     private void itemMenuAdvogadosPorFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuAdvogadosPorFilialActionPerformed
        
         
-        
-        Report.gerarRelatorioAdvogadosPorFilial("padraoporenquanto");
+        RelatorioPorFilial relatorioPorFilial = new RelatorioPorFilial();
+        this.setContentPane(relatorioPorFilial);
+        this.pack();
         
         
     }//GEN-LAST:event_itemMenuAdvogadosPorFilialActionPerformed

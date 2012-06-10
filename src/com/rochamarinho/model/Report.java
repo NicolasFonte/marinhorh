@@ -78,7 +78,8 @@ public class Report {
         try {
             jasperReport = JasperCompileManager.compileReport("rhlibs/report1.jrxml");
             JasperPrint print = JasperFillManager.fillReport(jasperReport, map, con);
-            JasperViewer.viewReport(print, true);
+            JasperViewer.viewReport(print, false);
+                    
         } catch (JRException ex) {
             Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -92,20 +93,18 @@ public class Report {
         calendar.setTime(new Date());
         int monthIndex = calendar.get(Calendar.MONTH);
         String monthName = escolherCorretoMes(monthIndex);
-        JasperReport jasperReport;
-
-        
+        JasperReport jasperReport;       
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("mes", monthName);
-        map.put("filial", nomeFilial);
+        map.put("nomefilial", nomeFilial);
         
         Connection con = Conexao.getConexao();
 
         try {
             jasperReport = JasperCompileManager.compileReport("rhlibs/advogadosporfilial.jrxml");
             JasperPrint print = JasperFillManager.fillReport(jasperReport, map, con);
-            JasperViewer.viewReport(print, true);
+            JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
             Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
         }
