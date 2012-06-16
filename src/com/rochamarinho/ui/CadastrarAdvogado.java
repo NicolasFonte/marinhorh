@@ -52,7 +52,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         lblDistribuicao = new javax.swing.JLabel();
         btnCadastrarAdvogado = new javax.swing.JButton();
         lblOab = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         filialComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         btnCancelarCadastro = new javax.swing.JButton();
@@ -67,7 +66,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         lblDominio = new javax.swing.JLabel();
         btnLimparCadastro = new javax.swing.JButton();
         txtDistribuicao = new javax.swing.JFormattedTextField();
-        txtTaxa = new javax.swing.JFormattedTextField();
+        checkBoxTaxa = new javax.swing.JCheckBox();
 
         setMinimumSize(new java.awt.Dimension(500, 350));
         setNextFocusableComponent(txtNome);
@@ -84,8 +83,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         });
 
         lblOab.setText("Oab:");
-
-        jLabel1.setText("Taxa:");
 
         filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "default" }));
         filialComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +142,8 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             }
         });
 
+        checkBoxTaxa.setText("Taxa");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,7 +153,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addComponent(btnCadastrarAdvogado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                         .addComponent(btnLimparCadastro)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelarCadastro))
@@ -184,19 +183,17 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                                     .addComponent(fmtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                                     .addComponent(txtDistribuicao))
                                 .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblAssociacao)
-                                    .addComponent(jLabel1))
+                                .addComponent(lblAssociacao)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(fmtAssociacao, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                                    .addComponent(txtTaxa)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(checkBoxTaxa)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(fmtOab, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtNome))))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +202,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomeAdvogado)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOab)
                     .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,9 +215,8 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDistribuicao)
-                    .addComponent(jLabel1)
                     .addComponent(txtDistribuicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkBoxTaxa))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNascimento)
@@ -253,7 +249,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
 
         String advNomeText = txtNome.getText();
-        String advTaxaText = txtTaxa.getText().replace("%", "").replace(",", ".");
         String advOabText = fmtOab.getText().replace(".", "").replace(" ", "");
 
         String advDistribuicaoText = txtDistribuicao.getText().replace(".", "").replace(",", ".");
@@ -345,8 +340,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("#.###,##")));
 
-            txtTaxa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("#,#%")));
             filialComboBox.setToolTipText("Escolha a Filial:");
 
         } catch (ParseException ex) {
@@ -364,7 +357,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             taxa = new Taxa(0);
         }
 
-        txtTaxa.setText(String.valueOf(taxa.getValor()));
+       
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -372,11 +365,11 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     private javax.swing.JButton btnCadastrarAdvogado;
     private javax.swing.JButton btnCancelarCadastro;
     private javax.swing.JButton btnLimparCadastro;
+    private javax.swing.JCheckBox checkBoxTaxa;
     private javax.swing.JComboBox filialComboBox;
     private javax.swing.JFormattedTextField fmtAssociacao;
     private javax.swing.JFormattedTextField fmtNascimento;
     private javax.swing.JFormattedTextField fmtOab;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblAssociacao;
     private javax.swing.JLabel lblDistribuicao;
@@ -388,7 +381,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txtDistribuicao;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JFormattedTextField txtTaxa;
     // End of variables declaration//GEN-END:variables
 
     public void setFiliaisNoComboBox() {
@@ -422,7 +414,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         fmtOab.setText("");
         txtEmail.setText("");
         txtDistribuicao.setText("");
-        txtTaxa.setText("");
         fmtNascimento.setText("");
         fmtAssociacao.setText("");
         filialComboBox.setToolTipText("Escolha a Filial:");
