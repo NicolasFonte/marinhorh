@@ -145,9 +145,9 @@ public class MySQLAdvogadoBackendTest {
     {
         Advogado adv = createDefaultAdvogado();
         
-        adv.setTaxa(10);
+        
         adv.setDistribuicao(1000);
-        adv.gerarSalarios();
+        adv.gerarSalarios(10);
         
         
         backend.create(adv);        

@@ -29,7 +29,6 @@ public class Advogado implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    private double taxa;
     private String nome;
     private double distribuicao;
     @Column(nullable = false, unique = true)
@@ -47,7 +46,7 @@ public class Advogado implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date nascimento;
     private String uf;
-
+    
     public String getUf() {
         return uf;
     }
@@ -79,8 +78,7 @@ public class Advogado implements Serializable {
     public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
-    private transient double[] listaDePorcentagensAleatorias = {0.4, 0.425, 0.45, 0.475, 0.5, 0.525, 0.55, 0.575, 0.6, 0.625, 0.650, 0.675, 0.7};
-
+    
     public List<Pagamento> getHistoricoPagamento() {
         return historicoPagamento;
     }
@@ -105,14 +103,6 @@ public class Advogado implements Serializable {
         this.distribuicao = distribuicao;
     }
 
-    public double getTaxa() {
-        return taxa;
-    }
-
-    public void setTaxa(double taxa) {
-        this.taxa = taxa;
-    }
-
     public Long getId() {
         return id;
     }
@@ -129,7 +119,8 @@ public class Advogado implements Serializable {
         this.id = id;
     }
 
-    public void gerarSalarios() {
+    public void gerarSalarios(double taxa) {
+        
         double salarioAnual = (12 * distribuicao) * (1 + (taxa / 100));
         this.salarioTotal = salarioAnual;
         System.out.println("salario anual " + salarioAnual);
@@ -141,6 +132,7 @@ public class Advogado implements Serializable {
         double totalAReceber = salarioAnual;
         double media = 0;
         boolean aumentarOuDiminuir = true;
+        
         while ( monthIndex != 0 )
         {
             media = totalAReceber / monthIndex;
@@ -168,11 +160,22 @@ public class Advogado implements Serializable {
             monthIndex--;
             totalAReceber = totalAReceber - valorMes;
             
+            if ( monthIndex == 1 )
+            {
+                ValorMes ultimoValor = new ValorMes();
+                ultimoValor.setMes(meses[monthIndex - 1]);
+                ultimoValor.setValor(totalAReceber);  // para garantir que seja o restante que falta para completar o salarioAnual
+                valores.add(ultimoValor);
+                monthIndex --;                        
+            
+            }
             
         }
         
 
     }
+
+    
 
     public double getSalarioTotal() {
         return salarioTotal;
@@ -182,15 +185,6 @@ public class Advogado implements Serializable {
         this.salarioTotal = salarioTotal;
     }
 
-    protected double escolherUmaPorcentagemAleatoria() {
-        int numero = (int) Math.round(13 * Math.random());
-        System.out.println("numero aleatorio 1-13 : " + numero);
-        if (numero < 0) {
-            numero = 0;
-        }
-
-        return listaDePorcentagensAleatorias[numero - 1];
-    }
 
     public List<ValorMes> getValores() {
         return valores;
@@ -198,5 +192,9 @@ public class Advogado implements Serializable {
 
     public void setValores(List<ValorMes> valores) {
         this.valores = valores;
+    }
+
+    protected void calculaSalariosSemTaxa() {
+        
     }
 }

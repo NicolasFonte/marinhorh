@@ -2,6 +2,7 @@ package com.rochamarinho.controller;
 
 import com.rochamarinho.backend.impl.MySQLAdvogadoBackend;
 import com.rochamarinho.backend.impl.MySQLFilialBackend;
+import com.rochamarinho.backend.impl.MySQLTaxaBackend;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.model.Filial;
 import com.rochamarinho.utils.BackendException;
@@ -20,20 +21,20 @@ public class AdvogadoController {
 
     private MySQLAdvogadoBackend advogadoBackend;
     private MySQLFilialBackend filialBackend;
+    private MySQLTaxaBackend taxaBackend;
     static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
     
     public AdvogadoController() {
     }
 
     public boolean cadastrarAdvogado(String oab,String nome,double distribuicao,
-                    double valorTaxa,String filialNome,String associacaoTexto, String nascimentoTexto,String email, String uf ) throws BackendException, ParseException
+                    double valorTaxa,String filialNome,String associacaoTexto, String nascimentoTexto,String email, String uf, boolean usaTaxa ) throws BackendException, ParseException
     {        
         
         Filial filial = getFilialBackend().buscarPorNome(filialNome);        
                 
         Advogado adv = new Advogado();
         adv.setOab(oab);
-        adv.setTaxa(valorTaxa);
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);
         adv.setEmail(email);
@@ -45,10 +46,12 @@ public class AdvogadoController {
         adv.setAssociacao(associacaoData);
         adv.setNascimento(nascimentoData);
         
-        adv.gerarSalarios();// IMPORTANTE!
+        double taxa = usaTaxa ? taxaBackend.read(1L).getValor() : 0.0;
+        
+        
+        adv.gerarSalarios(taxa);// IMPORTANTE!
         
         filial.addAdvogado(adv);
-        
         getFilialBackend().update(filial);
         
         return true;
@@ -102,7 +105,7 @@ public class AdvogadoController {
         
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);
-        adv.setTaxa(taxa);
+        
         
         advogadoBackend.update(adv);
         

@@ -250,7 +250,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         
         txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
         txtNome.setText(adv.getNome());
-        txtTaxa.setText(String.valueOf(adv.getTaxa()));
+        
         
     }//GEN-LAST:event_btnEditarAdvogadoActionPerformed
 

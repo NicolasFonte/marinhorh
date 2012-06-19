@@ -35,11 +35,19 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuFilial">
+        <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Filiais"/>
+            <Property name="text" type="java.lang.String" value="Administracao"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="itemMenuAlterarTaxa1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Setar Nova Taxa Padrao"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuAlterarTaxa1ActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemMenuFilialCadastrar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
@@ -50,23 +58,13 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemMenuFilialBusca">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Buscar"/>
+                <Property name="text" type="java.lang.String" value="Editar Filiais"/>
               </Properties>
             </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="menuTaxa">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Taxas"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itemMenuAlterarTaxa">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Setar Nova Taxa Padrao"/>
+                <Property name="text" type="java.lang.String" value="Efetuar Pagamento"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuAlterarTaxaActionPerformed"/>
-              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -75,17 +73,9 @@
             <Property name="text" type="java.lang.String" value="Relatorios"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menuItemSalarioAdvogados">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Salario Advogados"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemSalarioAdvogadosActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemMenuAdvogadosPorFilial">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Advogados Por Filial"/>
+                <Property name="text" type="java.lang.String" value="Mensal"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuAdvogadosPorFilialActionPerformed"/>

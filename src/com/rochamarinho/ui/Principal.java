@@ -5,6 +5,7 @@
  */
 package com.rochamarinho.ui;
 
+import com.rochamarinho.ui.relatorioui.RelatorioAdvogado;
 import com.rochamarinho.model.Report;
 
 /**
@@ -29,13 +30,12 @@ public class Principal extends javax.swing.JFrame {
         menuAdvogado = new javax.swing.JMenu();
         menuItemCadastrar = new javax.swing.JMenuItem();
         itemMenuBuscar = new javax.swing.JMenuItem();
-        menuFilial = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        itemMenuAlterarTaxa1 = new javax.swing.JMenuItem();
         itemMenuFilialCadastrar = new javax.swing.JMenuItem();
         itemMenuFilialBusca = new javax.swing.JMenuItem();
-        menuTaxa = new javax.swing.JMenu();
-        itemMenuAlterarTaxa = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        menuItemSalarioAdvogados = new javax.swing.JMenuItem();
         itemMenuAdvogadosPorFilial = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -43,7 +43,6 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("..:: Rocha, Marinho e Sales Advogados ::..");
         setMinimumSize(new java.awt.Dimension(500, 350));
-        setPreferredSize(getMinimumSize());
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rochamarinho/utils/logo.png"))); // NOI18N
         lblLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -70,7 +69,15 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuAdvogado);
 
-        menuFilial.setText("Filiais");
+        jMenu1.setText("Administracao");
+
+        itemMenuAlterarTaxa1.setText("Setar Nova Taxa Padrao");
+        itemMenuAlterarTaxa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuAlterarTaxa1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemMenuAlterarTaxa1);
 
         itemMenuFilialCadastrar.setText("Cadastrar");
         itemMenuFilialCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,36 +85,19 @@ public class Principal extends javax.swing.JFrame {
                 itemMenuFilialCadastrarActionPerformed(evt);
             }
         });
-        menuFilial.add(itemMenuFilialCadastrar);
+        jMenu1.add(itemMenuFilialCadastrar);
 
-        itemMenuFilialBusca.setText("Buscar");
-        menuFilial.add(itemMenuFilialBusca);
+        itemMenuFilialBusca.setText("Editar Filiais");
+        jMenu1.add(itemMenuFilialBusca);
 
-        jMenuBar1.add(menuFilial);
+        jMenuItem2.setText("Efetuar Pagamento");
+        jMenu1.add(jMenuItem2);
 
-        menuTaxa.setText("Taxas");
-
-        itemMenuAlterarTaxa.setText("Setar Nova Taxa Padrao");
-        itemMenuAlterarTaxa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemMenuAlterarTaxaActionPerformed(evt);
-            }
-        });
-        menuTaxa.add(itemMenuAlterarTaxa);
-
-        jMenuBar1.add(menuTaxa);
+        jMenuBar1.add(jMenu1);
 
         jMenu4.setText("Relatorios");
 
-        menuItemSalarioAdvogados.setText("Salario Advogados");
-        menuItemSalarioAdvogados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemSalarioAdvogadosActionPerformed(evt);
-            }
-        });
-        jMenu4.add(menuItemSalarioAdvogados);
-
-        itemMenuAdvogadosPorFilial.setText("Advogados Por Filial");
+        itemMenuAdvogadosPorFilial.setText("Mensal");
         itemMenuAdvogadosPorFilial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemMenuAdvogadosPorFilialActionPerformed(evt);
@@ -147,12 +137,6 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_menuItemCadastrarActionPerformed
 
-    private void itemMenuAlterarTaxaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuAlterarTaxaActionPerformed
-        AlterarTaxa alterarTaxaPanel = new AlterarTaxa();
-        this.setContentPane(alterarTaxaPanel);
-        this.pack();
-    }//GEN-LAST:event_itemMenuAlterarTaxaActionPerformed
-
     private void itemMenuFilialCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuFilialCadastrarActionPerformed
         CadastrarFilial filPanel = new CadastrarFilial();
         this.setContentPane(filPanel);
@@ -165,37 +149,35 @@ public class Principal extends javax.swing.JFrame {
         this.pack();
     }//GEN-LAST:event_itemMenuBuscarActionPerformed
 
-    private void menuItemSalarioAdvogadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSalarioAdvogadosActionPerformed
-
-        Report.gerarRelatorioTodosAdvogados();
-
-
-    }//GEN-LAST:event_menuItemSalarioAdvogadosActionPerformed
-
     private void itemMenuAdvogadosPorFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuAdvogadosPorFilialActionPerformed
        
         
-        RelatorioPorFilial relatorioPorFilial = new RelatorioPorFilial();
+        RelatorioAdvogado relatorioPorFilial = new RelatorioAdvogado();
         this.setContentPane(relatorioPorFilial);
         this.pack();
         
         
     }//GEN-LAST:event_itemMenuAdvogadosPorFilialActionPerformed
 
+    private void itemMenuAlterarTaxa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuAlterarTaxa1ActionPerformed
+        AlterarTaxa alterarTaxaPanel = new AlterarTaxa();
+        this.setContentPane(alterarTaxaPanel);
+        this.pack();
+    }//GEN-LAST:event_itemMenuAlterarTaxa1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemMenuAdvogadosPorFilial;
-    private javax.swing.JMenuItem itemMenuAlterarTaxa;
+    private javax.swing.JMenuItem itemMenuAlterarTaxa1;
     private javax.swing.JMenuItem itemMenuBuscar;
     private javax.swing.JMenuItem itemMenuFilialBusca;
     private javax.swing.JMenuItem itemMenuFilialCadastrar;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JMenu menuAdvogado;
-    private javax.swing.JMenu menuFilial;
     private javax.swing.JMenuItem menuItemCadastrar;
-    private javax.swing.JMenuItem menuItemSalarioAdvogados;
-    private javax.swing.JMenu menuTaxa;
     // End of variables declaration//GEN-END:variables
 }
