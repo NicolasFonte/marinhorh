@@ -239,10 +239,12 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
         boolean existeFilial = existeFilial();
         if (existeFilial == false) {
+            JOptionPane.showMessageDialog(null, "Cadastrar primeiro filiais antes de advogado");
             return;
         }
 
-
+        
+        
         String advNomeText = txtNome.getText();
         String advOabText = fmtOab.getText().replace(".", "").replace(" ", "");
 
@@ -252,24 +254,44 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         String dataAssociacaoTexto = fmtAssociacao.getText();
         String dataNascimentoTexto = fmtNascimento.getText();
         String email = txtEmail.getText() + lblDominio.getText();
+        
         String ufTexto = (String) UfOabComboBox.getSelectedItem();
 
+        if ( ufTexto.equals("UF") )
+        {
+            JOptionPane.showMessageDialog(null, "Escolher UF");
+            return;
+        }
+        
         advOabText = ufTexto + advOabText;
         
+        if (advNomeText.equals("") || advOabText.equals("") || advDistribuicaoText.equals("")
+                    || dataAssociacaoTexto.equals("") || dataNascimentoTexto.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Preencher todos os campos");
+            return;
+        }
         
-        double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
+        
+        
         
         try {
-
+            double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
             advController.cadastrarAdvogado(advOabText, advNomeText,
                     distribuicaoDouble, nomeFilial, dataAssociacaoTexto, dataNascimentoTexto, email, ufTexto,true);
 
-        } catch (ParseException pex) {
+        } catch (NumberFormatException nfe)
+        {
+            JOptionPane.showMessageDialog(null, "Erro - Distribuiçao incorreta ou inválida");
+            return;
+        }
+            
+        catch (ParseException pex) {
 
-            JOptionPane.showMessageDialog(null, "advogado nao cadastrado devido a data incorreta");
+            JOptionPane.showMessageDialog(null, "Advogado nao cadastrado devido a data incorreta");
             return;
         } catch (BackendException ex) {
-            JOptionPane.showMessageDialog(null, "advogado nao cadastrado");
+            JOptionPane.showMessageDialog(null, "Advogado nao cadastrado");
             return;
         }
 
@@ -330,7 +352,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                     new javax.swing.text.MaskFormatter("##.####")));
 
             txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("#.###,##")));
+                    new javax.swing.text.MaskFormatter("##.###,##")));
 
             filialComboBox.setToolTipText("Escolha a Filial:");
 

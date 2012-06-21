@@ -46,7 +46,7 @@ public class AdvogadoController {
         adv.setAssociacao(associacaoData);
         adv.setNascimento(nascimentoData);
         
-        double taxa = usaTaxa ? taxaBackend.read(1L).getValor() : 0.0;
+        double taxa = usaTaxa ? getTaxaBackend().read(1L).getValor() : 0.0;
         
         
         adv.gerarSalarios(taxa);// IMPORTANTE!
@@ -70,6 +70,17 @@ public class AdvogadoController {
         }        
         return advogadoBackend;
     }
+    
+    public MySQLTaxaBackend getTaxaBackend()
+    {
+        if (taxaBackend == null)
+        {
+            taxaBackend = new MySQLTaxaBackend();
+        }
+        return taxaBackend;
+        
+    }
+            
 
     public void setBackend(MySQLAdvogadoBackend backend) {
         this.advogadoBackend = backend;
