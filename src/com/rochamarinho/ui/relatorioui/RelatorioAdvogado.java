@@ -26,13 +26,14 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
     public RelatorioAdvogado() {
         initComponents();
         setFiliaisNoComboBox();
+        setMesesNoComboBox();
     }
     
     public void setMesesNoComboBox()
     {
         ArrayList<String> nomeMeses = new ArrayList<String>(Arrays.asList("janeiro",
                     "fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"));
-        filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(nomeMeses.toArray()));
+        mesComboBox.setModel(new javax.swing.DefaultComboBoxModel(nomeMeses.toArray()));
     }
     
     public void setFiliaisNoComboBox() {
@@ -50,7 +51,6 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
         for (Filial f : filiais) {
             filiaisNomes.add(f.getNome());
         }
-        
         
         filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(filiaisNomes.toArray()));
     }

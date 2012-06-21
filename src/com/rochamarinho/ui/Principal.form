@@ -50,7 +50,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemMenuFilialCadastrar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                <Property name="text" type="java.lang.String" value="Cadastrar Filiais"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuFilialCadastrarActionPerformed"/>

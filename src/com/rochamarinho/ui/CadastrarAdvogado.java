@@ -258,11 +258,11 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         
         
         double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
-        double taxaDouble = Double.valueOf(advTaxaText);
+        
         try {
 
             advController.cadastrarAdvogado(advOabText, advNomeText,
-                    distribuicaoDouble, taxaDouble, nomeFilial, dataAssociacaoTexto, dataNascimentoTexto, email, ufTexto,true);
+                    distribuicaoDouble, nomeFilial, dataAssociacaoTexto, dataNascimentoTexto, email, ufTexto,true);
 
         } catch (ParseException pex) {
 

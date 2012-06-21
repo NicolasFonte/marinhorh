@@ -28,7 +28,7 @@ public class AdvogadoController {
     }
 
     public boolean cadastrarAdvogado(String oab,String nome,double distribuicao,
-                    double valorTaxa,String filialNome,String associacaoTexto, String nascimentoTexto,String email, String uf, boolean usaTaxa ) throws BackendException, ParseException
+                    String filialNome,String associacaoTexto, String nascimentoTexto,String email, String uf, boolean usaTaxa ) throws BackendException, ParseException
     {        
         
         Filial filial = getFilialBackend().buscarPorNome(filialNome);        

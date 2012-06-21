@@ -79,7 +79,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(itemMenuAlterarTaxa1);
 
-        itemMenuFilialCadastrar.setText("Cadastrar");
+        itemMenuFilialCadastrar.setText("Cadastrar Filiais");
         itemMenuFilialCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemMenuFilialCadastrarActionPerformed(evt);
