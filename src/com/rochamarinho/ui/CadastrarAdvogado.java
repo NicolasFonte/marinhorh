@@ -11,8 +11,6 @@ import com.rochamarinho.controller.TaxaController;
 import com.rochamarinho.model.Filial;
 import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
-import com.rochamarinho.utils.ValidaCpf;
-import java.awt.Color;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;

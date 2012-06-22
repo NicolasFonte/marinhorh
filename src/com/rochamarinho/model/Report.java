@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -47,6 +48,7 @@ public class Report {
             
         } else // creio que a unica chance seja com nome e com filial
         {
+            JOptionPane.showMessageDialog(null, "Ainda não suportado");
             //gerarRelatorioNomeEFilialMes(nomeAdvogado,nomeFilial,nomeMes);
         }
             
@@ -98,6 +100,9 @@ public class Report {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("mes", nomeMes);
         map.put("nomefilial", nomeFilial);
+        
+        nomeAdvogado = "%"+nomeAdvogado+"%"; // para pegar parte do nome.
+        
         map.put("nome_advogado", nomeAdvogado);
         
         Connection con = Conexao.getConexao();
