@@ -59,7 +59,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menuAdvogado.add(menuItemCadastrar);
 
-        itemMenuBuscar.setText("Buscar");
+        itemMenuBuscar.setText("Gerenciar");
         itemMenuBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemMenuBuscarActionPerformed(evt);
@@ -69,9 +69,9 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuAdvogado);
 
-        jMenu1.setText("Administracao");
+        jMenu1.setText("Administração");
 
-        itemMenuAlterarTaxa1.setText("Setar Nova Taxa Padrao");
+        itemMenuAlterarTaxa1.setText("Setar Nova Taxa Padrão");
         itemMenuAlterarTaxa1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemMenuAlterarTaxa1ActionPerformed(evt);
@@ -87,7 +87,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(itemMenuFilialCadastrar);
 
-        itemMenuFilialBusca.setText("Editar Filiais");
+        itemMenuFilialBusca.setText("Gerenciar Filiais");
         jMenu1.add(itemMenuFilialBusca);
 
         jMenuItem2.setText("Efetuar Pagamento");
@@ -95,7 +95,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu4.setText("Relatorios");
+        jMenu4.setText("Relatórios");
 
         itemMenuAdvogadosPorFilial.setText("Mensal");
         itemMenuAdvogadosPorFilial.addActionListener(new java.awt.event.ActionListener() {

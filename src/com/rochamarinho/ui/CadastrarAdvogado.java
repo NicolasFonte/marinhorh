@@ -239,11 +239,10 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
         boolean existeFilial = existeFilial();
         if (existeFilial == false) {
-            JOptionPane.showMessageDialog(null, "Cadastrar primeiro filiais antes de advogado");
             return;
         }
 
-        
+        boolean usaTaxa = checkBoxTaxa.isSelected();
         
         String advNomeText = txtNome.getText();
         String advOabText = fmtOab.getText().replace(".", "").replace(" ", "");
@@ -257,12 +256,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         
         String ufTexto = (String) UfOabComboBox.getSelectedItem();
 
-        if ( ufTexto.equals("UF") )
-        {
-            JOptionPane.showMessageDialog(null, "Escolher UF");
-            return;
-        }
-        
         advOabText = ufTexto + advOabText;
         
         if (advNomeText.equals("") || advOabText.equals("") || advDistribuicaoText.equals("")
@@ -272,13 +265,17 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             return;
         }
         
-        
+        if ( ufTexto.equals("UF") )
+        {
+            JOptionPane.showMessageDialog(null, "Escolher UF");
+            return;
+        }
         
         
         try {
             double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
             advController.cadastrarAdvogado(advOabText, advNomeText,
-                    distribuicaoDouble, nomeFilial, dataAssociacaoTexto, dataNascimentoTexto, email, ufTexto,true);
+                    distribuicaoDouble, nomeFilial, dataAssociacaoTexto, dataNascimentoTexto, email, ufTexto,usaTaxa);
 
         } catch (NumberFormatException nfe)
         {
@@ -416,7 +413,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
     private boolean existeFilial() {
         if (filialComboBox.getItemCount() == 0) {
-            JOptionPane.showConfirmDialog(null, "um advogado precisa estar associado a uma filial, cadastre uma filial.");
+            JOptionPane.showMessageDialog(null, "um advogado precisa estar associado a uma filial, cadastre uma filial.");
             return false;
         }
         return true;

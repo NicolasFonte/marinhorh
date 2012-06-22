@@ -194,7 +194,5 @@ public class Advogado implements Serializable {
         this.valores = valores;
     }
 
-    protected void calculaSalariosSemTaxa() {
-        
-    }
+
 }

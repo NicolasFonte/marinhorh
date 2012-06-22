@@ -27,7 +27,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemMenuBuscar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Buscar"/>
+                <Property name="text" type="java.lang.String" value="Gerenciar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuBuscarActionPerformed"/>
@@ -37,12 +37,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Administracao"/>
+            <Property name="text" type="java.lang.String" value="Administra&#xe7;&#xe3;o"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemMenuAlterarTaxa1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Setar Nova Taxa Padrao"/>
+                <Property name="text" type="java.lang.String" value="Setar Nova Taxa Padr&#xe3;o"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuAlterarTaxa1ActionPerformed"/>
@@ -58,7 +58,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemMenuFilialBusca">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Editar Filiais"/>
+                <Property name="text" type="java.lang.String" value="Gerenciar Filiais"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
@@ -70,7 +70,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Relatorios"/>
+            <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemMenuAdvogadosPorFilial">

@@ -38,6 +38,7 @@ public class AdvogadoController {
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);
         adv.setEmail(email);
+        
         adv.setUf(uf);
         
         Date associacaoData = formatter.parse(associacaoTexto);

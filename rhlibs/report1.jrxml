@@ -41,20 +41,7 @@ vm.mes = $P{mes};]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="70" splitType="Stretch">
-			<staticText>
-				<reportElement style="Title" x="0" y="5" width="263" height="33"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Ubuntu"/>
-				</textElement>
-				<text><![CDATA[]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="SubTitle" x="63" y="39" width="200" height="22" forecolor="#FFFFFF"/>
-				<textElement textAlignment="Right"/>
-				<text><![CDATA[Rocha, Marinho e Sales]]></text>
-			</staticText>
-		</band>
+		<band height="70" splitType="Stretch"/>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
@@ -68,19 +55,19 @@ vm.mes = $P{mes};]]>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="27" y="2" width="100" height="20"/>
+				<reportElement x="55" y="0" width="79" height="20"/>
 				<textElement/>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="226" y="2" width="127" height="20"/>
+				<reportElement x="186" y="0" width="127" height="20"/>
 				<textElement/>
 				<text><![CDATA[Valor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="436" y="2" width="100" height="20"/>
+				<reportElement x="333" y="0" width="100" height="20"/>
 				<textElement/>
-				<text><![CDATA[filial]]></text>
+				<text><![CDATA[Filial]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -93,19 +80,19 @@ vm.mes = $P{mes};]]>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="12" y="0" width="171" height="20"/>
+				<reportElement x="333" y="0" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{filial}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="226" y="0" width="127" height="20"/>
+				<reportElement x="186" y="0" width="127" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="0" width="100" height="20"/>
+				<reportElement x="55" y="0" width="79" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{filial}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
