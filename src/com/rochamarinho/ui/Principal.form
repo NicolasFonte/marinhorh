@@ -61,10 +61,13 @@
                 <Property name="text" type="java.lang.String" value="Gerenciar Filiais"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="itemMenuEfetuarPagamento">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Efetuar Pagamento"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuEfetuarPagamentoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

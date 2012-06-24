@@ -194,5 +194,10 @@ public class Advogado implements Serializable {
         this.valores = valores;
     }
 
+    public void addPagamento(Pagamento pg)
+    {
+        getHistoricoPagamento().add(pg);
+    }
+    
 
 }

@@ -1,8 +1,3 @@
-/*
- * Principal.java
- *
- * Created on 29/04/2012, 16:31:28 pelo Nicolas
- */
 package com.rochamarinho.ui;
 
 import com.rochamarinho.ui.relatorioui.RelatorioAdvogado;
@@ -34,7 +29,7 @@ public class Principal extends javax.swing.JFrame {
         itemMenuAlterarTaxa1 = new javax.swing.JMenuItem();
         itemMenuFilialCadastrar = new javax.swing.JMenuItem();
         itemMenuFilialBusca = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        itemMenuEfetuarPagamento = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         itemMenuAdvogadosPorFilial = new javax.swing.JMenuItem();
 
@@ -90,8 +85,13 @@ public class Principal extends javax.swing.JFrame {
         itemMenuFilialBusca.setText("Gerenciar Filiais");
         jMenu1.add(itemMenuFilialBusca);
 
-        jMenuItem2.setText("Efetuar Pagamento");
-        jMenu1.add(jMenuItem2);
+        itemMenuEfetuarPagamento.setText("Efetuar Pagamento");
+        itemMenuEfetuarPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuEfetuarPagamentoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemMenuEfetuarPagamento);
 
         jMenuBar1.add(jMenu1);
 
@@ -165,17 +165,23 @@ public class Principal extends javax.swing.JFrame {
         this.pack();
     }//GEN-LAST:event_itemMenuAlterarTaxa1ActionPerformed
 
+    private void itemMenuEfetuarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuEfetuarPagamentoActionPerformed
+        EfetuarPagamento efetuarPagamento = new EfetuarPagamento();
+        this.setContentPane(efetuarPagamento);
+        this.pack();
+    }//GEN-LAST:event_itemMenuEfetuarPagamentoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemMenuAdvogadosPorFilial;
     private javax.swing.JMenuItem itemMenuAlterarTaxa1;
     private javax.swing.JMenuItem itemMenuBuscar;
+    private javax.swing.JMenuItem itemMenuEfetuarPagamento;
     private javax.swing.JMenuItem itemMenuFilialBusca;
     private javax.swing.JMenuItem itemMenuFilialCadastrar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JMenu menuAdvogado;
     private javax.swing.JMenuItem menuItemCadastrar;

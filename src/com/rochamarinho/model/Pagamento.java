@@ -3,6 +3,7 @@ package com.rochamarinho.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 
@@ -14,7 +15,7 @@ import javax.persistence.Temporal;
 @Entity
 public class Pagamento implements Serializable {
     
-    @Id
+    @Id @GeneratedValue
     private Long id;
 
     @Temporal(javax.persistence.TemporalType.DATE)
