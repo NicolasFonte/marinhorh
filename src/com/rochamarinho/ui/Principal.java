@@ -32,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
         itemMenuEfetuarPagamento = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         itemMenuAdvogadosPorFilial = new javax.swing.JMenuItem();
+        itemMenuRelatorioAnual = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -104,6 +105,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu4.add(itemMenuAdvogadosPorFilial);
+
+        itemMenuRelatorioAnual.setText("Anual");
+        jMenu4.add(itemMenuRelatorioAnual);
 
         jMenuBar1.add(jMenu4);
 
@@ -178,6 +182,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemMenuEfetuarPagamento;
     private javax.swing.JMenuItem itemMenuFilialBusca;
     private javax.swing.JMenuItem itemMenuFilialCadastrar;
+    private javax.swing.JMenuItem itemMenuRelatorioAnual;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;

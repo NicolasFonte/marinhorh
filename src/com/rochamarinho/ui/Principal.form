@@ -84,6 +84,11 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuAdvogadosPorFilialActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemMenuRelatorioAnual">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Anual"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
