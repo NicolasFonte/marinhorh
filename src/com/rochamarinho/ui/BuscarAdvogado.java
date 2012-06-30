@@ -7,15 +7,11 @@ package com.rochamarinho.ui;
 
 import com.rochamarinho.controller.AdvogadoController;
 import com.rochamarinho.controller.FilialController;
-import com.rochamarinho.controller.TaxaController;
 import com.rochamarinho.model.Advogado;
-import com.rochamarinho.model.Filial;
 import com.rochamarinho.utils.BackendException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,7 +25,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
     /** Creates new form BuscarAdvogado */
     public BuscarAdvogado() {
         initComponents();
-        setDefaultTextEmpty();
+        //setDefaultTextEmpty();
     }
 
     private void mostrarMensagem(String mensagem) {
@@ -37,7 +33,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
     }
 
     protected void setDefaultTextEmpty() {
-        txtDistribuicao.setVisible(false);
+     /* txtDistribuicao.setVisible(false);
         txtNome.setVisible(false);
         txtTaxa.setVisible(false);
         lblDistribuicao.setVisible(false);
@@ -48,68 +44,33 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         btnGravar.setVisible(false);
         lblFilialMostrarNome.setVisible(false);
         lblMostrarNome.setVisible(false);
+        * 
+        */
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblCpf = new javax.swing.JLabel();
-        jftCpf = new javax.swing.JFormattedTextField();
-        lblMostrarNome = new javax.swing.JLabel();
+        lblPesquisar = new javax.swing.JLabel();
+        jftPesquisar = new javax.swing.JFormattedTextField();
         btnBuscar = new javax.swing.JButton();
-        lblFilialMostrarNome = new javax.swing.JLabel();
-        btnRemoverAdvogado = new javax.swing.JButton();
-        btnEditarAdvogado = new javax.swing.JButton();
-        txtNome = new javax.swing.JTextField();
-        txtDistribuicao = new javax.swing.JTextField();
-        txtTaxa = new javax.swing.JTextField();
-        lblNome = new javax.swing.JLabel();
-        lblDistribuicao = new javax.swing.JLabel();
-        lblTaxa = new javax.swing.JLabel();
-        btnGravar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jRadioNome = new javax.swing.JRadioButton();
+        jRadioOab = new javax.swing.JRadioButton();
+        btnEditar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePesquisar = new javax.swing.JTable();
 
         setMinimumSize(new java.awt.Dimension(500, 300));
-        setPreferredSize(getMinimumSize());
 
-        lblCpf.setText("Digite o Cpf: ");
-
-        lblMostrarNome.setText("advNome");
+        lblPesquisar.setText("Pesquisar:");
 
         btnBuscar.setText("buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
-            }
-        });
-
-        lblFilialMostrarNome.setText("advFilial");
-
-        btnRemoverAdvogado.setText("remover");
-        btnRemoverAdvogado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverAdvogadoActionPerformed(evt);
-            }
-        });
-
-        btnEditarAdvogado.setText("editar");
-        btnEditarAdvogado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarAdvogadoActionPerformed(evt);
-            }
-        });
-
-        lblNome.setText("Nome:");
-
-        lblDistribuicao.setText("Distribuicao:");
-
-        lblTaxa.setText("Taxa:");
-
-        btnGravar.setText("gravar");
-        btnGravar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGravarActionPerformed(evt);
             }
         });
 
@@ -120,107 +81,117 @@ public class BuscarAdvogado extends javax.swing.JPanel {
             }
         });
 
+        jRadioNome.setText("Nome");
+
+        jRadioOab.setText("OAB");
+
+        btnEditar.setText("Editar");
+
+        jTablePesquisar.setAutoCreateRowSorter(true);
+        jTablePesquisar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "OAB", "Distribuição", "Associação", "E-mail"
+            }
+        ));
+        jTablePesquisar.setColumnSelectionAllowed(true);
+        jTablePesquisar.setName("");
+        jScrollPane1.setViewportView(jTablePesquisar);
+        jTablePesquisar.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTablePesquisar.getAccessibleContext().setAccessibleName("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCpf)
-                            .addComponent(lblMostrarNome))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFilialMostrarNome)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jftCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnGravar)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnBuscar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnCancelar))))))
+                        .addContainerGap()
+                        .addComponent(lblPesquisar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jftPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRemoverAdvogado)
-                            .addComponent(lblNome)
-                            .addComponent(lblDistribuicao)
-                            .addComponent(lblTaxa))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEditarAdvogado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNome)
-                            .addComponent(txtDistribuicao)
-                            .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                        .addGap(93, 93, 93)
+                        .addComponent(jRadioNome)
+                        .addGap(14, 14, 14)
+                        .addComponent(jRadioOab)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEditar)
+                .addGap(23, 23, 23))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCpf)
+                    .addComponent(jRadioNome)
+                    .addComponent(jRadioOab))
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPesquisar)
                     .addComponent(btnBuscar)
-                    .addComponent(jftCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFilialMostrarNome)
-                    .addComponent(lblMostrarNome))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRemoverAdvogado)
-                    .addComponent(btnEditarAdvogado))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNome))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDistribuicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDistribuicao))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTaxa)
-                    .addComponent(btnGravar))
-                .addContainerGap(75, Short.MAX_VALUE))
+                    .addComponent(jftPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnEditar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        String maybeCpf = jftCpf.getText();
-        Advogado adv = null;
+        String nomeAdv = jftPesquisar.getText();
+        List<Advogado> advs = null;
         try {
-            adv = advController.byOab(maybeCpf);
+            advs = advController.porNome(nomeAdv);
         } catch (BackendException ex) {
-            mostrarMensagem("erro na busca do cpf");
+            mostrarMensagem("erro na busca do nome");
             return;
         }
 
-        if (adv == null) {
+        if ((advs == null) || (advs.isEmpty())) {
             mostrarMensagem("advogado nao encontrado");
-            return;
+            //return
         }
-        
-        Filial filialProcurada;
+    
+                
+        /* Implementar posteriormente a busca de advogado e filial.
+         * Filial filialProcurada;
         try {
-            filialProcurada = filialController.filialDeAdvogado(maybeCpf);
+            filialProcurada = filialController.filialDeAdvogado(nomeAdvs);
         } catch (BackendException ex) {
             mostrarMensagem("este advogado nao esta numa filial devido a algum erro");
-            return;
         }
+        * 
+        */
+        DefaultTableModel m = (DefaultTableModel) jTablePesquisar.getModel();
+        
+        for (Advogado obj:advs){
+           m.addRow(new Object [] {obj.getNome(), obj.getOab(), obj.getDistribuicao(),
+               obj.getAssociacao(), obj.getEmail()
+           }); 
+        }
+    
          
-        lblMostrarNome.setText(adv.getNome());
+/*      lblMostrarNome.setText(adv.getNome());
         lblMostrarNome.setVisible(true);
         lblFilialMostrarNome.setText(filialProcurada.getNome());
         lblFilialMostrarNome.setVisible(true);
         btnEditarAdvogado.setVisible(true);
         btnRemoverAdvogado.setVisible(true);
+        * 
+        */
+        
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -228,81 +199,16 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnEditarAdvogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAdvogadoActionPerformed
-        
-        String oab = jftCpf.getText().replace(".", "").replace("-", "");
-        
-        txtDistribuicao.setVisible(true);
-        txtNome.setVisible(true);
-        txtTaxa.setVisible(true);
-        
-        Advogado adv = null;
-        try {
-            adv = advController.byOab(oab);
-        } catch (BackendException ex) {
-            
-        }
-        
-        lblDistribuicao.setVisible(true);
-        lblNome.setVisible(true);
-        lblTaxa.setVisible(true);
-        btnGravar.setVisible(true);
-        
-        txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
-        txtNome.setText(adv.getNome());
-        
-        
-    }//GEN-LAST:event_btnEditarAdvogadoActionPerformed
-
-    private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
-
-        String cpf = jftCpf.getText().replace(".", "").replace("-", "");
-        
-        double distribuicao = Double.parseDouble(txtDistribuicao.getText());
-        double taxa = Double.parseDouble(txtTaxa.getText());
-        String nome = txtNome.getText();       
-        try {
-            advController.atualizarAdvogado(cpf, nome , distribuicao, taxa);
-        } catch (BackendException ex) {
-            mostrarMensagem("nao foi possivel atualizar o advogado");
-        }
-        
-        JOptionPane.showMessageDialog(null, " atualizado com sucesso");
-        this.setVisible(false);
-        
-    }//GEN-LAST:event_btnGravarActionPerformed
-
-    private void btnRemoverAdvogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverAdvogadoActionPerformed
-        
-        String cpf = jftCpf.getText().replace(".", "").replace("-", "");
-        try {
-            advController.deletarAdvogado(cpf);
-        } catch (BackendException ex) {
-            Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
-            mostrarMensagem("advogado nao foi removido!");
-            this.setVisible(false);
-        }
-        
-        mostrarMensagem("advogado removido com sucesso!");
-        this.setVisible(false);
-        
-    }//GEN-LAST:event_btnRemoverAdvogadoActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEditarAdvogado;
-    private javax.swing.JButton btnGravar;
-    private javax.swing.JButton btnRemoverAdvogado;
-    private javax.swing.JFormattedTextField jftCpf;
-    private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblDistribuicao;
-    private javax.swing.JLabel lblFilialMostrarNome;
-    private javax.swing.JLabel lblMostrarNome;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblTaxa;
-    private javax.swing.JTextField txtDistribuicao;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtTaxa;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JRadioButton jRadioNome;
+    private javax.swing.JRadioButton jRadioOab;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTablePesquisar;
+    private javax.swing.JFormattedTextField jftPesquisar;
+    private javax.swing.JLabel lblPesquisar;
     // End of variables declaration//GEN-END:variables
 }
