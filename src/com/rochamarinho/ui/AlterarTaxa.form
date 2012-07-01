@@ -68,6 +68,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTaxaNovoValor">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTaxaNovoValorFocusGained"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAlterarValorTaxa">
       <Properties>
