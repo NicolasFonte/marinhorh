@@ -38,6 +38,12 @@ public class AlterarTaxa extends javax.swing.JPanel {
 
         lblNovoValor.setText("Digite o novo valor: ");
 
+        txtTaxaNovoValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTaxaNovoValorFocusGained(evt);
+            }
+        });
+
         btnAlterarValorTaxa.setText("alterar");
         btnAlterarValorTaxa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +115,10 @@ public class AlterarTaxa extends javax.swing.JPanel {
     private void btnCancelarAlteracaoTaxaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarAlteracaoTaxaActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarAlteracaoTaxaActionPerformed
+
+    private void txtTaxaNovoValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTaxaNovoValorFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTaxaNovoValorFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarValorTaxa;

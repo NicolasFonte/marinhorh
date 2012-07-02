@@ -9,8 +9,11 @@ import com.rochamarinho.controller.AdvogadoController;
 import com.rochamarinho.controller.FilialController;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.utils.BackendException;
+import java.awt.Color;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -67,6 +70,15 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(583, 353));
 
         lblPesquisar.setText("Pesquisar:");
+
+        jftPesquisar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jftPesquisarFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jftPesquisarFocusLost(evt);
+            }
+        });
 
         btnBuscar.setText("buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -182,6 +194,11 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         */
         DefaultTableModel m = (DefaultTableModel) jTablePesquisar.getModel();
         
+        int i=0;
+	while(i<jTablePesquisar.getRowCount()){
+	m.removeRow(0);
+        }
+        
         for (Advogado obj:advs){
            m.addRow(new Object [] {obj.getNome(), obj.getOab(), obj.getDistribuicao(),
                obj.getAssociacao(), obj.getEmail()
@@ -205,10 +222,13 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
-        
-    }//GEN-LAST:event_btnEditarActionPerformed
+    private void jftPesquisarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jftPesquisarFocusGained
+        jftPesquisar.setBorder(BorderFactory.createLineBorder(Color.yellow));
+    }//GEN-LAST:event_jftPesquisarFocusGained
+
+    private void jftPesquisarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jftPesquisarFocusLost
+        jftPesquisar.setBorder(BorderFactory.createLineBorder(Color.gray));
+    }//GEN-LAST:event_jftPesquisarFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

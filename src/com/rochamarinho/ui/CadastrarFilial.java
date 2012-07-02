@@ -6,8 +6,10 @@ package com.rochamarinho.ui;
 
 import com.rochamarinho.controller.FilialController;
 import com.rochamarinho.utils.BackendException;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.RootPaneUI;
 
@@ -46,6 +48,14 @@ public class CadastrarFilial extends javax.swing.JPanel {
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
+            }
+        });
+        txtNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNomeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNomeFocusLost(evt);
             }
         });
 
@@ -120,6 +130,14 @@ public class CadastrarFilial extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Filial cadastrado com sucesso!");
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarFilialActionPerformed
+
+    private void txtNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusGained
+        txtNome.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+    }//GEN-LAST:event_txtNomeFocusGained
+
+    private void txtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusLost
+        txtNome.setBorder(BorderFactory.createLineBorder(Color.gray));
+    }//GEN-LAST:event_txtNomeFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarFilial;

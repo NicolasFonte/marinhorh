@@ -11,14 +11,18 @@ import com.rochamarinho.controller.TaxaController;
 import com.rochamarinho.model.Filial;
 import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
+import com.rochamarinho.utils.IeValidator;
 import java.awt.Color;
-import java.awt.color.ColorSpace;
+import java.awt.TextField;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.border.CompoundBorder;
+import javax.swing.text.AbstractDocument;
 
 /**
  *
@@ -35,7 +39,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         initComponents();
         setDefaultTaxaText();
         setFiliaisNoComboBox();
-        setDefaultMasks();
+       // setDefaultMasks();
     }
 
     @SuppressWarnings("unchecked")
@@ -60,12 +64,21 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         fmtAssociacao = new javax.swing.JFormattedTextField();
         lblDominio = new javax.swing.JLabel();
         btnLimparCadastro = new javax.swing.JButton();
-        txtDistribuicao = new javax.swing.JFormattedTextField();
         checkBoxTaxa = new javax.swing.JCheckBox();
+        txtDistribuicao = new javax.swing.JFormattedTextField();
 
         setMinimumSize(new java.awt.Dimension(500, 350));
         setNextFocusableComponent(txtNome);
         setPreferredSize(new java.awt.Dimension(583, 353));
+
+        txtNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNomeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNomeFocusLost(evt);
+            }
+        });
 
         lblNomeAdvogado.setText("Nome:");
 
@@ -81,11 +94,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         lblOab.setText("Oab:");
 
         filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "default" }));
-        filialComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filialComboBoxActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Filial:");
 
@@ -96,12 +104,10 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             }
         });
 
-        fmtOab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fmtOabActionPerformed(evt);
-            }
-        });
         fmtOab.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fmtOabFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fmtOabFocusLost(evt);
             }
@@ -112,25 +118,34 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         lblAssociacao.setText("Associacao:");
 
         UfOabComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UF","AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO" }));
-        UfOabComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UfOabComboBoxActionPerformed(evt);
-            }
-        });
 
         lblEmail.setText("E-mail:");
 
-        fmtNascimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fmtNascimentoActionPerformed(evt);
+        txtEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmailFocusLost(evt);
             }
         });
+
         fmtNascimento.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 fmtNascimentoFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fmtNascimentoFocusLost(evt);
+            }
+        });
+
+        fmtAssociacao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fmtAssociacaoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fmtAssociacaoFocusLost(evt);
             }
         });
 
@@ -144,6 +159,12 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         });
 
         checkBoxTaxa.setText("Taxa");
+
+        txtDistribuicao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDistribuicaoFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -180,20 +201,23 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                                 .addComponent(lblDominio))
                             .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(fmtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                                    .addComponent(txtDistribuicao))
-                                .addGap(28, 28, 28)
-                                .addComponent(lblAssociacao)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkBoxTaxa)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(fmtOab, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNome))))
+                            .addComponent(txtNome)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtDistribuicao)
+                                    .addComponent(fmtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(28, 28, 28)
+                                        .addComponent(lblAssociacao)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(134, 134, 134)
+                                        .addComponent(checkBoxTaxa)))))))
                 .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -216,8 +240,8 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDistribuicao)
-                    .addComponent(txtDistribuicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkBoxTaxa))
+                    .addComponent(checkBoxTaxa)
+                    .addComponent(txtDistribuicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNascimento)
@@ -236,10 +260,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                 .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void filialComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filialComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_filialComboBoxActionPerformed
 
     private void btnCadastrarAdvogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAdvogadoActionPerformed
 
@@ -307,16 +327,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarCadastroActionPerformed
 
-    private void fmtOabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fmtOabActionPerformed
-    }//GEN-LAST:event_fmtOabActionPerformed
-
-    private void fmtOabFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtOabFocusLost
-    }//GEN-LAST:event_fmtOabFocusLost
-
-    private void UfOabComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UfOabComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UfOabComboBoxActionPerformed
-
     private void btnLimparCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCadastroActionPerformed
 
         limpar();
@@ -324,49 +334,93 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLimparCadastroActionPerformed
 
     private void fmtNascimentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtNascimentoFocusLost
-     /**   try {
-            fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                        new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (ParseException ex) {
-            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
-        }*///184,207,229
-       fmtNascimento.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(184,207,229)));
+     
+        fmtNascimento.setBorder(BorderFactory.createLineBorder(Color.GRAY));
     }//GEN-LAST:event_fmtNascimentoFocusLost
 
     private void fmtNascimentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtNascimentoFocusGained
-       try {
-           fmtNascimento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 0)));
-            fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+       fmtNascimento.setBorder(BorderFactory.createLineBorder(Color.yellow));
+        try {
+         fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                         new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (ParseException ex) {
             Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_fmtNascimentoFocusGained
 
-    private void fmtNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fmtNascimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fmtNascimentoActionPerformed
-
-    private void setDefaultMasks() {
+    private void fmtAssociacaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtAssociacaoFocusGained
+        
+            fmtAssociacao.setBorder(BorderFactory.createLineBorder(Color.yellow));
         try {
-            //fmtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-              //      new javax.swing.text.MaskFormatter("##/##/####")));
-
             fmtAssociacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_fmtAssociacaoFocusGained
 
+    private void fmtAssociacaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtAssociacaoFocusLost
+        fmtAssociacao.setBorder(BorderFactory.createLineBorder(Color.gray));
+    }//GEN-LAST:event_fmtAssociacaoFocusLost
+
+    private void txtNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusGained
+        txtNome.setBorder(BorderFactory.createLineBorder(Color.yellow));
+    }//GEN-LAST:event_txtNomeFocusGained
+
+    private void txtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusLost
+        txtNome.setBorder(BorderFactory.createLineBorder(Color.gray));
+    }//GEN-LAST:event_txtNomeFocusLost
+
+    private void fmtOabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtOabFocusGained
+       fmtOab.setBorder(BorderFactory.createLineBorder(Color.yellow));
+       try{
             fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##.####")));
+       } catch (ParseException ex) {
+            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_fmtOabFocusGained
 
+    private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
+        txtEmail.setBorder(BorderFactory.createLineBorder(Color.yellow));
+    }//GEN-LAST:event_txtEmailFocusGained
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        txtEmail.setBorder(BorderFactory.createLineBorder(Color.gray));
+    }//GEN-LAST:event_txtEmailFocusLost
+
+    private void fmtOabFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtOabFocusLost
+        fmtOab.setBorder(BorderFactory.createLineBorder(Color.gray));
+    }//GEN-LAST:event_fmtOabFocusLost
+
+    private void txtDistribuicaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistribuicaoFocusGained
+        txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
+        try{
             txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##.###,##")));
-
-            filialComboBox.setToolTipText("Escolha a Filial:");
-
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Por gentileza, Preecha os campos corretamente!");
+            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }//GEN-LAST:event_txtDistribuicaoFocusGained
+
+   // private void setDefaultMasks() {
+        //try {
+         //   fmtAssociacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+         //           new javax.swing.text.MaskFormatter("##/##/####")));
+
+        //    fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+          //          new javax.swing.text.MaskFormatter("##.####")));
+
+          //  txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+           //         new javax.swing.text.MaskFormatter("##.###,##")));
+
+           // filialComboBox.setToolTipText("Escolha a Filial:");
+
+      //  } catch (ParseException ex) {
+          //  JOptionPane.showMessageDialog(null, "Por gentileza, Preecha os campos corretamente!");
+        //}
+    //}
 
     protected void setDefaultTaxaText() {
         Taxa taxa;
@@ -431,13 +485,13 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
     private void limpar() {
         txtNome.setText("");
-        UfOabComboBox.setToolTipText("TESTE");
+        //UfOabComboBox.setToolTipText("TESTE");
         fmtOab.setText("");
         txtEmail.setText("");
         txtDistribuicao.setText("");
         fmtNascimento.setText("");
         fmtAssociacao.setText("");
-        filialComboBox.setToolTipText("Escolha a Filial:");
-        setDefaultMasks();
+        //filialComboBox.setToolTipText("Escolha a Filial:");
+        //setDefaultMasks();
     }
 }

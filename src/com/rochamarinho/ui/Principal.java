@@ -35,6 +35,7 @@ public class Principal extends javax.swing.JFrame {
         menuAdvogado = new javax.swing.JMenu();
         menuItemCadastrar = new javax.swing.JMenuItem();
         itemMenuBuscar = new javax.swing.JMenuItem();
+        jMenuItemSair = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         itemMenuAlterarTaxa1 = new javax.swing.JMenuItem();
         itemMenuFilialCadastrar = new javax.swing.JMenuItem();
@@ -49,6 +50,7 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("..:: Rocha, Marinho e Sales Advogados ::..");
         setMinimumSize(new java.awt.Dimension(500, 350));
+        setResizable(false);
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rochamarinho/utils/logo.png"))); // NOI18N
         lblLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -57,6 +59,7 @@ public class Principal extends javax.swing.JFrame {
 
         menuAdvogado.setText("Advogados");
 
+        menuItemCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         menuItemCadastrar.setText("Cadastrar");
         menuItemCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,6 +68,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menuAdvogado.add(menuItemCadastrar);
 
+        itemMenuBuscar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_MASK));
         itemMenuBuscar.setText("Gerenciar");
         itemMenuBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,10 +77,20 @@ public class Principal extends javax.swing.JFrame {
         });
         menuAdvogado.add(itemMenuBuscar);
 
+        jMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemSair.setText("Sair");
+        jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSairActionPerformed(evt);
+            }
+        });
+        menuAdvogado.add(jMenuItemSair);
+
         jMenuBar1.add(menuAdvogado);
 
         jMenu1.setText("Administração");
 
+        itemMenuAlterarTaxa1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
         itemMenuAlterarTaxa1.setText("Setar Nova Taxa Padrão");
         itemMenuAlterarTaxa1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +99,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(itemMenuAlterarTaxa1);
 
+        itemMenuFilialCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
         itemMenuFilialCadastrar.setText("Cadastrar Filiais");
         itemMenuFilialCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,9 +108,11 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(itemMenuFilialCadastrar);
 
+        itemMenuFilialBusca.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
         itemMenuFilialBusca.setText("Gerenciar Filiais");
         jMenu1.add(itemMenuFilialBusca);
 
+        itemMenuEfetuarPagamento.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
         itemMenuEfetuarPagamento.setText("Efetuar Pagamento");
         itemMenuEfetuarPagamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +125,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu4.setText("Relatórios");
 
+        itemMenuAdvogadosPorFilial.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
         itemMenuAdvogadosPorFilial.setText("Mensal");
         itemMenuAdvogadosPorFilial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +134,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu4.add(itemMenuAdvogadosPorFilial);
 
+        itemMenuRelatorioAnual.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
         itemMenuRelatorioAnual.setText("Anual");
         jMenu4.add(itemMenuRelatorioAnual);
 
@@ -217,9 +236,10 @@ public class Principal extends javax.swing.JFrame {
 
         }
 
-        JOptionPane.showMessageDialog(null, "Pagamento do mes efetuado com sucesso");
+    private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMenuItemSairActionPerformed
 
-    }//GEN-LAST:event_itemMenuEfetuarPagamentoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemMenuAdvogadosPorFilial;
     private javax.swing.JMenuItem itemMenuAlterarTaxa1;
@@ -232,6 +252,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JMenu menuAdvogado;
     private javax.swing.JMenuItem menuItemCadastrar;

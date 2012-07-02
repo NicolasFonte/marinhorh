@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
@@ -64,25 +64,30 @@
                               <Component id="lblDominio" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="filialComboBox" min="-2" pref="197" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="fmtNascimento" pref="80" max="32767" attributes="1"/>
-                                  <Component id="txtDistribuicao" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="lblAssociacao" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="fmtAssociacao" min="-2" pref="80" max="-2" attributes="1"/>
-                                  <Component id="checkBoxTaxa" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
                           <Group type="102" attributes="0">
                               <Component id="UfOabComboBox" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="fmtOab" min="-2" pref="67" max="-2" attributes="1"/>
                           </Group>
                           <Component id="txtNome" max="32767" attributes="1"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtDistribuicao" max="32767" attributes="0"/>
+                                  <Component id="fmtNascimento" pref="80" max="32767" attributes="1"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Component id="lblAssociacao" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="fmtAssociacao" min="-2" pref="80" max="-2" attributes="1"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                                      <Component id="checkBoxTaxa" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -113,8 +118,8 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblDistribuicao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtDistribuicao" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="checkBoxTaxa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDistribuicao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -141,6 +146,10 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="txtNome">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNomeFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNomeFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblNomeAdvogado">
       <Properties>
@@ -171,9 +180,6 @@
           <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;default&quot; })" type="code"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filialComboBoxActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
       </AuxValues>
@@ -193,7 +199,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="fmtOab">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fmtOabActionPerformed"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fmtOabFocusGained"/>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fmtOabFocusLost"/>
       </Events>
     </Component>
@@ -213,9 +219,6 @@
           <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;UF&quot;,&quot;AC&quot;,&quot;AL&quot;,&quot;AM&quot;,&quot;AP&quot;,&quot;BA&quot;,&quot;CE&quot;,&quot;DF&quot;,&quot;ES&quot;,&quot;GO&quot;,&quot;MA&quot;,&quot;MG&quot;,&quot;MS&quot;,&quot;MT&quot;,&quot;PA&quot;,&quot;PB&quot;,&quot;PE&quot;,&quot;PI&quot;,&quot;PR&quot;,&quot;RJ&quot;,&quot;RN&quot;,&quot;RO&quot;,&quot;RR&quot;,&quot;RS&quot;,&quot;SC&quot;,&quot;SE&quot;,&quot;SP&quot;,&quot;TO&quot; })" type="code"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UfOabComboBoxActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblEmail">
       <Properties>
@@ -223,6 +226,15 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtEmail">
+      <Properties>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor de Texto"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtEmailFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtEmailFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="fmtNascimento">
       <Events>
@@ -232,6 +244,10 @@
       </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="fmtAssociacao">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fmtAssociacaoFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fmtAssociacaoFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDominio">
       <Properties>
@@ -246,12 +262,15 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparCadastroActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="txtDistribuicao">
-    </Component>
     <Component class="javax.swing.JCheckBox" name="checkBoxTaxa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Taxa"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtDistribuicao">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDistribuicaoFocusGained"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
