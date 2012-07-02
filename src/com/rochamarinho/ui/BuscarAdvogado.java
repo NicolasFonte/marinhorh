@@ -10,6 +10,7 @@ import com.rochamarinho.controller.FilialController;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.utils.BackendException;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -61,7 +62,6 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         btnCancelar = new javax.swing.JButton();
         jRadioNome = new javax.swing.JRadioButton();
         jRadioOab = new javax.swing.JRadioButton();
-        btnEditar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePesquisar = new javax.swing.JTable();
@@ -98,13 +98,6 @@ public class BuscarAdvogado extends javax.swing.JPanel {
 
         jRadioOab.setText("OAB");
 
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
         jTablePesquisar.setAutoCreateRowSorter(true);
         jTablePesquisar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,7 +124,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(lblPesquisar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jftPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
+                        .addComponent(jftPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(jRadioNome)
@@ -141,9 +134,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
                 .addComponent(btnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditar)
-                .addGap(23, 23, 23))
+                .addGap(88, 88, 88))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -157,8 +148,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
                     .addComponent(lblPesquisar)
                     .addComponent(btnBuscar)
                     .addComponent(jftPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnEditar))
+                    .addComponent(btnCancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
@@ -233,7 +223,6 @@ public class BuscarAdvogado extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEditar;
     private javax.swing.JRadioButton jRadioNome;
     private javax.swing.JRadioButton jRadioOab;
     private javax.swing.JScrollPane jScrollPane1;

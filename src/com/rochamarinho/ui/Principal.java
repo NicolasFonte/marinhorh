@@ -6,11 +6,13 @@ import com.rochamarinho.model.Advogado;
 import com.rochamarinho.model.Pagamento;
 import com.rochamarinho.ui.relatorioui.RelatorioAdvogado;
 import com.rochamarinho.utils.BackendException;
+import java.awt.CardLayout;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -177,11 +179,16 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemMenuFilialCadastrarActionPerformed
 
     private void itemMenuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuBuscarActionPerformed
-        BuscarAdvogado buscar = new BuscarAdvogado();
+        
+        JPanel panelManager = new JPanel(new CardLayout());
+        
+        BuscarAdvogado buscar = new BuscarAdvogado();        
+        
+        
+        
         this.setContentPane(buscar);
         this.pack();
-        
-        
+                
     }//GEN-LAST:event_itemMenuBuscarActionPerformed
 
     private void itemMenuAdvogadosPorFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuAdvogadosPorFilialActionPerformed
@@ -200,7 +207,7 @@ public class Principal extends javax.swing.JFrame {
         this.pack();
     }//GEN-LAST:event_itemMenuAlterarTaxa1ActionPerformed
 
-    private void itemMenuEfetuarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuEfetuarPagamentoActionPerformed
+    private void itemMenuEfetuarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {                                                         
         
         int opcao = JOptionPane.showConfirmDialog(null, "deseja efetuar o pagamento desse mes?" );
         if (opcao != 0)
@@ -235,7 +242,7 @@ public class Principal extends javax.swing.JFrame {
             }
 
         }
-
+    }
     private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuItemSairActionPerformed
