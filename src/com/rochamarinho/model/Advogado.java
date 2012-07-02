@@ -1,6 +1,7 @@
 package com.rochamarinho.model;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 /**
  *
@@ -33,7 +36,9 @@ public class Advogado implements Serializable {
     private double distribuicao;
     @Column(nullable = false, unique = true)
     private String oab;
+    
     @OneToMany(cascade = CascadeType.ALL)
+    @NotFound(action=NotFoundAction.IGNORE)
     private List<Pagamento> historicoPagamento;
     
     @OneToMany(cascade = CascadeType.ALL)
@@ -80,6 +85,12 @@ public class Advogado implements Serializable {
     }
     
     public List<Pagamento> getHistoricoPagamento() {
+        
+        if (historicoPagamento == null)
+        {
+            historicoPagamento = new ArrayList<Pagamento>();
+        }
+        
         return historicoPagamento;
     }
 
@@ -187,6 +198,12 @@ public class Advogado implements Serializable {
 
 
     public List<ValorMes> getValores() {
+        
+        if (valores == null)
+        {
+            valores = new ArrayList<ValorMes>();
+        }
+        
         return valores;
     }
 

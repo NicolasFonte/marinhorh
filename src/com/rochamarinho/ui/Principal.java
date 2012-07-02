@@ -1,7 +1,16 @@
 package com.rochamarinho.ui;
 
+import com.rochamarinho.begin.Begin;
+import com.rochamarinho.controller.AdvogadoController;
+import com.rochamarinho.model.Advogado;
+import com.rochamarinho.model.Pagamento;
 import com.rochamarinho.ui.relatorioui.RelatorioAdvogado;
-import com.rochamarinho.model.Report;
+import com.rochamarinho.utils.BackendException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -9,12 +18,13 @@ import com.rochamarinho.model.Report;
  */
 public class Principal extends javax.swing.JFrame {
 
+    
+    AdvogadoController advController = new AdvogadoController();
     /** Creates new form Principal */
     public Principal() {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -151,16 +161,18 @@ public class Principal extends javax.swing.JFrame {
         BuscarAdvogado buscar = new BuscarAdvogado();
         this.setContentPane(buscar);
         this.pack();
+        
+        
     }//GEN-LAST:event_itemMenuBuscarActionPerformed
 
     private void itemMenuAdvogadosPorFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuAdvogadosPorFilialActionPerformed
-       
-        
+
+
         RelatorioAdvogado relatorioPorFilial = new RelatorioAdvogado();
         this.setContentPane(relatorioPorFilial);
         this.pack();
-        
-        
+
+
     }//GEN-LAST:event_itemMenuAdvogadosPorFilialActionPerformed
 
     private void itemMenuAlterarTaxa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuAlterarTaxa1ActionPerformed
@@ -170,11 +182,44 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemMenuAlterarTaxa1ActionPerformed
 
     private void itemMenuEfetuarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuEfetuarPagamentoActionPerformed
-        EfetuarPagamento efetuarPagamento = new EfetuarPagamento();
-        this.setContentPane(efetuarPagamento);
-        this.pack();
-    }//GEN-LAST:event_itemMenuEfetuarPagamentoActionPerformed
+        
+        int opcao = JOptionPane.showConfirmDialog(null, "deseja efetuar o pagamento desse mes?" );
+        if (opcao != 0)
+        {
+            return;
+        }
+        
+        if (Begin.verificarSeHouvePagamento())
+        {
+            JOptionPane.showMessageDialog(null, "Ja houve pagamento este mes");
+            return;
+        }
+                
+        List<Advogado> advogados = advController.listarAdvogados();
 
+        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+        Date selecionada = new Date();
+        calendar.setTime(selecionada);
+        int month = calendar.get(Calendar.MONTH);
+
+        for (Advogado each : advogados) {
+            Pagamento pg = new Pagamento();
+            pg.setDataPagamento(selecionada);
+            pg.setValorPago(each.getValores().get(month).getValor());
+            each.addPagamento(pg);
+            try {
+                advController.getBackend().update(each);
+            } catch (BackendException ex) {
+
+                JOptionPane.showMessageDialog(null, "Nao foi possivel efetuar pagamento");
+                return;
+            }
+
+        }
+
+        JOptionPane.showMessageDialog(null, "Pagamento do mes efetuado com sucesso");
+
+    }//GEN-LAST:event_itemMenuEfetuarPagamentoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemMenuAdvogadosPorFilial;
     private javax.swing.JMenuItem itemMenuAlterarTaxa1;

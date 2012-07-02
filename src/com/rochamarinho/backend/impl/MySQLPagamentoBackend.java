@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.criterion.Order;
 
 /**
  *
@@ -53,7 +54,27 @@ public class MySQLPagamentoBackend implements PagamentoBackend {
 
     @Override
     public Pagamento read(Long id) throws BackendException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Transaction tx = session.beginTransaction();
+        Pagamento reloaded = (Pagamento) session.get(Pagamento.class, id);
+        tx.commit();
+        return reloaded;
+
+    }
+    
+    @Override
+    public Pagamento ultimoPagamento() throws BackendException
+    {
+        Transaction tx = session.beginTransaction();
+        List<Pagamento> pgs = session.createCriteria(Pagamento.class).addOrder(Order.desc("id")).list();
+        
+        if (pgs == null || pgs.isEmpty())
+        {
+            return null;
+        }
+        Pagamento pg = pgs.get(0);
+        tx.commit();
+        return pg;
+
     }
     
 }

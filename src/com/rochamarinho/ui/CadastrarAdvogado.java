@@ -11,6 +11,8 @@ import com.rochamarinho.controller.TaxaController;
 import com.rochamarinho.model.Filial;
 import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
+import java.awt.Color;
+import java.awt.color.ColorSpace;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +65,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
         setMinimumSize(new java.awt.Dimension(500, 350));
         setNextFocusableComponent(txtNome);
+        setPreferredSize(new java.awt.Dimension(583, 353));
 
         lblNomeAdvogado.setText("Nome:");
 
@@ -117,6 +120,11 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
         lblEmail.setText("E-mail:");
 
+        fmtNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fmtNascimentoActionPerformed(evt);
+            }
+        });
         fmtNascimento.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 fmtNascimentoFocusGained(evt);
@@ -321,8 +329,8 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                         new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (ParseException ex) {
             Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-       fmtNascimento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+        }*///184,207,229
+       fmtNascimento.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(184,207,229)));
     }//GEN-LAST:event_fmtNascimentoFocusLost
 
     private void fmtNascimentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtNascimentoFocusGained
@@ -334,6 +342,10 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_fmtNascimentoFocusGained
+
+    private void fmtNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fmtNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fmtNascimentoActionPerformed
 
     private void setDefaultMasks() {
         try {

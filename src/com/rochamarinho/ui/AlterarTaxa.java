@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * AlterarTaxa.java
  *
  * Created on 13/05/2012, 19:51:34
