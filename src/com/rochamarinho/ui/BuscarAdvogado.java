@@ -9,8 +9,11 @@ import com.rochamarinho.controller.AdvogadoController;
 import com.rochamarinho.controller.FilialController;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.utils.BackendException;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -21,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author nicolas
  */
-public class BuscarAdvogado extends javax.swing.JPanel {
+public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
 
     private AdvogadoController advController = new AdvogadoController();
     private FilialController filialController = new FilialController();
@@ -29,6 +32,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
     /** Creates new form BuscarAdvogado */
     public BuscarAdvogado() {
         initComponents();
+        
         //setDefaultTextEmpty();
     }
 
@@ -65,6 +69,7 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePesquisar = new javax.swing.JTable();
+        btnEditar = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(500, 300));
         setPreferredSize(new java.awt.Dimension(583, 353));
@@ -113,6 +118,18 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         jTablePesquisar.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTablePesquisar.getAccessibleContext().setAccessibleName("");
 
+        btnEditar.setText("editar");
+        btnEditar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnEditarItemStateChanged(evt);
+            }
+        });
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,17 +141,19 @@ public class BuscarAdvogado extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(lblPesquisar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jftPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
+                        .addComponent(jftPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(jRadioNome)
                         .addGap(14, 14, 14)
                         .addComponent(jRadioOab)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar)
-                .addGap(88, 88, 88))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEditar)
+                .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -148,7 +167,8 @@ public class BuscarAdvogado extends javax.swing.JPanel {
                     .addComponent(lblPesquisar)
                     .addComponent(btnBuscar)
                     .addComponent(jftPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar))
+                    .addComponent(btnCancelar)
+                    .addComponent(btnEditar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
@@ -220,9 +240,22 @@ public class BuscarAdvogado extends javax.swing.JPanel {
         jftPesquisar.setBorder(BorderFactory.createLineBorder(Color.gray));
     }//GEN-LAST:event_jftPesquisarFocusLost
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+
+         CardLayout cl = (CardLayout)(this.getLayout());
+        cl.next(this);
+        this.setLayout(cl);
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEditarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnEditarItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JRadioButton jRadioNome;
     private javax.swing.JRadioButton jRadioOab;
     private javax.swing.JScrollPane jScrollPane1;
@@ -231,4 +264,9 @@ public class BuscarAdvogado extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField jftPesquisar;
     private javax.swing.JLabel lblPesquisar;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

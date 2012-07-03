@@ -1,6 +1,5 @@
 package com.rochamarinho.begin;
 
-import com.rochamarinho.backend.TaxaBackend;
 import com.rochamarinho.backend.impl.MySQLPagamentoBackend;
 import com.rochamarinho.backend.impl.MySQLTaxaBackend;
 import com.rochamarinho.model.Pagamento;
@@ -27,6 +26,7 @@ public class Begin {
 
     public static void main(String[] args) {
         inicializacao();
+        
 
         Principal p = new Principal();
         p.setVisible(true);
@@ -58,7 +58,7 @@ public class Begin {
             
             if ( pg == null )
             {
-                //JOptionPane.showMessageDialog(null, "Atenção, Não foi feito nenhum pagamento");
+                JOptionPane.showMessageDialog(null, "Atenção, ainda não foi feito nenhum pagamento no sistema");
                 return false;
             }
             

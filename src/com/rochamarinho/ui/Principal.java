@@ -181,12 +181,15 @@ public class Principal extends javax.swing.JFrame {
     private void itemMenuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuBuscarActionPerformed
         
         JPanel panelManager = new JPanel(new CardLayout());
+        JPanel teste = new JPanel();
         
         BuscarAdvogado buscar = new BuscarAdvogado();        
         
+        panelManager.add(teste, "teste");
+        panelManager.add(buscar, "buscar");
         
         
-        this.setContentPane(buscar);
+        this.setContentPane(panelManager);
         this.pack();
                 
     }//GEN-LAST:event_itemMenuBuscarActionPerformed
