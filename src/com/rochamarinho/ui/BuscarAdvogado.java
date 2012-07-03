@@ -9,15 +9,15 @@ import com.rochamarinho.controller.AdvogadoController;
 import com.rochamarinho.controller.FilialController;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.utils.BackendException;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -241,10 +241,25 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
     }//GEN-LAST:event_jftPesquisarFocusLost
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-
-         CardLayout cl = (CardLayout)(this.getLayout());
-        cl.next(this);
-        this.setLayout(cl);
+        
+        int rowIndex = jTablePesquisar.getSelectedRow();
+        
+        String oab = (String) jTablePesquisar.getValueAt(rowIndex, 1);
+        
+        Advogado adv = null;;
+        try {
+            adv = advController.byOab(oab);
+        } catch (BackendException ex) {
+            Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        EditarAdvogadoFrame frame = new EditarAdvogadoFrame();
+        frame.setContentPane(new EditarAdvogadoPanel(adv) );
+        
+        
+        
+        frame.setVisible(true);
 
     }//GEN-LAST:event_btnEditarActionPerformed
 

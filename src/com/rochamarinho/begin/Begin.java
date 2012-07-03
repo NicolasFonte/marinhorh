@@ -26,7 +26,7 @@ public class Begin {
 
     public static void main(String[] args) {
         inicializacao();
-        
+
 
         Principal p = new Principal();
         p.setVisible(true);
@@ -41,43 +41,37 @@ public class Begin {
                 taxaMysql.create(new Taxa(10));
             }
         } catch (BackendException ex) {
-        
         }
-        verificarSeHouvePagamento();
-        
-        
+        avisarCasoExistaPagamentoHouvePagamento();
+
+
 
     }
 
     public static boolean verificarSeHouvePagamento() throws HeadlessException {
         MySQLPagamentoBackend pagamentoBackend = new MySQLPagamentoBackend();
         try {
-            
-                    
+
             Pagamento pg = pagamentoBackend.ultimoPagamento();
-            
-            if ( pg == null )
-            {
-                JOptionPane.showMessageDialog(null, "Atenção, ainda não foi feito nenhum pagamento no sistema");
+
+            if (pg == null) {
                 return false;
             }
-            
+
             Date atual = new Date();
             Calendar calendarioAtual = Calendar.getInstance(Locale.ENGLISH);
             calendarioAtual.setTime(atual);
-            
+
             Calendar calendarioUltimoPagamento = Calendar.getInstance(Locale.ENGLISH);
             calendarioUltimoPagamento.setTime(atual);
-            
+
             int mesAtual = calendarioAtual.get(Calendar.MONTH);
             int ultimoPagamento = calendarioUltimoPagamento.get(Calendar.MONTH);
-            
-            if ( mesAtual  !=  ultimoPagamento )
-            {
-                JOptionPane.showMessageDialog(null, "A confirmacao pagamento desse mes nao foi efetuada");
+
+            if (mesAtual != ultimoPagamento) {
                 return false;
-            }           
-            
+            }
+
         } catch (BackendException ex) {
             Logger.getLogger(Begin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -99,5 +93,37 @@ public class Begin {
         }
         return props.getProperty("taxa");
 
+    }
+
+    public static void avisarCasoExistaPagamentoHouvePagamento() {
+        MySQLPagamentoBackend pagamentoBackend = new MySQLPagamentoBackend();
+        try {
+
+
+            Pagamento pg = pagamentoBackend.ultimoPagamento();
+
+            if (pg == null) {
+                JOptionPane.showMessageDialog(null, "Atenção, ainda não foi feito nenhum pagamento no sistema");
+            }
+
+            Date atual = new Date();
+            Calendar calendarioAtual = Calendar.getInstance(Locale.ENGLISH);
+            calendarioAtual.setTime(atual);
+
+            Calendar calendarioUltimoPagamento = Calendar.getInstance(Locale.ENGLISH);
+            calendarioUltimoPagamento.setTime(atual);
+
+            int mesAtual = calendarioAtual.get(Calendar.MONTH);
+            int ultimoPagamento = calendarioUltimoPagamento.get(Calendar.MONTH);
+
+            if (mesAtual != ultimoPagamento) {
+                JOptionPane.showMessageDialog(null, "A confirmacao pagamento desse mes nao foi efetuada");
+                
+            }
+
+        } catch (BackendException ex) {
+            Logger.getLogger(Begin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
