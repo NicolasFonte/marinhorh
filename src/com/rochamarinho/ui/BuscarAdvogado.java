@@ -242,9 +242,19 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         
+        
         int rowIndex = jTablePesquisar.getSelectedRow();
         
+        
+        if ( rowIndex == -1 )
+        {
+            JOptionPane.showMessageDialog(null, "Primeiro deve ser buscado um advogado");
+            return;
+        }
+            
         String oab = (String) jTablePesquisar.getValueAt(rowIndex, 1);
+        
+        
         
         Advogado adv = null;;
         try {

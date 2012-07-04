@@ -32,11 +32,8 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblNascimento" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -45,6 +42,7 @@
                                   <Component id="lblDistribuicao" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblOab" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblNomeAdvogado" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblAssociacao" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -69,36 +67,19 @@
                               <Component id="txtDistribuicao" alignment="1" max="32767" attributes="1"/>
                               <Component id="txtEmail" alignment="1" pref="117" max="32767" attributes="1"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblDominio" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                          <Component id="lblAssociacao" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="fmtAssociacao" min="-2" pref="80" max="-2" attributes="1"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
-                                          <Component id="checkBoxTaxa" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblDominio" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                          <Component id="btnLimparCadastro" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="filialComboBox" alignment="1" min="-2" pref="197" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="fmtAssociacao" alignment="0" min="-2" pref="80" max="-2" attributes="1"/>
+                      <Component id="filialComboBox" alignment="0" min="-2" pref="197" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="btnCancelarCadastro" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnLimparCadastro" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="btnCancelarCadastro" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="91" max="32767" attributes="0"/>
+              <EmptySpace pref="129" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -110,7 +91,7 @@
                   <Component id="lblNomeAdvogado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblOab" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="UfOabComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -125,12 +106,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblDistribuicao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="checkBoxTaxa" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtDistribuicao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblAssociacao" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fmtAssociacao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -142,8 +121,8 @@
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCancelarCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnLimparCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAtualizarAdvogado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLimparCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
@@ -209,11 +188,6 @@
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fmtOabFocusLost"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblNascimento">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nascimento:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblAssociacao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Associacao:"/>
@@ -260,11 +234,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparCadastroActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="checkBoxTaxa">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Taxa"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtDistribuicao">
       <Events>

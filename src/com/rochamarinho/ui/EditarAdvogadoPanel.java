@@ -16,8 +16,11 @@ import com.rochamarinho.utils.IeValidator;
 import java.awt.Color;
 import java.awt.TextField;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -66,7 +69,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         btnCancelarCadastro = new javax.swing.JButton();
         fmtOab = new javax.swing.JFormattedTextField();
-        lblNascimento = new javax.swing.JLabel();
         lblAssociacao = new javax.swing.JLabel();
         UfOabComboBox = new javax.swing.JComboBox();
         lblEmail = new javax.swing.JLabel();
@@ -74,7 +76,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         fmtAssociacao = new javax.swing.JFormattedTextField();
         lblDominio = new javax.swing.JLabel();
         btnLimparCadastro = new javax.swing.JButton();
-        checkBoxTaxa = new javax.swing.JCheckBox();
         txtDistribuicao = new javax.swing.JFormattedTextField();
 
         setMinimumSize(new java.awt.Dimension(500, 350));
@@ -123,8 +124,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
             }
         });
 
-        lblNascimento.setText("Nascimento:");
-
         lblAssociacao.setText("Associacao:");
 
         UfOabComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UF","AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO" }));
@@ -159,8 +158,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
             }
         });
 
-        checkBoxTaxa.setText("Taxa");
-
         txtDistribuicao.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDistribuicaoFocusGained(evt);
@@ -176,17 +173,16 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNascimento)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addGap(62, 62, 62)
+                                .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblEmail)
                                     .addComponent(lblDistribuicao)
                                     .addComponent(lblOab)
-                                    .addComponent(lblNomeAdvogado))))
+                                    .addComponent(lblNomeAdvogado)
+                                    .addComponent(lblAssociacao))))
                         .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(61, Short.MAX_VALUE)
@@ -203,26 +199,15 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtDistribuicao)
                                 .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(lblDominio))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(28, 28, 28)
-                                            .addComponent(lblAssociacao)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addGap(134, 134, 134)
-                                            .addComponent(checkBoxTaxa))))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnLimparCadastro)
-                            .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnCancelarCadastro, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(91, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblDominio))
+                        .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnLimparCadastro)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnCancelarCadastro)))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +216,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomeAdvogado)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOab)
                     .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,11 +229,9 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDistribuicao)
-                    .addComponent(checkBoxTaxa)
                     .addComponent(txtDistribuicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNascimento)
                     .addComponent(lblAssociacao)
                     .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -258,8 +241,8 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarCadastro)
-                    .addComponent(btnLimparCadastro)
-                    .addComponent(btnAtualizarAdvogado))
+                    .addComponent(btnAtualizarAdvogado)
+                    .addComponent(btnLimparCadastro))
                 .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -271,7 +254,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
             return;
         }
 
-        boolean usaTaxa = checkBoxTaxa.isSelected();
+        boolean usaTaxa = true;//checkBoxTaxa.isSelected();
         
         String advNomeText = txtNome.getText();
         String advOabText = fmtOab.getText().replace(".", "").replace(" ", "");
@@ -428,7 +411,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAtualizarAdvogado;
     private javax.swing.JButton btnCancelarCadastro;
     private javax.swing.JButton btnLimparCadastro;
-    private javax.swing.JCheckBox checkBoxTaxa;
     private javax.swing.JComboBox filialComboBox;
     private javax.swing.JFormattedTextField fmtAssociacao;
     private javax.swing.JFormattedTextField fmtOab;
@@ -437,7 +419,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblDistribuicao;
     private javax.swing.JLabel lblDominio;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblNascimento;
     private javax.swing.JLabel lblNomeAdvogado;
     private javax.swing.JLabel lblOab;
     private javax.swing.JFormattedTextField txtDistribuicao;
@@ -484,5 +465,25 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
 
     public void setAdvogadoValores() {
         txtNome.setText(adv.getNome());
+        txtEmail.setText(adv.getEmail());
+        txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
+        fmtAssociacao.setText(new SimpleDateFormat("dd/MM/aaaaa").format(adv.getAssociacao()));
+        fmtOab.setText(adv.getOab().substring(2));
+        UfOabComboBox.setSelectedIndex(descobrirIndiceDaUF(adv.getUf()));
+        
+    }
+    
+    public int descobrirIndiceDaUF(String uf)
+    {
+        
+        for (int i = 0; i < filialComboBox.getItemCount(); i ++)
+        {
+            String item = (String) filialComboBox.getItemAt(i);
+            if (  uf.equals(item)  )
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 }
