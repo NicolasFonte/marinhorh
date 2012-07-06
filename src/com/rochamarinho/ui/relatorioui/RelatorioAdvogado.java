@@ -83,7 +83,7 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
 
         mesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos" }));
 
-        jLabel2.setText("Nome:");
+        jLabel2.setText("Nome Advogado :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -103,7 +103,7 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
                             .addComponent(txtNomeRelatorio)
                             .addComponent(filialComboBox, 0, 167, Short.MAX_VALUE)
                             .addComponent(mesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

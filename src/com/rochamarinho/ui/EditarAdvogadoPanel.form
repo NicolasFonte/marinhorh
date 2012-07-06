@@ -29,7 +29,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
@@ -47,39 +47,33 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="61" max="32767" attributes="0"/>
-                      <Component id="btnAtualizarAdvogado" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="UfOabComboBox" min="-2" pref="51" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="fmtOab" min="-2" pref="67" max="-2" attributes="1"/>
-                      </Group>
-                      <Component id="txtNome" max="32767" attributes="1"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txtDistribuicao" alignment="1" max="32767" attributes="1"/>
-                              <Component id="txtEmail" alignment="1" pref="117" max="32767" attributes="1"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="UfOabComboBox" min="-2" pref="51" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="fmtOab" min="-2" pref="67" max="-2" attributes="1"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblDominio" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNome" max="32767" attributes="1"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtDistribuicao" alignment="1" max="32767" attributes="1"/>
+                                  <Component id="txtEmail" alignment="1" pref="117" max="32767" attributes="1"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblDominio" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="fmtAssociacao" alignment="0" min="-2" pref="80" max="-2" attributes="1"/>
+                          <Component id="filialComboBox" alignment="0" min="-2" pref="197" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="fmtAssociacao" alignment="0" min="-2" pref="80" max="-2" attributes="1"/>
-                      <Component id="filialComboBox" alignment="0" min="-2" pref="197" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnLimparCadastro" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                      <Component id="btnCancelarCadastro" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAtualizarAdvogado" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="129" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnCancelarCadastro" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="63" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,9 +114,8 @@
               </Group>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCancelarCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAtualizarAdvogado" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnLimparCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCancelarCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
@@ -226,14 +219,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="@rochamarinho.adv.br"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnLimparCadastro">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Limpar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparCadastroActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtDistribuicao">
       <Events>

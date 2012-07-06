@@ -75,7 +75,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         txtEmail = new javax.swing.JTextField();
         fmtAssociacao = new javax.swing.JFormattedTextField();
         lblDominio = new javax.swing.JLabel();
-        btnLimparCadastro = new javax.swing.JButton();
         txtDistribuicao = new javax.swing.JFormattedTextField();
 
         setMinimumSize(new java.awt.Dimension(500, 350));
@@ -151,13 +150,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
 
         lblDominio.setText("@rochamarinho.adv.br");
 
-        btnLimparCadastro.setText("Limpar");
-        btnLimparCadastro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparCadastroActionPerformed(evt);
-            }
-        });
-
         txtDistribuicao.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDistribuicaoFocusGained(evt);
@@ -170,7 +162,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(62, 62, 62)
@@ -183,31 +175,27 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
                                     .addComponent(lblOab)
                                     .addComponent(lblNomeAdvogado)
                                     .addComponent(lblAssociacao))))
-                        .addGap(23, 23, 23))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fmtOab, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNome)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtDistribuicao)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblDominio))
+                            .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(61, Short.MAX_VALUE)
                         .addComponent(btnAtualizarAdvogado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(fmtOab, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(txtNome)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtDistribuicao)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblDominio))
-                        .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnLimparCadastro)
-                        .addGap(55, 55, 55)
-                        .addComponent(btnCancelarCadastro)))
-                .addContainerGap(129, Short.MAX_VALUE))
+                        .addGap(173, 173, 173)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelarCadastro)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,9 +228,8 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelarCadastro)
                     .addComponent(btnAtualizarAdvogado)
-                    .addComponent(btnLimparCadastro))
+                    .addComponent(btnCancelarCadastro))
                 .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -286,7 +273,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         
         try {
             double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
-            advController.cadastrarAdvogado(advOabText, advNomeText,
+            advController.atualizarAdvogado(advOabText, advNomeText,
                     distribuicaoDouble, nomeFilial, dataAssociacaoTexto, dataNascimentoTexto, email, ufTexto,usaTaxa);
 
         } catch (NumberFormatException nfe)
@@ -297,27 +284,21 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
             
         catch (ParseException pex) {
 
-            JOptionPane.showMessageDialog(null, "Advogado nao cadastrado devido a data incorreta");
+            JOptionPane.showMessageDialog(null, "Advogado nao Atualizado devido a data incorreta");
             return;
         } catch (BackendException ex) {
-            JOptionPane.showMessageDialog(null, "Advogado nao cadastrado");
+            JOptionPane.showMessageDialog(null, "Advogado nao Atualizado");
             return;
         }
 
-        JOptionPane.showMessageDialog(null, "advogado cadastrado com sucesso");
+        JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
         this.setVisible(false);
 
     }//GEN-LAST:event_btnAtualizarAdvogadoActionPerformed
 
     private void btnCancelarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCadastroActionPerformed
-        this.setVisible(false);
+        
     }//GEN-LAST:event_btnCancelarCadastroActionPerformed
-
-    private void btnLimparCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCadastroActionPerformed
-
-        limpar();
-
-    }//GEN-LAST:event_btnLimparCadastroActionPerformed
 
     private void fmtAssociacaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtAssociacaoFocusGained
         
@@ -410,7 +391,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox UfOabComboBox;
     private javax.swing.JButton btnAtualizarAdvogado;
     private javax.swing.JButton btnCancelarCadastro;
-    private javax.swing.JButton btnLimparCadastro;
     private javax.swing.JComboBox filialComboBox;
     private javax.swing.JFormattedTextField fmtAssociacao;
     private javax.swing.JFormattedTextField fmtOab;
@@ -465,20 +445,25 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
 
     public void setAdvogadoValores() {
         txtNome.setText(adv.getNome());
-        txtEmail.setText(adv.getEmail());
+        String email = adv.getEmail();
+        String [] partes = email.split("@");
+        txtEmail.setText(partes[0]);
+        
         txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
-        fmtAssociacao.setText(new SimpleDateFormat("dd/MM/aaaaa").format(adv.getAssociacao()));
+        fmtAssociacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(adv.getAssociacao()));
         fmtOab.setText(adv.getOab().substring(2));
         UfOabComboBox.setSelectedIndex(descobrirIndiceDaUF(adv.getUf()));
+        
+        
         
     }
     
     public int descobrirIndiceDaUF(String uf)
     {
         
-        for (int i = 0; i < filialComboBox.getItemCount(); i ++)
+        for (int i = 0; i < UfOabComboBox.getItemCount(); i ++)
         {
-            String item = (String) filialComboBox.getItemAt(i);
+            String item = (String) UfOabComboBox.getItemAt(i);
             if (  uf.equals(item)  )
             {
                 return i;
@@ -486,4 +471,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         }
         return -1;
     }
+    
+    
+    
 }

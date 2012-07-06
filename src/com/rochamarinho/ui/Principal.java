@@ -93,7 +93,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu1.setText("Administração");
 
         itemMenuAlterarTaxa1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
-        itemMenuAlterarTaxa1.setText("Setar Nova Taxa Padrão");
+        itemMenuAlterarTaxa1.setText("Definir Nova Taxa Padrão");
         itemMenuAlterarTaxa1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemMenuAlterarTaxa1ActionPerformed(evt);

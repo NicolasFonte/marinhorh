@@ -23,110 +23,116 @@ public class AdvogadoController {
     private MySQLFilialBackend filialBackend;
     private MySQLTaxaBackend taxaBackend;
     static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-    
+
     public AdvogadoController() {
     }
 
-    public boolean cadastrarAdvogado(String oab,String nome,double distribuicao,
-                    String filialNome,String associacaoTexto, String nascimentoTexto,String email, String uf, boolean usaTaxa ) throws BackendException, ParseException
-    {        
-        
-        Filial filial = getFilialBackend().buscarPorNome(filialNome);        
-                
+    public boolean cadastrarAdvogado(String oab, String nome, double distribuicao,
+            String filialNome, String associacaoTexto, String nascimentoTexto, String email, String uf, boolean usaTaxa) throws BackendException, ParseException {
+
+        Filial filial = getFilialBackend().buscarPorNome(filialNome);
+
         Advogado adv = new Advogado();
         adv.setOab(oab);
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);
         adv.setEmail(email);
-        
         adv.setUf(uf);
-        
+
         Date associacaoData = formatter.parse(associacaoTexto);
         Date nascimentoData = formatter.parse(nascimentoTexto);
-        
+
         adv.setAssociacao(associacaoData);
         adv.setNascimento(nascimentoData);
-        
+
         double taxa = usaTaxa ? getTaxaBackend().read(1L).getValor() : 0.0;
-        
-        
+
         adv.gerarSalarios(taxa);// IMPORTANTE!
-        
+
         filial.addAdvogado(adv);
         getFilialBackend().update(filial);
-        
         return true;
-        
+
     }
-    
-    public List<Advogado> listarAdvogados()
-    {
+
+    public List<Advogado> listarAdvogados() {
         return getBackend().list();
     }
-            
+
     public MySQLAdvogadoBackend getBackend() {
-        if (advogadoBackend == null)
-        {
+        if (advogadoBackend == null) {
             advogadoBackend = new MySQLAdvogadoBackend();
-        }        
+        }
         return advogadoBackend;
     }
-    
-    public MySQLTaxaBackend getTaxaBackend()
-    {
-        if (taxaBackend == null)
-        {
+
+    public MySQLTaxaBackend getTaxaBackend() {
+        if (taxaBackend == null) {
             taxaBackend = new MySQLTaxaBackend();
         }
         return taxaBackend;
-        
+
     }
-            
 
     public void setBackend(MySQLAdvogadoBackend backend) {
         this.advogadoBackend = backend;
     }
 
-    
-    public Advogado byOab(String validOab) throws BackendException
-    {
-        return getBackend().byOab(validOab);    
+    public Advogado byOab(String validOab) throws BackendException {
+        return getBackend().byOab(validOab);
     }
-    
-    public List<Advogado> porNome(String nomeParcial) throws BackendException
-    {
+
+    public List<Advogado> porNome(String nomeParcial) throws BackendException {
         return getBackend().byNome(nomeParcial);
     }
-    
-    
+
     public MySQLFilialBackend getFilialBackend() {
-        if (filialBackend == null)
-        {
+        if (filialBackend == null) {
             filialBackend = new MySQLFilialBackend();
-        }        
+        }
         return filialBackend;
     }
 
     public void setFilialBackend(MySQLFilialBackend filialBackend) {
         this.filialBackend = filialBackend;
     }
-    
-    public void atualizarAdvogado(String oab, String nome, double distribuicao, double taxa) throws BackendException
-    {
+
+    public boolean atualizarAdvogado(String oab, String nome, double distribuicao,
+            String filialNome, String associacaoTexto, String nascimentoTexto, String email, String uf, boolean usaTaxa) throws BackendException, ParseException {
+
         Advogado adv = getBackend().byOab(oab);
-        
+        double distribuicaoAntiga = adv.getDistribuicao();
+
+        adv.setOab(oab);
         adv.setNome(nome);
         adv.setDistribuicao(distribuicao);
+        adv.setEmail(email);
+        adv.setUf(uf);
+
+        Date associacaoData = formatter.parse(associacaoTexto);
+        Date nascimentoData = formatter.parse(nascimentoTexto);
+
+        adv.setAssociacao(associacaoData);
+        adv.setNascimento(nascimentoData);
+
+        double taxa = usaTaxa ? getTaxaBackend().read(1L).getValor() : 0.0;
+
+        if ( Math.abs(distribuicaoAntiga - distribuicao) > 1.0)
+        {
+            adv.gerarSalarios(taxa);
+        }
+        
+        getBackend().update(adv);
         
         
-        advogadoBackend.update(adv);
-        
+        return true;
+
     }
 
     public void deletarAdvogado(String oab) throws BackendException {
-        
-        Advogado adv = advogadoBackend.byOab(oab);        
+
+        Advogado adv = advogadoBackend.byOab(oab);
         getBackend().remove(adv);
-        
+
     }
 }

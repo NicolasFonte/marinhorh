@@ -1,16 +1,11 @@
 package com.rochamarinho.model;
 
 import com.rochamarinho.utils.Conexao;
-import java.io.InputStream;
 import java.sql.Connection;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -120,7 +115,7 @@ public class Report {
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("mes", nomeMes);
-        
+
         nomeAdvogado = "%" + nomeAdvogado + "%"; // para pegar parte do nome.
         map.put("nome_advogado", nomeAdvogado);
 

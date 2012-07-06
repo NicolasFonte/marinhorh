@@ -62,7 +62,7 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+T"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Setar Nova Taxa Padr&#xe3;o"/>
+                <Property name="text" type="java.lang.String" value="Definir Nova Taxa Padr&#xe3;o"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuAlterarTaxa1ActionPerformed"/>
