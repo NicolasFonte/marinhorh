@@ -6,6 +6,7 @@
 package com.rochamarinho.ui;
 
 import com.rochamarinho.controller.TaxaController;
+import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,13 @@ public class AlterarTaxa extends javax.swing.JPanel {
     /** Creates new form AlterarTaxa */
     public AlterarTaxa() {
         initComponents();
+        Taxa taxa = null;
+        try {
+            taxa = taxaController.getBackend().read(1L);
+        } catch (BackendException ex) {
+            Logger.getLogger(AlterarTaxa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lblExibirValorAtual.setText(Double.toString(taxa.getValor()));
     }
 
     @SuppressWarnings("unchecked")
@@ -32,9 +40,10 @@ public class AlterarTaxa extends javax.swing.JPanel {
         txtTaxaNovoValor = new javax.swing.JTextField();
         btnAlterarValorTaxa = new javax.swing.JButton();
         btnCancelarAlteracaoTaxa = new javax.swing.JButton();
+        lblValorAtual = new javax.swing.JLabel();
+        lblExibirValorAtual = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(500, 300));
-        setPreferredSize(getMinimumSize());
 
         lblNovoValor.setText("Digite o novo valor: ");
 
@@ -58,28 +67,37 @@ public class AlterarTaxa extends javax.swing.JPanel {
             }
         });
 
+        lblValorAtual.setText("Valor Atual:");
+
+        lblExibirValorAtual.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblNovoValor)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNovoValor)
+                    .addComponent(lblValorAtual))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblExibirValorAtual)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAlterarValorTaxa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
-                        .addComponent(btnCancelarAlteracaoTaxa)
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTaxaNovoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(44, 44, 44)
+                        .addComponent(btnCancelarAlteracaoTaxa))
+                    .addComponent(txtTaxaNovoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblValorAtual)
+                    .addComponent(lblExibirValorAtual))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNovoValor)
                     .addComponent(txtTaxaNovoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -123,7 +141,9 @@ public class AlterarTaxa extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarValorTaxa;
     private javax.swing.JButton btnCancelarAlteracaoTaxa;
+    private javax.swing.JLabel lblExibirValorAtual;
     private javax.swing.JLabel lblNovoValor;
+    private javax.swing.JLabel lblValorAtual;
     private javax.swing.JTextField txtTaxaNovoValor;
     // End of variables declaration//GEN-END:variables
 }

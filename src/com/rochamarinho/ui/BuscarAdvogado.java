@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -32,8 +33,11 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
     /** Creates new form BuscarAdvogado */
     public BuscarAdvogado() {
         initComponents();
-        
-        //setDefaultTextEmpty();
+        jRadioNome.setSelected(true);
+        ButtonGroup group = new ButtonGroup();
+        group.add(jRadioNome);
+        group.add(jRadioOab);
+        //setDefaultTextEmpty();I
     }
 
     private void mostrarMensagem(String mensagem) {
@@ -41,7 +45,7 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
     }
 
     protected void setDefaultTextEmpty() {
-     /* txtDistribuicao.setVisible(false);
+        /* txtDistribuicao.setVisible(false);
         txtNome.setVisible(false);
         txtTaxa.setVisible(false);
         lblDistribuicao.setVisible(false);
@@ -52,14 +56,15 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         btnGravar.setVisible(false);
         lblFilialMostrarNome.setVisible(false);
         lblMostrarNome.setVisible(false);
-        * 
-        */
+         * 
+         */
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         lblPesquisar = new javax.swing.JLabel();
         jftPesquisar = new javax.swing.JFormattedTextField();
         btnBuscar = new javax.swing.JButton();
@@ -181,7 +186,13 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         String nomeAdv = jftPesquisar.getText();
         List<Advogado> advs = null;
         try {
-            advs = advController.porNome(nomeAdv);
+            if (jRadioNome.isSelected()) {
+                advs = advController.porNome(nomeAdv);
+            } else {
+                JOptionPane.showMessageDialog(null, "somente busca por nome suportada, selecione por nome");
+                return;
+            }
+
         } catch (BackendException ex) {
             mostrarMensagem("erro na busca do nome");
             return;
@@ -191,40 +202,40 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
             mostrarMensagem("advogado nao encontrado");
             //return
         }
-    
-                
+
+
         /* Implementar posteriormente a busca de advogado e filial.
          * Filial filialProcurada;
         try {
-            filialProcurada = filialController.filialDeAdvogado(nomeAdvs);
+        filialProcurada = filialController.filialDeAdvogado(nomeAdvs);
         } catch (BackendException ex) {
-            mostrarMensagem("este advogado nao esta numa filial devido a algum erro");
+        mostrarMensagem("este advogado nao esta numa filial devido a algum erro");
         }
-        * 
-        */
+         * 
+         */
         DefaultTableModel m = (DefaultTableModel) jTablePesquisar.getModel();
-        
-        int i=0;
-	while(i<jTablePesquisar.getRowCount()){
-	m.removeRow(0);
+
+        int i = 0;
+        while (i < jTablePesquisar.getRowCount()) {
+            m.removeRow(0);
         }
-        
-        for (Advogado obj:advs){
-           m.addRow(new Object [] {obj.getNome(), obj.getOab(), obj.getDistribuicao(),
-               obj.getAssociacao(), obj.getEmail()
-           }); 
+
+        for (Advogado obj : advs) {
+            m.addRow(new Object[]{obj.getNome(), obj.getOab(), obj.getDistribuicao(),
+                        obj.getAssociacao(), obj.getEmail()
+                    });
         }
-    
-         
-/*      lblMostrarNome.setText(adv.getNome());
+
+
+        /*      lblMostrarNome.setText(adv.getNome());
         lblMostrarNome.setVisible(true);
         lblFilialMostrarNome.setText(filialProcurada.getNome());
         lblFilialMostrarNome.setVisible(true);
         btnEditarAdvogado.setVisible(true);
         btnRemoverAdvogado.setVisible(true);
-        * 
-        */
-        
+         * 
+         */
+
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -241,20 +252,16 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
     }//GEN-LAST:event_jftPesquisarFocusLost
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
-        
+
+
         int rowIndex = jTablePesquisar.getSelectedRow();
-        
-        
-        if ( rowIndex == -1 )
-        {
+
+        if (rowIndex == -1) {
             JOptionPane.showMessageDialog(null, "Primeiro deve ser buscado um advogado");
             return;
         }
-            
+
         String oab = (String) jTablePesquisar.getValueAt(rowIndex, 1);
-        
-        
         
         Advogado adv = null;;
         try {
@@ -262,13 +269,10 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         } catch (BackendException ex) {
             Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
         EditarAdvogadoFrame frame = new EditarAdvogadoFrame();
-        frame.setContentPane(new EditarAdvogadoPanel(adv) );
-        
-        
-        
+        frame.setContentPane(new EditarAdvogadoPanel(adv));
         frame.setVisible(true);
 
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -276,11 +280,11 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
     private void btnEditarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnEditarItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarItemStateChanged
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton jRadioNome;
     private javax.swing.JRadioButton jRadioOab;
     private javax.swing.JScrollPane jScrollPane1;
