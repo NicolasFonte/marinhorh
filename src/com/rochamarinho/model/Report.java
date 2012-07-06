@@ -14,6 +14,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
+
 /**
  *
  * @author nicolas
@@ -60,7 +61,7 @@ public class Report {
         Connection con = Conexao.getConexao();
 
         try {
-            jasperReport = JasperCompileManager.compileReport("rhlibs/report1.jrxml");
+            jasperReport = JasperCompileManager.compileReport("rhlibs/MensalToExcel.jrxml");
             JasperPrint print = JasperFillManager.fillReport(jasperReport, map, con);
             JasperViewer.viewReport(print, false);
 
