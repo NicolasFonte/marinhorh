@@ -13,4 +13,6 @@ public interface CRUDBackend < T extends Object > {
     void remove(T object) throws BackendException;
     T read(Long id) throws BackendException;        
     
+    
+    
 }

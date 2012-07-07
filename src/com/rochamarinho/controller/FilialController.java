@@ -48,9 +48,18 @@ public class FilialController {
         
     }
     
-    public Filial filialDeAdvogado(String cpf) throws BackendException
-    {
-        return getBackend().buscarFilialDeAdvogadoPorCpf(cpf);
+    public Filial porNome(String text) throws BackendException {
+        
+        return getBackend().buscarPorNome(text);
+        
+    }
+
+    public void atualizarFilial(Filial antiga, String novaFilial) throws BackendException {
+        
+        Filial f = getBackend().read(antiga.getId());
+        f.setNome(novaFilial);
+        getBackend().update(f);
+        
     }
 
 

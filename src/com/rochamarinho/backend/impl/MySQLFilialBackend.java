@@ -98,36 +98,13 @@ public class MySQLFilialBackend implements FilialBackend {
         update(f);        
     }
     
-    
+    @Override
     public Filial buscarPorNome(String nome) throws BackendException
     {
         Transaction tx = session.beginTransaction();
         Filial filial = (Filial) session.createCriteria(Filial.class).add(Restrictions.eq("nome", nome)).uniqueResult();
-        if (filial == null) throw new BackendException("filial nao existe no banco");        
         tx.commit();
         return filial;
     }
 
-    @Override
-    public Filial buscarFilialDeAdvogadoPorCpf(String cpf) throws BackendException {
-        
-        List<Filial> list = list();
-        for ( Filial filialEach: list )
-        {            
-            for ( Advogado advEach : filialEach.getAdvogados())
-            {
-                if ( advEach.getOab().equals(cpf) )
-                {
-                    return filialEach;
-                }
-            }
-            
-        }
-        return null;
-        
-    }
-    
-    
-
-    
 }

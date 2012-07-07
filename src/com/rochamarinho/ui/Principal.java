@@ -41,7 +41,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         itemMenuAlterarTaxa1 = new javax.swing.JMenuItem();
         itemMenuFilialCadastrar = new javax.swing.JMenuItem();
-        itemMenuFilialBusca = new javax.swing.JMenuItem();
         itemMenuEfetuarPagamento = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         itemMenuAdvogadosPorFilial = new javax.swing.JMenuItem();
@@ -102,17 +101,13 @@ public class Principal extends javax.swing.JFrame {
         jMenu1.add(itemMenuAlterarTaxa1);
 
         itemMenuFilialCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
-        itemMenuFilialCadastrar.setText("Cadastrar Filiais");
+        itemMenuFilialCadastrar.setText("Filiais");
         itemMenuFilialCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemMenuFilialCadastrarActionPerformed(evt);
             }
         });
         jMenu1.add(itemMenuFilialCadastrar);
-
-        itemMenuFilialBusca.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
-        itemMenuFilialBusca.setText("Gerenciar Filiais");
-        jMenu1.add(itemMenuFilialBusca);
 
         itemMenuEfetuarPagamento.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
         itemMenuEfetuarPagamento.setText("Efetuar Pagamento");
@@ -250,7 +245,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemMenuAlterarTaxa1;
     private javax.swing.JMenuItem itemMenuBuscar;
     private javax.swing.JMenuItem itemMenuEfetuarPagamento;
-    private javax.swing.JMenuItem itemMenuFilialBusca;
     private javax.swing.JMenuItem itemMenuFilialCadastrar;
     private javax.swing.JMenuItem itemMenuRelatorioAnual;
     private javax.swing.JMenu jMenu1;
