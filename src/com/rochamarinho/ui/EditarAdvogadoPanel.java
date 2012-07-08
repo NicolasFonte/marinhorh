@@ -107,6 +107,11 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Filial:");
 
+        fmtOab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fmtOabMouseClicked(evt);
+            }
+        });
         fmtOab.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 fmtOabFocusGained(evt);
@@ -288,6 +293,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         try {
             fmtAssociacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##/##/####")));
+            fmtAssociacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(adv.getAssociacao()));
         } catch (ParseException ex) {
             Logger.getLogger(EditarAdvogadoPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -310,7 +316,12 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
        fmtOab.setBorder(BorderFactory.createLineBorder(Color.yellow));
        try{
             fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("##.####")));
+                    new javax.swing.text.MaskFormatter("###.###")));
+            
+            String advOab = adv.getOab().substring(2);
+            String formattingOab = advOab.substring(0, 3) + "." + advOab.substring(3, 6);
+            
+            fmtOab.setText(formattingOab);
        } catch (ParseException ex) {
             Logger.getLogger(EditarAdvogadoPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -333,31 +344,18 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         try{
             txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                     new javax.swing.text.MaskFormatter("##.###,##")));
+            txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
         } catch (ParseException ex) {
             Logger.getLogger(EditarAdvogadoPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_txtDistribuicaoFocusGained
 
-   // private void setDefaultMasks() {
-        //try {
-         //   fmtAssociacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-         //           new javax.swing.text.MaskFormatter("##/##/####")));
-
-        //    fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-          //          new javax.swing.text.MaskFormatter("##.####")));
-
-          //  txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-           //         new javax.swing.text.MaskFormatter("##.###,##")));
-
-           // filialComboBox.setToolTipText("Escolha a Filial:");
-
-      //  } catch (ParseException ex) {
-          //  JOptionPane.showMessageDialog(null, "Por gentileza, Preecha os campos corretamente!");
-        //}
-    //}
+    private void fmtOabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fmtOabMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fmtOabMouseClicked
 
     protected void setDefaultTaxaText() {
-        Taxa taxa;
+        Taxa taxa = null;
 
         try {
             taxa = taxaController.getTaxa();
@@ -365,9 +363,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
             Logger.getLogger(EditarAdvogadoPanel.class.getName()).log(Level.SEVERE, "taxa nao foi carregada", ex);
             taxa = new Taxa(0);
         }
-
-       
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox UfOabComboBox;
@@ -432,7 +427,13 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         
         txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
         fmtAssociacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(adv.getAssociacao()));
-        fmtOab.setText(adv.getOab().substring(2));
+        
+        
+        String oab = adv.getOab().substring(2);
+        String formattingOab = oab.substring(0, 3) + "." + oab.substring(3, 6);
+        fmtOab.setText(formattingOab);
+        
+        
         UfOabComboBox.setSelectedIndex(descobrirIndiceDaUF(adv.getUf()));
         
         

@@ -10,8 +10,10 @@ import com.rochamarinho.controller.FilialController;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.utils.BackendException;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -188,9 +190,10 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         try {
             if (jRadioNome.isSelected()) {
                 advs = advController.porNome(nomeAdv);
-            } else {
-                JOptionPane.showMessageDialog(null, "somente busca por nome suportada, selecione por nome");
-                return;
+            } else if (jRadioOab.isSelected()) {
+                Advogado pesquisado = advController.byOab(nomeAdv);
+                advs = new ArrayList<Advogado>();
+                advs.add(pesquisado);
             }
 
         } catch (BackendException ex) {
@@ -221,7 +224,10 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         }
 
         for (Advogado obj : advs) {
-            m.addRow(new Object[]{obj.getNome(), obj.getOab(), obj.getDistribuicao(),
+            
+            String distriuicaoText = String.valueOf(obj.getDistribuicao());
+            
+            m.addRow(new Object[]{obj.getNome(), obj.getOab(), distriuicaoText,
                         obj.getAssociacao(), obj.getEmail()
                     });
         }
@@ -262,7 +268,7 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         }
 
         String oab = (String) jTablePesquisar.getValueAt(rowIndex, 1);
-        
+
         Advogado adv = null;;
         try {
             adv = advController.byOab(oab);
@@ -272,6 +278,7 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
 
 
         EditarAdvogadoFrame frame = new EditarAdvogadoFrame();
+        frame.setPreferredSize(new Dimension(400, 600));
         frame.setContentPane(new EditarAdvogadoPanel(adv));
         frame.setVisible(true);
 

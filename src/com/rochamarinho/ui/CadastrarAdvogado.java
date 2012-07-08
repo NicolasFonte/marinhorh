@@ -11,9 +11,7 @@ import com.rochamarinho.controller.TaxaController;
 import com.rochamarinho.model.Filial;
 import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
-import com.rochamarinho.utils.IeValidator;
 import java.awt.Color;
-import java.awt.TextField;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
-import javax.swing.border.CompoundBorder;
-import javax.swing.text.AbstractDocument;
 
 /**
  *
@@ -330,7 +326,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     private void btnLimparCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCadastroActionPerformed
 
         limpar();
-
     }//GEN-LAST:event_btnLimparCadastroActionPerformed
 
     private void fmtNascimentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtNascimentoFocusLost
@@ -376,7 +371,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
        fmtOab.setBorder(BorderFactory.createLineBorder(Color.yellow));
        try{
             fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("##.####")));
+                    new javax.swing.text.MaskFormatter("###.###")));
        } catch (ParseException ex) {
             Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -431,9 +426,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, "taxa nao foi carregada", ex);
             taxa = new Taxa(0);
         }
-
-       
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox UfOabComboBox;
@@ -466,7 +458,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             JOptionPane.showConfirmDialog(null, "Nao foi possivel carregar a lista de filiais");
             filiais = new ArrayList<Filial>();
         }
-
 
         List<String> filiaisNomes = new ArrayList<String>();
         for (Filial f : filiais) {
