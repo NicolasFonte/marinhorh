@@ -1,8 +1,13 @@
 package com.rochamarinho.model;
 
+import com.rochamarinho.backend.impl.MySQLAdvogadoBackend;
 import com.rochamarinho.utils.Conexao;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +18,11 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 
 /**
@@ -111,7 +121,7 @@ public class Report {
         }
     }
 
-    private static void gerarRelatorioNomeMes(String nomeAdvogado, String nomeMes) {
+    protected static void gerarRelatorioNomeMes(String nomeAdvogado, String nomeMes) {
         JasperReport jasperReport;
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -130,4 +140,52 @@ public class Report {
             Logger.getLogger(Report.class.getName()).log(Level.SEVERE, "report exception", ex);
         }
     }
+
+    protected static void gerarRelatorioAnual(int ano) throws FileNotFoundException, IOException
+    {
+        MySQLAdvogadoBackend backend = new MySQLAdvogadoBackend();
+        List <Advogado> advogados = backend.list();
+        
+        
+        Workbook wb = new HSSFWorkbook();
+        CreationHelper createHelper = wb.getCreationHelper();
+        Sheet sheet = wb.createSheet("Relatorio");
+        
+        int numeroLinha = 0;
+        int numeroCel = 0;
+        
+        Row definicaoDeCelulas =  sheet.createRow(numeroLinha);
+        definicaoDeCelulas.createCell(numeroCel).setCellValue(createHelper.createRichTextString("Nome"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Janeiro"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Fevereiro"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Marco"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Abril"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Maio"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Junho"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Julho"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Agosto"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Setembro"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Outubro"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Novembro"));        
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Dezembro"));        
+        
+        numeroLinha++;
+        numeroCel = 0;
+        
+        for (Advogado each : advogados)
+        {
+            Row linha =  sheet.createRow(numeroLinha);
+            linha.createCell(numeroCel).setCellValue(createHelper.createRichTextString(each.getNome()));
+            
+            numeroLinha++;
+        }
+        
+        
+        FileOutputStream fileOut = new FileOutputStream("rhlibs/relatorioanual.xls");
+        wb.write(fileOut);
+        fileOut.close();
+        
+    
+    }
+
 }

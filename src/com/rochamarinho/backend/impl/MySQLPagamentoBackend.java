@@ -5,6 +5,7 @@ import com.rochamarinho.model.Pagamento;
 import com.rochamarinho.utils.BackendException;
 import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -31,8 +32,17 @@ public class MySQLPagamentoBackend implements PagamentoBackend {
     
     
     @Override
-    public List<Pagamento> pagamentosPorAno() throws BackendException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<Pagamento> pagamentosPorAno(String ano) throws BackendException {
+        Transaction tx = session.beginTransaction();
+        SQLQuery q = session.createSQLQuery("select ");
+        
+        
+        tx.commit();
+
+        
+        
+        return null;
+        
     }
 
     @Override

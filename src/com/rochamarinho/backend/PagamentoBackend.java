@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface PagamentoBackend extends CRUDBackend<Pagamento> {
     
-    List<Pagamento> pagamentosPorAno() throws BackendException;
+    List<Pagamento> pagamentosPorAno(String ano) throws BackendException;
     Pagamento ultimoPagamento() throws BackendException;
 }

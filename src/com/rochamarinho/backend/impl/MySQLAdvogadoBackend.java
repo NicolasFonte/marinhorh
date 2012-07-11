@@ -84,4 +84,14 @@ public class MySQLAdvogadoBackend implements AdvogadoBackend {
         return advogados;
         
     }
+    
+    //@Override
+//    public List<Pagamentos> pagamentosPorAno(String ano) throws BackendException {
+//        
+//        Transaction tx = session.beginTransaction();
+//        List<Advogado> advogados =  session.createCriteria(Advogado.class).add(Restrictions.like("nome" , "%" + nomeParcial + "%" )).list();
+//        tx.commit();
+//        return advogados;
+//        
+//    }
 }
