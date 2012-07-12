@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
@@ -67,7 +67,7 @@
                       <Component id="filialComboBox" alignment="0" min="-2" pref="197" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="186" max="32767" attributes="0"/>
+              <EmptySpace pref="259" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,7 +79,7 @@
                   <Component id="lblNomeAdvogado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="63" max="32767" attributes="0"/>
+              <EmptySpace pref="65" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblOab" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="UfOabComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -160,7 +160,6 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="fmtOab">
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fmtOabMouseClicked"/>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fmtOabFocusGained"/>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fmtOabFocusLost"/>
       </Events>
@@ -207,6 +206,7 @@
     <Component class="javax.swing.JFormattedTextField" name="txtDistribuicao">
       <Events>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDistribuicaoFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDistribuicaoFocusLost"/>
       </Events>
     </Component>
   </SubComponents>

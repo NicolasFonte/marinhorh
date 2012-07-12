@@ -13,6 +13,7 @@ import com.rochamarinho.model.Filial;
 import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
 import com.rochamarinho.utils.IeValidator;
+import com.rochamarinho.utils.MonetarioDocument;
 import java.awt.Color;
 import java.awt.TextField;
 import java.text.ParseException;
@@ -27,6 +28,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.CompoundBorder;
 import javax.swing.text.AbstractDocument;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -38,6 +40,8 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
     TaxaController taxaController = new TaxaController();
     FilialController filialController = new FilialController();
     Advogado adv;
+    int x = 0;
+    int y = 0;
     
     /** Creates new form CadastrarAdvogado */
     public EditarAdvogadoPanel() {
@@ -107,11 +111,6 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Filial:");
 
-        fmtOab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                fmtOabMouseClicked(evt);
-            }
-        });
         fmtOab.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 fmtOabFocusGained(evt);
@@ -152,6 +151,9 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDistribuicaoFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDistribuicaoFocusLost(evt);
+            }
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -188,7 +190,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
                             .addComponent(lblDominio))
                         .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +199,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomeAdvogado)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOab)
                     .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,17 +316,8 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
 
     private void fmtOabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtOabFocusGained
        fmtOab.setBorder(BorderFactory.createLineBorder(Color.yellow));
-       try{
-            fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("###.###")));
-            
-            String advOab = adv.getOab().substring(2);
-            String formattingOab = advOab.substring(0, 3) + "." + advOab.substring(3, 6);
-            
-            fmtOab.setText(formattingOab);
-       } catch (ParseException ex) {
-            Logger.getLogger(EditarAdvogadoPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       fmtOab.setFormatterFactory( new javax.swing.text.DefaultFormatterFactory(
+               new NumberFormatter()));
     }//GEN-LAST:event_fmtOabFocusGained
 
     private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
@@ -340,19 +333,30 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_fmtOabFocusLost
 
     private void txtDistribuicaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistribuicaoFocusGained
+       /** if (txtDistribuicao.getText().equals("")){
+          txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
+          txtDistribuicao.setDocument(new MonetarioDocument());
+        }
         txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
-        try{
-            txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("##.###,##")));
-            txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
-        } catch (ParseException ex) {
-            Logger.getLogger(EditarAdvogadoPanel.class.getName()).log(Level.SEVERE, null, ex);
+        */
+        txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
+        double dist = Double.parseDouble(txtDistribuicao.getText());
+        
+        if (txtDistribuicao.getText().equals("")){
+          txtDistribuicao.setDocument(new MonetarioDocument());
+        }
+        
+	
+	 while(y<1){ 
+            txtDistribuicao.setDocument(new MonetarioDocument());
+            txtDistribuicao.setText(String.valueOf(dist));
+            y++;
         }
     }//GEN-LAST:event_txtDistribuicaoFocusGained
 
-    private void fmtOabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fmtOabMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fmtOabMouseClicked
+    private void txtDistribuicaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistribuicaoFocusLost
+        txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.gray));
+    }//GEN-LAST:event_txtDistribuicaoFocusLost
 
     protected void setDefaultTaxaText() {
         Taxa taxa = null;
@@ -424,7 +428,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         String email = adv.getEmail();
         String [] partes = email.split("@");
         txtEmail.setText(partes[0]);
-        
+        txtDistribuicao.setDocument(new MonetarioDocument());
         txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
         fmtAssociacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(adv.getAssociacao()));
         
