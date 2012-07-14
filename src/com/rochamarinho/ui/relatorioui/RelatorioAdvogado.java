@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class RelatorioAdvogado extends javax.swing.JPanel {
 
     FilialController filialController = new FilialController();
-    
+    Report report = new Report();
     /** Creates new form RelatorioPorFilial */
     public RelatorioAdvogado() {
         initComponents();
@@ -132,7 +132,7 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
         String nomeAdvogado = txtNomeRelatorio.getText();
         String nomeMes = (String) mesComboBox.getSelectedItem();
         
-        Report.gerarRelatorioAdvogadosMensal(nomeAdvogado,nomeFilial,nomeMes); // ajeitar relatorios
+        report.gerarRelatorioAdvogadosMensal(nomeAdvogado,nomeFilial,nomeMes); // ajeitar relatorios
         
         
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed

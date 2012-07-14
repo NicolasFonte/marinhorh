@@ -1,13 +1,18 @@
 package com.rochamarinho.model;
 
+import com.rochamarinho.backend.AdvogadoBackend;
 import com.rochamarinho.backend.impl.MySQLAdvogadoBackend;
+import com.rochamarinho.utils.BackendException;
 import com.rochamarinho.utils.Conexao;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +28,7 @@ import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.w3c.tidy.Clean;
 
 
 /**
@@ -31,15 +37,21 @@ import org.apache.poi.ss.usermodel.Workbook;
  */
 public class Report {
 
+    public AdvogadoBackend backend;
+
+    
     public Report() {
     }
 
-    public static void gerarRelatorioTodosAdvogados() {
+    public AdvogadoBackend getBackend() {
+        return backend;
     }
 
-    public static void gerarRelatorioAdvogadosMensal(String nomeAdvogado, String nomeFilial, String nomeMes) {
-
-
+    public void setBackend(AdvogadoBackend backend) {
+        this.backend = backend;
+    }
+    
+    public void gerarRelatorioAdvogadosMensal(String nomeAdvogado, String nomeFilial, String nomeMes) {
 
         if (nomeAdvogado.equals("") && nomeFilial.equals("Todos")) // sem nome e sem filial
         {
@@ -58,10 +70,9 @@ public class Report {
         }
 
 
-
     }
 
-    protected static void gerarRelatorioGeralMes(String nomeMes) {
+    protected void gerarRelatorioGeralMes(String nomeMes) {
 
         JasperReport jasperReport;
 
@@ -81,7 +92,7 @@ public class Report {
 
     }
 
-    protected static void gerarRelatorioFilialMes(String nomeFilial, String nomeMes) {
+    protected void gerarRelatorioFilialMes(String nomeFilial, String nomeMes) {
         JasperReport jasperReport;
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -99,7 +110,7 @@ public class Report {
         }
     }
 
-    protected static void gerarRelatorioNomeEFilialMes(String nomeAdvogado, String nomeFilial, String nomeMes) {
+    protected void gerarRelatorioNomeEFilialMes(String nomeAdvogado, String nomeFilial, String nomeMes) {
         JasperReport jasperReport;
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -121,7 +132,7 @@ public class Report {
         }
     }
 
-    protected static void gerarRelatorioNomeMes(String nomeAdvogado, String nomeMes) {
+    protected void gerarRelatorioNomeMes(String nomeAdvogado, String nomeMes) {
         JasperReport jasperReport;
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -141,11 +152,9 @@ public class Report {
         }
     }
 
-    protected static void gerarRelatorioAnual(int ano) throws FileNotFoundException, IOException
+    protected void gerarRelatorioAnual(int ano) throws FileNotFoundException, IOException, BackendException
     {
-        MySQLAdvogadoBackend backend = new MySQLAdvogadoBackend();
         List <Advogado> advogados = backend.list();
-        
         
         Workbook wb = new HSSFWorkbook();
         CreationHelper createHelper = wb.getCreationHelper();
@@ -176,16 +185,49 @@ public class Report {
         {
             Row linha =  sheet.createRow(numeroLinha);
             linha.createCell(numeroCel).setCellValue(createHelper.createRichTextString(each.getNome()));
+
+            List<Pagamento> todosPagamentos = each.getHistoricoPagamento();            
+            List<Pagamento> pagamentosMensais = filtrarPorAno(ano,todosPagamentos);            
+            
+           linha.createCell(numeroCel + 1).setCellValue(pagamentosMensais.get(0).getValorPago());
+           linha.createCell(numeroCel + 2).setCellValue(pagamentosMensais.get(1).getValorPago());
+           linha.createCell(numeroCel + 3).setCellValue(pagamentosMensais.get(2).getValorPago());
+           linha.createCell(numeroCel + 4).setCellValue(pagamentosMensais.get(3).getValorPago());
+           linha.createCell(numeroCel + 5).setCellValue(pagamentosMensais.get(4).getValorPago());
+           linha.createCell(numeroCel + 6).setCellValue(pagamentosMensais.get(5).getValorPago());
+           linha.createCell(numeroCel + 7).setCellValue(pagamentosMensais.get(6).getValorPago());
+           linha.createCell(numeroCel + 8).setCellValue(pagamentosMensais.get(7).getValorPago());
+           linha.createCell(numeroCel + 9).setCellValue(pagamentosMensais.get(8).getValorPago());
+           linha.createCell(numeroCel + 10).setCellValue(pagamentosMensais.get(9).getValorPago());
+           linha.createCell(numeroCel + 11).setCellValue(pagamentosMensais.get(10).getValorPago());
+           linha.createCell(numeroCel + 12).setCellValue(pagamentosMensais.get(11).getValorPago());
+
+            
+            
             
             numeroLinha++;
         }
-        
         
         FileOutputStream fileOut = new FileOutputStream("rhlibs/relatorioanual.xls");
         wb.write(fileOut);
         fileOut.close();
         
-    
     }
 
+    public List<Pagamento> filtrarPorAno(int ano, List<Pagamento> todosPagamentos) {
+         
+        List<Pagamento> anuais = new ArrayList<Pagamento>();
+        
+        for (Pagamento each: todosPagamentos)
+        {
+            Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+            calendar.setTime(each.getDataPagamento());
+            int anoData = calendar.get(Calendar.YEAR);
+            if (anoData == ano)
+            {
+                anuais.add(each);
+            }
+        }
+        return anuais;
+    }
 }
