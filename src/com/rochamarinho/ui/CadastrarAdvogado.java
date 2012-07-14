@@ -11,6 +11,7 @@ import com.rochamarinho.controller.TaxaController;
 import com.rochamarinho.model.Filial;
 import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
+import com.rochamarinho.utils.MonetarioDocument;
 import java.awt.Color;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -160,6 +162,9 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDistribuicaoFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDistribuicaoFocusLost(evt);
+            }
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -214,7 +219,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(134, 134, 134)
                                         .addComponent(checkBoxTaxa)))))))
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +228,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomeAdvogado)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOab)
                     .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -369,12 +374,8 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
 
     private void fmtOabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtOabFocusGained
        fmtOab.setBorder(BorderFactory.createLineBorder(Color.yellow));
-       try{
-            fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("###.###")));
-       } catch (ParseException ex) {
-            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       fmtOab.setFormatterFactory( new javax.swing.text.DefaultFormatterFactory(
+               new NumberFormatter()));
     }//GEN-LAST:event_fmtOabFocusGained
 
     private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
@@ -390,14 +391,33 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
     }//GEN-LAST:event_fmtOabFocusLost
 
     private void txtDistribuicaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistribuicaoFocusGained
-        txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
-        try{
-            txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("##.###,##")));
-        } catch (ParseException ex) {
-            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
+         if (txtDistribuicao.getText().equals(""))       
+          txtDistribuicao.setDocument(new MonetarioDocument());
+     
     }//GEN-LAST:event_txtDistribuicaoFocusGained
+
+    private void txtDistribuicaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistribuicaoFocusLost
+        txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.gray));
+    }//GEN-LAST:event_txtDistribuicaoFocusLost
+
+   // private void setDefaultMasks() {
+        //try {
+         //   fmtAssociacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+         //           new javax.swing.text.MaskFormatter("##/##/####")));
+
+        //    fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+          //          new javax.swing.text.MaskFormatter("##.####")));
+
+          //  txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+           //         new javax.swing.text.MaskFormatter("##.###,##")));
+
+           // filialComboBox.setToolTipText("Escolha a Filial:");
+
+      //  } catch (ParseException ex) {
+          //  JOptionPane.showMessageDialog(null, "Por gentileza, Preecha os campos corretamente!");
+        //}
+    //}
 
     protected void setDefaultTaxaText() {
         Taxa taxa;
