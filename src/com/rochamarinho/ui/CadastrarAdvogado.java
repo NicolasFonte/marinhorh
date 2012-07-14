@@ -399,24 +399,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtDistribuicaoFocusGained
 
-   // private void setDefaultMasks() {
-        //try {
-         //   fmtAssociacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-         //           new javax.swing.text.MaskFormatter("##/##/####")));
-
-        //    fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-          //          new javax.swing.text.MaskFormatter("##.####")));
-
-          //  txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-           //         new javax.swing.text.MaskFormatter("##.###,##")));
-
-           // filialComboBox.setToolTipText("Escolha a Filial:");
-
-      //  } catch (ParseException ex) {
-          //  JOptionPane.showMessageDialog(null, "Por gentileza, Preecha os campos corretamente!");
-        //}
-    //}
-
     protected void setDefaultTaxaText() {
         Taxa taxa;
 

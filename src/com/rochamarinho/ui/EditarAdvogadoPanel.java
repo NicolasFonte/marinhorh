@@ -343,7 +343,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
         try{
             txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                    new javax.swing.text.MaskFormatter("##.###,##")));
+                    new javax.swing.text.MaskFormatter("##.###,##")));            
             txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
         } catch (ParseException ex) {
             Logger.getLogger(EditarAdvogadoPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -425,7 +425,16 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         String [] partes = email.split("@");
         txtEmail.setText(partes[0]);
         
+        
+        try{
+            txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                    new javax.swing.text.MaskFormatter("##.###,##")));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
         txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
+        
+        
         fmtAssociacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(adv.getAssociacao()));
         
         
