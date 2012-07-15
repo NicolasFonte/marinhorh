@@ -30,7 +30,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.w3c.tidy.Clean;
 
-
 /**
  *
  * @author nicolas
@@ -39,7 +38,6 @@ public class Report {
 
     public AdvogadoBackend backend;
 
-    
     public Report() {
     }
 
@@ -50,7 +48,7 @@ public class Report {
     public void setBackend(AdvogadoBackend backend) {
         this.backend = backend;
     }
-    
+
     public void gerarRelatorioAdvogadosMensal(String nomeAdvogado, String nomeFilial, String nomeMes) {
 
         if (nomeAdvogado.equals("") && nomeFilial.equals("Todos")) // sem nome e sem filial
@@ -152,18 +150,17 @@ public class Report {
         }
     }
 
-    protected void gerarRelatorioAnual(int ano) throws FileNotFoundException, IOException, BackendException
-    {
-        List <Advogado> advogados = backend.list();
-        
+    public void gerarRelatorioAnual(int ano) throws FileNotFoundException, IOException, BackendException {
+        List<Advogado> advogados = backend.list();
+
         Workbook wb = new HSSFWorkbook();
         CreationHelper createHelper = wb.getCreationHelper();
         Sheet sheet = wb.createSheet("Relatorio");
-        
+
         int numeroLinha = 0;
         int numeroCel = 0;
-        
-        Row definicaoDeCelulas =  sheet.createRow(numeroLinha);
+
+        Row definicaoDeCelulas = sheet.createRow(numeroLinha);
         definicaoDeCelulas.createCell(numeroCel).setCellValue(createHelper.createRichTextString("Nome"));
         definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Janeiro"));
         definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Fevereiro"));
@@ -175,56 +172,45 @@ public class Report {
         definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Agosto"));
         definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Setembro"));
         definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Outubro"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Novembro"));        
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Dezembro"));        
-        
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Novembro"));
+        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Dezembro"));
+
         numeroLinha++;
         numeroCel = 0;
-        
-        for (Advogado each : advogados)
-        {
-            Row linha =  sheet.createRow(numeroLinha);
+
+        for (Advogado each : advogados) {
+            Row linha = sheet.createRow(numeroLinha);
             linha.createCell(numeroCel).setCellValue(createHelper.createRichTextString(each.getNome()));
 
-            List<Pagamento> todosPagamentos = each.getHistoricoPagamento();            
-            List<Pagamento> pagamentosMensais = filtrarPorAno(ano,todosPagamentos);            
-            
-           linha.createCell(numeroCel + 1).setCellValue(pagamentosMensais.get(0).getValorPago());
-           linha.createCell(numeroCel + 2).setCellValue(pagamentosMensais.get(1).getValorPago());
-           linha.createCell(numeroCel + 3).setCellValue(pagamentosMensais.get(2).getValorPago());
-           linha.createCell(numeroCel + 4).setCellValue(pagamentosMensais.get(3).getValorPago());
-           linha.createCell(numeroCel + 5).setCellValue(pagamentosMensais.get(4).getValorPago());
-           linha.createCell(numeroCel + 6).setCellValue(pagamentosMensais.get(5).getValorPago());
-           linha.createCell(numeroCel + 7).setCellValue(pagamentosMensais.get(6).getValorPago());
-           linha.createCell(numeroCel + 8).setCellValue(pagamentosMensais.get(7).getValorPago());
-           linha.createCell(numeroCel + 9).setCellValue(pagamentosMensais.get(8).getValorPago());
-           linha.createCell(numeroCel + 10).setCellValue(pagamentosMensais.get(9).getValorPago());
-           linha.createCell(numeroCel + 11).setCellValue(pagamentosMensais.get(10).getValorPago());
-           linha.createCell(numeroCel + 12).setCellValue(pagamentosMensais.get(11).getValorPago());
+            List<Pagamento> todosPagamentos = each.getHistoricoPagamento();
+            List<Pagamento> pagamentosMensais = filtrarPorAno(ano, todosPagamentos);
 
-            
-            
-            
+            for (Pagamento eachPagamento: pagamentosMensais)
+            {
+                Calendar c = Calendar.getInstance(Locale.ENGLISH);
+                c.setTime(eachPagamento.getDataPagamento());
+                int indexMonthExcel = c.get(Calendar.MONTH);
+                linha.createCell(indexMonthExcel+1).setCellValue(eachPagamento.getValorPago());
+            }
+
             numeroLinha++;
         }
-        
+
         FileOutputStream fileOut = new FileOutputStream("rhlibs/relatorioanual.xls");
         wb.write(fileOut);
         fileOut.close();
-        
+
     }
 
     public List<Pagamento> filtrarPorAno(int ano, List<Pagamento> todosPagamentos) {
-         
+
         List<Pagamento> anuais = new ArrayList<Pagamento>();
-        
-        for (Pagamento each: todosPagamentos)
-        {
+
+        for (Pagamento each : todosPagamentos) {
             Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
             calendar.setTime(each.getDataPagamento());
             int anoData = calendar.get(Calendar.YEAR);
-            if (anoData == ano)
-            {
+            if (anoData == ano) {
                 anuais.add(each);
             }
         }

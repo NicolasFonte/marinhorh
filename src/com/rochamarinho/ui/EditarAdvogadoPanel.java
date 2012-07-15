@@ -28,6 +28,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.CompoundBorder;
 import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.NumberFormatter;
 
 /**
@@ -340,7 +341,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
         */
         txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
-        double dist = Double.parseDouble(txtDistribuicao.getText());
+        //double dist = Double.parseDouble(txtDistribuicao.getText());
         
         if (txtDistribuicao.getText().equals("")){
           txtDistribuicao.setDocument(new MonetarioDocument());
@@ -349,7 +350,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
 	
 	 while(y<1){ 
             txtDistribuicao.setDocument(new MonetarioDocument());
-            txtDistribuicao.setText(String.valueOf(dist));
+            //txtDistribuicao.setText(String.valueOf(dist));
             y++;
         }
     }//GEN-LAST:event_txtDistribuicaoFocusGained
@@ -428,9 +429,10 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         String email = adv.getEmail();
         String [] partes = email.split("@");
         txtEmail.setText(partes[0]);
-        txtDistribuicao.setDocument(new MonetarioDocument());
-        txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
         
+        
+        txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
+        //System.out.println(String.valueOf(adv.getDistribuicao()));
         
         fmtAssociacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(adv.getAssociacao()));
         

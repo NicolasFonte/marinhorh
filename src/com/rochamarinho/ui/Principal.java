@@ -5,6 +5,7 @@ import com.rochamarinho.controller.AdvogadoController;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.model.Pagamento;
 import com.rochamarinho.ui.relatorioui.RelatorioAdvogado;
+import com.rochamarinho.ui.relatorioui.RelatorioAnualAdvogados;
 import com.rochamarinho.utils.BackendException;
 import java.awt.CardLayout;
 import java.util.Calendar;
@@ -133,6 +134,11 @@ public class Principal extends javax.swing.JFrame {
 
         itemMenuRelatorioAnual.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
         itemMenuRelatorioAnual.setText("Anual");
+        itemMenuRelatorioAnual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuRelatorioAnualActionPerformed(evt);
+            }
+        });
         jMenu4.add(itemMenuRelatorioAnual);
 
         jMenuBar1.add(jMenu4);
@@ -239,6 +245,14 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuItemSairActionPerformed
+
+    private void itemMenuRelatorioAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuRelatorioAnualActionPerformed
+        RelatorioAnualAdvogados anual = new RelatorioAnualAdvogados();
+        this.setContentPane(anual);
+        this.pack();
+        
+
+    }//GEN-LAST:event_itemMenuRelatorioAnualActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemMenuAdvogadosPorFilial;
