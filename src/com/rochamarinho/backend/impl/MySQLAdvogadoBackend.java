@@ -20,19 +20,19 @@ public class MySQLAdvogadoBackend implements AdvogadoBackend {
     private Session session;
 
     public MySQLAdvogadoBackend() {
-    
+
         AnnotationConfiguration conf = new AnnotationConfiguration();
         conf.configure();
         factory = conf.buildSessionFactory();
         session = factory.openSession();
-    
+
     }
-    
+
     @Override
     public Advogado update(Advogado object) throws BackendException {
         Transaction tx = session.beginTransaction();
         Advogado updatedOne = (Advogado) session.merge(object);
-        tx.commit();            
+        tx.commit();
         return updatedOne;
     }
 
@@ -40,7 +40,7 @@ public class MySQLAdvogadoBackend implements AdvogadoBackend {
     public void create(Advogado object) throws BackendException {
         Transaction tx = session.beginTransaction();
         session.save(object);
-        tx.commit();   
+        tx.commit();
     }
 
     @Override
@@ -57,15 +57,15 @@ public class MySQLAdvogadoBackend implements AdvogadoBackend {
         tx.commit();
         return reloaded;
     }
-    
+
     @Override
     public List<Advogado> list() {
         Transaction tx = session.beginTransaction();
-        List<Advogado> list = session.createCriteria(Advogado.class).list();
+        List<Advogado> list = session.createCriteria(Advogado.class).add(Restrictions.eq("ativo", true)).list();
         tx.commit();
+
         return list;
     }
-
 
     @Override
     public Advogado byOab(String validOab) throws BackendException {
@@ -77,21 +77,11 @@ public class MySQLAdvogadoBackend implements AdvogadoBackend {
 
     @Override
     public List<Advogado> byNome(String nomeParcial) throws BackendException {
-        
+
         Transaction tx = session.beginTransaction();
-        List<Advogado> advogados =  session.createCriteria(Advogado.class).add(Restrictions.like("nome" , "%" + nomeParcial + "%" )).list();
+        List<Advogado> advogados = session.createCriteria(Advogado.class).add(Restrictions.like("nome", "%" + nomeParcial + "%")).add(Restrictions.eq("ativo", true)).list();
         tx.commit();
+
         return advogados;
-        
     }
-    
-    //@Override
-//    public List<Pagamentos> pagamentosPorAno(String ano) throws BackendException {
-//        
-//        Transaction tx = session.beginTransaction();
-//        List<Advogado> advogados =  session.createCriteria(Advogado.class).add(Restrictions.like("nome" , "%" + nomeParcial + "%" )).list();
-//        tx.commit();
-//        return advogados;
-//        
-//    }
 }

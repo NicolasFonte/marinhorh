@@ -140,7 +140,7 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         jTablePesquisar.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTablePesquisar.getAccessibleContext().setAccessibleName("");
 
-        btnDeletar.setText("deletar");
+        btnDeletar.setText("desativar");
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeletarActionPerformed(evt);
@@ -198,7 +198,7 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addGap(2, 2, 2))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -225,7 +225,17 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
             mostrarMensagem("advogado nao encontrado");
             //return
         }
+/*
+        DefaultTableModel modelNaoEditavel = new DefaultTableModel() {
 
+            @Override
+            public boolean isCellEditable(int rowIndex, int mColIndex) {
+                return false;
+            }
+        };
+        
+        jTablePesquisar.setModel(modelNaoEditavel);
+  */      
         DefaultTableModel m = (DefaultTableModel) jTablePesquisar.getModel();
 
         int i = 0;
@@ -297,19 +307,24 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
             JOptionPane.showMessageDialog(null, "Primeiro deve ser buscado um advogado");
             return;
         }
-        
+
         String oabFormatada = (String) jTablePesquisar.getValueAt(rowIndex, 1);
         String oab = oabFormatada.replace("-", "");
         Advogado adv = null;
-        
+
         try {
             adv = advController.byOab(oab);
-            advController.getBackend().remove(adv);
+            adv.setAtivo(false);
+            advController.getBackend().update(adv);
         } catch (BackendException ex) {
             JOptionPane.showMessageDialog(null, "Problema de conexão ao buscar/deletar advogado pela oab: " + oab);
             Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        JOptionPane.showMessageDialog(null, "Advogado desativado com sucesso!");
+        this.setVisible(true);
+            
+
     }//GEN-LAST:event_btnDeletarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

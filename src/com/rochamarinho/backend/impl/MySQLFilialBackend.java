@@ -4,6 +4,7 @@ import com.rochamarinho.backend.FilialBackend;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.model.Filial;
 import com.rochamarinho.utils.BackendException;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -76,11 +77,10 @@ public class MySQLFilialBackend implements FilialBackend {
     @Override
     public List<Filial> list() throws BackendException {
         Transaction tx = session.beginTransaction();
-        List<Filial> list = session.createCriteria(Filial.class).list();
+        List<Filial> list = session.createCriteria(Filial.class).add(Restrictions.eq("ativo", true)).list();
         tx.commit();
+
         return list;
-        
-        
     }
 
     @Override

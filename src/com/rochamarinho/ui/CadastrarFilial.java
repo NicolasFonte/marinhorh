@@ -26,6 +26,7 @@ public class CadastrarFilial extends javax.swing.JPanel {
     public CadastrarFilial() {
         initComponents();
         setFiliaisNoComboBox();
+        
     }
 
     /**
@@ -45,6 +46,8 @@ public class CadastrarFilial extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtFilialAtualizada = new javax.swing.JTextField();
         btnAtualizarFilial = new javax.swing.JButton();
+        btnDeletarFilial = new javax.swing.JButton();
+        lblNovoNome = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
@@ -63,7 +66,7 @@ public class CadastrarFilial extends javax.swing.JPanel {
             }
         });
 
-        lblNomeFilial.setText("Nome:");
+        lblNomeFilial.setText("Nome nova filial:");
 
         btnCadastrarFilial.setText("Cadastrar");
         btnCadastrarFilial.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +84,7 @@ public class CadastrarFilial extends javax.swing.JPanel {
 
         comboBoxFiliais.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "default" }));
 
-        jLabel1.setText("Atualizar Filial:");
+        jLabel1.setText("Selecione:");
 
         btnAtualizarFilial.setText("Atualizar");
         btnAtualizarFilial.addActionListener(new java.awt.event.ActionListener() {
@@ -90,51 +93,66 @@ public class CadastrarFilial extends javax.swing.JPanel {
             }
         });
 
+        btnDeletarFilial.setText("Deletar");
+        btnDeletarFilial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarFilialActionPerformed(evt);
+            }
+        });
+
+        lblNovoNome.setText("Novo nome:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCancelarCadastro)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(btnCadastrarFilial)
-                        .addGap(34, 34, 34)
-                        .addComponent(btnAtualizarFilial)
-                        .addGap(38, 38, 38)
-                        .addComponent(btnCancelarCadastro))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCadastrarFilial)
+                            .addComponent(lblNomeFilial)
                             .addComponent(jLabel1)
-                            .addComponent(lblNomeFilial))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNovoNome))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(comboBoxFiliais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtFilialAtualizada, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(117, Short.MAX_VALUE))
+                                .addGap(13, 13, 13)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFilialAtualizada, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboBoxFiliais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnAtualizarFilial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnDeletarFilial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomeFilial)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
+                .addComponent(btnCadastrarFilial)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(comboBoxFiliais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFilialAtualizada, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(86, 86, 86)
+                    .addComponent(btnDeletarFilial))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrarFilial)
-                    .addComponent(btnCancelarCadastro)
+                    .addComponent(txtFilialAtualizada, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNovoNome)
                     .addComponent(btnAtualizarFilial))
-                .addGap(94, 94, 94))
+                .addGap(45, 45, 45)
+                .addComponent(btnCancelarCadastro)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         txtNome.getAccessibleContext().setAccessibleName("");
@@ -154,11 +172,11 @@ public class CadastrarFilial extends javax.swing.JPanel {
         try {
             filialController.cadastrarFilial(filNomeText);
         } catch (BackendException ex) {
-            // Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Filial não Cadastrada!");
         }
         JOptionPane.showMessageDialog(null, "Filial cadastrado com sucesso!");
-        this.setVisible(false);
+        setFiliaisNoComboBox();
+        txtNome.setText("");
     }//GEN-LAST:event_btnCadastrarFilialActionPerformed
 
     private void txtNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusGained
@@ -200,12 +218,38 @@ public class CadastrarFilial extends javax.swing.JPanel {
             return;
         }
 
-        JOptionPane.showMessageDialog(null, "Filial cadastrada com sucesso");
+        JOptionPane.showMessageDialog(null, "Filial atualizada com sucesso");
         setFiliaisNoComboBox();
         txtFilialAtualizada.setText("");
             
 
     }//GEN-LAST:event_btnAtualizarFilialActionPerformed
+
+    private void btnDeletarFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarFilialActionPerformed
+        
+        int escolha = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja desativar a filial " + comboBoxFiliais.getSelectedItem());
+        
+        if (escolha != 0)
+        {
+            return;
+        }
+        
+        String filial = (String) comboBoxFiliais.getSelectedItem();
+        try {
+            Filial filialParaSerDeletada = filialController.porNome(filial);
+            filialParaSerDeletada.setAtivo(false);
+            filialController.getBackend().update(filialParaSerDeletada);
+            
+        } catch (BackendException ex) {
+            JOptionPane.showMessageDialog(null, "Não foi possível deletar/encontrar filial!");
+            Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JOptionPane.showMessageDialog(null, "Filial deletada com sucesso");
+        setFiliaisNoComboBox();
+        txtFilialAtualizada.setText("");
+        
+    }//GEN-LAST:event_btnDeletarFilialActionPerformed
 
     public void setFiliaisNoComboBox() {
         List<Filial> filiais = null;
@@ -228,9 +272,11 @@ public class CadastrarFilial extends javax.swing.JPanel {
     private javax.swing.JButton btnAtualizarFilial;
     private javax.swing.JButton btnCadastrarFilial;
     private javax.swing.JButton btnCancelarCadastro;
+    private javax.swing.JButton btnDeletarFilial;
     private javax.swing.JComboBox comboBoxFiliais;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblNomeFilial;
+    private javax.swing.JLabel lblNovoNome;
     private javax.swing.JTextField txtFilialAtualizada;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables

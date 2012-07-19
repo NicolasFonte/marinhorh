@@ -19,34 +19,41 @@ import org.hibernate.annotations.NotFoundAction;
  * @author nicolas
  */
 @Entity
-public class Filial implements Comparable<Filial>,Serializable  {
-    
-    @Id @GeneratedValue
+public class Filial implements Comparable<Filial>, Serializable {
+
+    @Id
+    @GeneratedValue
     private Long id;
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String nome;
-
     @OneToMany(cascade = CascadeType.ALL)
-    @NotFound(action=NotFoundAction.IGNORE) 
+    @NotFound(action = NotFoundAction.IGNORE)
     List<Advogado> advogados;
+    private boolean ativo;
 
+    public Filial() {
+    
+        this.ativo = true;
+        
+    }
+
+    
+    
     public List<Advogado> getAdvogados() {
-        if (advogados == null)
-        {
+        if (advogados == null) {
             advogados = new ArrayList<Advogado>();
         }
         return advogados;
     }
-    
-    public void addAdvogado(Advogado adv)
-    {
+
+    public void addAdvogado(Advogado adv) {
         getAdvogados().add(adv);
     }
 
     public void setAdvogados(List<Advogado> advogados) {
         this.advogados = advogados;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -65,7 +72,15 @@ public class Filial implements Comparable<Filial>,Serializable  {
 
     @Override
     public int compareTo(Filial o) {
-        
+
         return this.getNome().compareTo(o.getNome());
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

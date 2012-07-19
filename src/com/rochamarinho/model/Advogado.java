@@ -22,7 +22,7 @@ import org.hibernate.annotations.NotFoundAction;
 public class Advogado implements Serializable {
 
     public Advogado() {
-
+        ativo = true;
         valores = new ArrayList<ValorMes>();
     }
     @Id
@@ -47,7 +47,8 @@ public class Advogado implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date nascimento;
     private String uf;
-    
+    private boolean ativo;
+
     public String getUf() {
         return uf;
     }
@@ -210,6 +211,14 @@ public class Advogado implements Serializable {
     public void addPagamento(Pagamento pg)
     {
         getHistoricoPagamento().add(pg);
+    }
+    
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
     
 

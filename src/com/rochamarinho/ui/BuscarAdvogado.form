@@ -90,7 +90,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="325" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="309" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -204,7 +204,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnDeletar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="deletar"/>
+        <Property name="text" type="java.lang.String" value="desativar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeletarActionPerformed"/>
