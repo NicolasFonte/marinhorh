@@ -57,8 +57,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         setFiliaisNoComboBox();
         setAdvogadoValores();
        // setDefaultMasks();
-        
-    
+            
     }
 
     @SuppressWarnings("unchecked")
@@ -260,8 +259,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Escolher UF");
             return;
-        }
-        
+        }       
         
         try {
             double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
@@ -332,12 +330,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_fmtOabFocusLost
 
     private void txtDistribuicaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistribuicaoFocusGained
-       /** if (txtDistribuicao.getText().equals("")){
-          txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
-          txtDistribuicao.setDocument(new MonetarioDocument());
-        }
-        txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
-        */
+
         txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.yellow));
         //double dist = Double.parseDouble(txtDistribuicao.getText());
         
@@ -430,15 +423,12 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         
         
         txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
-        //System.out.println(String.valueOf(adv.getDistribuicao()));
-        
-        fmtAssociacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(adv.getAssociacao()));
-        
+                
+        fmtAssociacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(adv.getAssociacao()));        
         
         String oab = adv.getOab().substring(2);
         String formattingOab = oab.substring(0, 3) + "." + oab.substring(3, 6);
-        fmtOab.setText(formattingOab);
-        
+        fmtOab.setText(formattingOab);        
         
         UfOabComboBox.setSelectedIndex(descobrirIndiceDaUF(adv.getUf()));
         

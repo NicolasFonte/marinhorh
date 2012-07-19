@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -77,6 +78,7 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         btnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePesquisar = new javax.swing.JTable();
+        btnDeletar = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
@@ -138,39 +140,55 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         jTablePesquisar.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTablePesquisar.getAccessibleContext().setAccessibleName("");
 
+        btnDeletar.setText("deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblPesquisar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jftPesquisar))
+                        .addComponent(jftPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(jRadioNome)
                         .addGap(14, 14, 14)
                         .addComponent(jRadioOab)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar))
+                    .addComponent(btnDeletar))
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioNome)
-                    .addComponent(jRadioOab))
-                .addGap(3, 3, 3)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioNome)
+                            .addComponent(jRadioOab))
+                        .addGap(3, 3, 3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDeletar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPesquisar)
                     .addComponent(btnBuscar)
@@ -180,7 +198,7 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                 .addGap(2, 2, 2))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -208,16 +226,6 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
             //return
         }
 
-
-        /* Implementar posteriormente a busca de advogado e filial.
-         * Filial filialProcurada;
-        try {
-        filialProcurada = filialController.filialDeAdvogado(nomeAdvs);
-        } catch (BackendException ex) {
-        mostrarMensagem("este advogado nao esta numa filial devido a algum erro");
-        }
-         * 
-         */
         DefaultTableModel m = (DefaultTableModel) jTablePesquisar.getModel();
 
         int i = 0;
@@ -226,25 +234,15 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         }
 
         for (Advogado obj : advs) {
-            
-            String distriuicaoText = String.valueOf(obj.getDistribuicao());
-            
-            m.addRow(new Object[]{obj.getNome(), obj.getOab(), distriuicaoText,
-                        obj.getAssociacao(), obj.getEmail()
+
+            String distribuicaoText = String.valueOf(obj.getDistribuicao());
+            String dataFormatada = new SimpleDateFormat("dd/MM/yyyy").format(obj.getAssociacao());
+            String oabFormatado = obj.getOab().substring(0, 2) + "-" + obj.getOab().substring(2);
+
+            m.addRow(new Object[]{obj.getNome(), oabFormatado, distribuicaoText,
+                        dataFormatada, obj.getEmail()
                     });
         }
-
-
-        /*      lblMostrarNome.setText(adv.getNome());
-        lblMostrarNome.setVisible(true);
-        lblFilialMostrarNome.setText(filialProcurada.getNome());
-        lblFilialMostrarNome.setVisible(true);
-        btnEditarAdvogado.setVisible(true);
-        btnRemoverAdvogado.setVisible(true);
-         * 
-         */
-
-
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -269,9 +267,10 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
             return;
         }
 
-        String oab = (String) jTablePesquisar.getValueAt(rowIndex, 1);
+        String oabFormatada = (String) jTablePesquisar.getValueAt(rowIndex, 1);
+        String oab = oabFormatada.replace("-", "");
 
-        Advogado adv = null;;
+        Advogado adv = null;
         try {
             adv = advController.byOab(oab);
         } catch (BackendException ex) {
@@ -289,9 +288,33 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
     private void btnEditarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnEditarItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarItemStateChanged
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+
+        int rowIndex = jTablePesquisar.getSelectedRow();
+
+        if (rowIndex == -1) {
+            JOptionPane.showMessageDialog(null, "Primeiro deve ser buscado um advogado");
+            return;
+        }
+        
+        String oabFormatada = (String) jTablePesquisar.getValueAt(rowIndex, 1);
+        String oab = oabFormatada.replace("-", "");
+        Advogado adv = null;
+        
+        try {
+            adv = advController.byOab(oab);
+            advController.getBackend().remove(adv);
+        } catch (BackendException ex) {
+            JOptionPane.showMessageDialog(null, "Problema de conexão ao buscar/deletar advogado pela oab: " + oab);
+            Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnDeletarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnEditar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton jRadioNome;

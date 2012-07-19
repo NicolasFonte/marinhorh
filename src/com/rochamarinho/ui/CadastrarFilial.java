@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rochamarinho.ui;
 
 import com.rochamarinho.controller.FilialController;
@@ -9,6 +5,7 @@ import com.rochamarinho.model.Filial;
 import com.rochamarinho.utils.BackendException;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -184,7 +181,7 @@ public class CadastrarFilial extends javax.swing.JPanel {
         try {
             Filial f = filialController.porNome(novaFilial);
             if (f != null) {
-                JOptionPane.showMessageDialog(null, "Filial ja existe, escolha outro nome");
+                JOptionPane.showMessageDialog(null, "Filial já existe, escolha outro nome");
                 return;
             }
         } catch (BackendException ex) {
@@ -214,8 +211,9 @@ public class CadastrarFilial extends javax.swing.JPanel {
         List<Filial> filiais = null;
         try {
             filiais = filialController.listarFiliais();
+            Collections.sort(filiais);
         } catch (BackendException ex) {
-            JOptionPane.showConfirmDialog(null, "Nao foi possivel carregar a lista de filiais");
+            JOptionPane.showConfirmDialog(null, "Não foi possivel carregar a lista de filiais");
             filiais = new ArrayList<Filial>();
         }
 

@@ -19,7 +19,7 @@ import org.hibernate.annotations.NotFoundAction;
  * @author nicolas
  */
 @Entity
-public class Filial implements Serializable {
+public class Filial implements Comparable<Filial>,Serializable  {
     
     @Id @GeneratedValue
     private Long id;
@@ -61,5 +61,11 @@ public class Filial implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public int compareTo(Filial o) {
+        
+        return this.getNome().compareTo(o.getNome());
     }
 }

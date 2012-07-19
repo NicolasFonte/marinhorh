@@ -15,6 +15,7 @@ import com.rochamarinho.utils.MonetarioDocument;
 import java.awt.Color;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +38,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         initComponents();
         setDefaultTaxaText();
         setFiliaisNoComboBox();
-       // setDefaultMasks();
+        checkBoxTaxa.setSelected(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -296,8 +297,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Escolher UF");
             return;
-        }
-        
+        }        
         
         try {
             double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
@@ -456,6 +456,8 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         List<Filial> filiais = null;
         try {
             filiais = filialController.listarFiliais();
+            
+            Collections.sort(filiais);
         } catch (BackendException ex) {
             JOptionPane.showConfirmDialog(null, "Nao foi possivel carregar a lista de filiais");
             filiais = new ArrayList<Filial>();

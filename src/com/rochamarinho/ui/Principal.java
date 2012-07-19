@@ -10,8 +10,10 @@ import com.rochamarinho.utils.BackendException;
 import java.awt.CardLayout;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -23,9 +25,14 @@ public class Principal extends javax.swing.JFrame {
 
     
     AdvogadoController advController = new AdvogadoController();
+    private Map <Integer,String> numeroMes = new HashMap<Integer, String>();
+    
     /** Creates new form Principal */
     public Principal() {
         initComponents();
+        preencherRelacaoNumeroMes();
+        
+    
     }
 
     @SuppressWarnings("unchecked")
@@ -210,7 +217,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void itemMenuEfetuarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {                                                         
         
-        int opcao = JOptionPane.showConfirmDialog(null, "deseja efetuar o pagamento desse mes?" );
+        
+        Date selecionada = new Date();
+        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+        
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja efetuar o pagamento de " + numeroMes.get(calendar.get(Calendar.MONTH)) + " ?" );
         if (opcao != 0)
         {
             return;
@@ -218,14 +229,13 @@ public class Principal extends javax.swing.JFrame {
         
         if (Begin.verificarSeHouvePagamento())
         {
-            JOptionPane.showMessageDialog(null, "Ja houve pagamento este mes");
+            JOptionPane.showMessageDialog(null, "Já houve pagamento este mês.");
             return;
         }
                 
         List<Advogado> advogados = advController.listarAdvogados();
 
-        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-        Date selecionada = new Date();
+        
         calendar.setTime(selecionada);
         int month = calendar.get(Calendar.MONTH);
 
@@ -238,11 +248,13 @@ public class Principal extends javax.swing.JFrame {
                 advController.getBackend().update(each);
             } catch (BackendException ex) {
 
-                JOptionPane.showMessageDialog(null, "Nao foi possivel efetuar pagamento");
+                JOptionPane.showMessageDialog(null, "Não foi possível efetuar pagamento");
                 return;
             }
 
         }
+        
+        JOptionPane.showMessageDialog(null, "Pagamento do mês " + numeroMes.get(calendar.get(Calendar.MONTH)) + " efetuado com sucesso");
     }
     private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
         dispose();
@@ -272,4 +284,21 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menuAdvogado;
     private javax.swing.JMenuItem menuItemCadastrar;
     // End of variables declaration//GEN-END:variables
+
+    private void preencherRelacaoNumeroMes() {
+
+        numeroMes.put(0, "Janeiro");    
+        numeroMes.put(1, "Fevereiro");
+        numeroMes.put(2, "Março");
+        numeroMes.put(3, "Abril");
+        numeroMes.put(4, "Maio");
+        numeroMes.put(5, "Junho");
+        numeroMes.put(6, "Julho");
+        numeroMes.put(7, "Agosto");
+        numeroMes.put(8, "Setembro");
+        numeroMes.put(9, "Outubro");
+        numeroMes.put(10, "Novembro");
+        numeroMes.put(11, "Dezembro");
+        
+    }
 }

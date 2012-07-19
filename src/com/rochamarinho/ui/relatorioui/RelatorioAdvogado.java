@@ -11,6 +11,8 @@ import com.rochamarinho.model.Report;
 import com.rochamarinho.utils.BackendException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -40,6 +42,7 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
         List<Filial> filiais = null;
         try {
             filiais = filialController.listarFiliais();
+            Collections.sort(filiais);
         } catch (BackendException ex) {
             JOptionPane.showConfirmDialog(null, "Nao foi possivel carregar a lista de filiais");
             filiais = new ArrayList<Filial>();
