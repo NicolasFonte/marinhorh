@@ -13,9 +13,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -232,17 +235,7 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
             mostrarMensagem("advogado nao encontrado");
             //return
         }
-/*
-        DefaultTableModel modelNaoEditavel = new DefaultTableModel() {
-
-            @Override
-            public boolean isCellEditable(int rowIndex, int mColIndex) {
-                return false;
-            }
-        };
         
-        jTablePesquisar.setModel(modelNaoEditavel);
-  */      
         DefaultTableModel m = (DefaultTableModel) jTablePesquisar.getModel();
 
         int i = 0;
@@ -252,7 +245,14 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
 
         for (Advogado obj : advs) {
 
-            String distribuicaoText = String.valueOf(obj.getDistribuicao());
+            
+            NumberFormat format = DecimalFormat.getCurrencyInstance(new Locale("pt", "BR"));
+            format.setMaximumFractionDigits(2);
+            
+            String distribuicaoText = format.format(obj.getDistribuicao());
+            
+            
+            
             String dataFormatada = new SimpleDateFormat("dd/MM/yyyy").format(obj.getAssociacao());
             String oabFormatado = obj.getOab().substring(0, 2) + "-" + obj.getOab().substring(2);
 

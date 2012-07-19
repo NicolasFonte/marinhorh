@@ -427,8 +427,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         fmtAssociacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(adv.getAssociacao()));        
         
         String oab = adv.getOab().substring(2);
-        String formattingOab = oab.substring(0, 3) + "." + oab.substring(3, 6);
-        fmtOab.setText(formattingOab);        
+        fmtOab.setText(oab);        
         
         UfOabComboBox.setSelectedIndex(descobrirIndiceDaUF(adv.getUf()));
         

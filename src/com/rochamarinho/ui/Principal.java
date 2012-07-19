@@ -7,7 +7,6 @@ import com.rochamarinho.model.Pagamento;
 import com.rochamarinho.ui.relatorioui.RelatorioAdvogado;
 import com.rochamarinho.ui.relatorioui.RelatorioAnualAdvogados;
 import com.rochamarinho.utils.BackendException;
-import java.awt.CardLayout;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +14,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -189,7 +187,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemMenuFilialCadastrarActionPerformed
 
     private void itemMenuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuBuscarActionPerformed
-        
         
         
         BuscarAdvogado buscar = new BuscarAdvogado();        
