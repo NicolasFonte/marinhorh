@@ -19,7 +19,7 @@ import org.hibernate.annotations.NotFoundAction;
  * @author nicolas
  */
 @Entity
-public class Advogado implements Serializable {
+public class Advogado implements Serializable, Comparable<Advogado> {
 
     public Advogado() {
         ativo = true;
@@ -32,14 +32,11 @@ public class Advogado implements Serializable {
     private double distribuicao;
     @Column(nullable = false, unique = true)
     private String oab;
-    
     @OneToMany(cascade = CascadeType.ALL)
-    @NotFound(action=NotFoundAction.IGNORE)
+    @NotFound(action = NotFoundAction.IGNORE)
     private List<Pagamento> historicoPagamento;
-    
     @OneToMany(cascade = CascadeType.ALL)
     private List<ValorMes> valores;
-    
     private double salarioTotal;
     private String email;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -80,14 +77,13 @@ public class Advogado implements Serializable {
     public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
-    
+
     public List<Pagamento> getHistoricoPagamento() {
-        
-        if (historicoPagamento == null)
-        {
+
+        if (historicoPagamento == null) {
             historicoPagamento = new ArrayList<Pagamento>();
         }
-        
+
         return historicoPagamento;
     }
 
@@ -128,7 +124,7 @@ public class Advogado implements Serializable {
     }
 
     public void gerarSalarios(double taxa) {
-        
+
         double salarioAnual = (12 * distribuicao) * (1 + (taxa / 100));
         this.salarioTotal = salarioAnual;
         System.out.println("salario anual " + salarioAnual);
@@ -136,54 +132,48 @@ public class Advogado implements Serializable {
         String[] meses = {"janeiro", "fevereiro", "marco", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"};
 
         int monthIndex = 12;
-        
+
         double totalAReceber = salarioAnual;
         double media = 0;
         boolean aumentarOuDiminuir = true;
-        
-        while ( monthIndex != 0 )
-        {
+
+        while (monthIndex != 0) {
             media = totalAReceber / monthIndex;
             double valorMes = 0;
             double porcentagemParaAddOuSubtrair = Math.random(); //
-            
+
             double decidirSeSomaOuSubtrai = Math.random();
-            
+
             aumentarOuDiminuir = decidirSeSomaOuSubtrai >= 0.5 ? true : false;
-            
-            if ( aumentarOuDiminuir ) 
-            {
-                valorMes = media + (media * ( porcentagemParaAddOuSubtrair / 100 )); 
-            } else 
-            {
-                valorMes = media - (media * ( porcentagemParaAddOuSubtrair / 100 )); 
+
+            if (aumentarOuDiminuir) {
+                valorMes = media + (media * (porcentagemParaAddOuSubtrair / 100));
+            } else {
+                valorMes = media - (media * (porcentagemParaAddOuSubtrair / 100));
             }
-            
+
             ValorMes valorMesAdvogado = new ValorMes();
-            valorMesAdvogado.setMes(meses[monthIndex-1]);
+            valorMesAdvogado.setMes(meses[monthIndex - 1]);
             valorMesAdvogado.setValor(valorMes);
-            
+
             valores.add(valorMesAdvogado);
-            
+
             monthIndex--;
             totalAReceber = totalAReceber - valorMes;
-            
-            if ( monthIndex == 1 )
-            {
+
+            if (monthIndex == 1) {
                 ValorMes ultimoValor = new ValorMes();
                 ultimoValor.setMes(meses[monthIndex - 1]);
                 ultimoValor.setValor(totalAReceber);  // para garantir que seja o restante que falta para completar o salarioAnual
                 valores.add(ultimoValor);
-                monthIndex --;                        
-            
+                monthIndex--;
+
             }
-            
+
         }
-        
+
 
     }
-
-    
 
     public double getSalarioTotal() {
         return salarioTotal;
@@ -193,14 +183,12 @@ public class Advogado implements Serializable {
         this.salarioTotal = salarioTotal;
     }
 
-
     public List<ValorMes> getValores() {
-        
-        if (valores == null)
-        {
+
+        if (valores == null) {
             valores = new ArrayList<ValorMes>();
         }
-        
+
         return valores;
     }
 
@@ -208,11 +196,10 @@ public class Advogado implements Serializable {
         this.valores = valores;
     }
 
-    public void addPagamento(Pagamento pg)
-    {
+    public void addPagamento(Pagamento pg) {
         getHistoricoPagamento().add(pg);
     }
-    
+
     public boolean isAtivo() {
         return ativo;
     }
@@ -220,6 +207,10 @@ public class Advogado implements Serializable {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-    
 
+    @Override
+    public int compareTo(Advogado o) {
+        return this.getNome().compareTo(o.getNome());
+
+    }
 }

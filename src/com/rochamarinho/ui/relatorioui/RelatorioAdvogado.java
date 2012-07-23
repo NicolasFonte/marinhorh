@@ -5,7 +5,9 @@
  */
 package com.rochamarinho.ui.relatorioui;
 
+import com.rochamarinho.controller.AdvogadoController;
 import com.rochamarinho.controller.FilialController;
+import com.rochamarinho.model.Advogado;
 import com.rochamarinho.model.Filial;
 import com.rochamarinho.model.Report;
 import com.rochamarinho.utils.BackendException;
@@ -23,12 +25,14 @@ import javax.swing.JOptionPane;
 public class RelatorioAdvogado extends javax.swing.JPanel {
 
     FilialController filialController = new FilialController();
+    AdvogadoController advogadoController = new AdvogadoController();
     Report report = new Report();
     /** Creates new form RelatorioPorFilial */
     public RelatorioAdvogado() {
         initComponents();
         setFiliaisNoComboBox();
         setMesesNoComboBox();
+        setAdvogadosNoComboBox();
     }
     
     public void setMesesNoComboBox()
@@ -69,7 +73,7 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         mesComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        txtNomeRelatorio = new javax.swing.JTextField();
+        advogadoComboBox = new javax.swing.JComboBox();
 
         filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos" }));
 
@@ -88,6 +92,8 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
 
         jLabel2.setText("Nome Advogado :");
 
+        advogadoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,15 +111,15 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
                             .addComponent(jLabel2))
                         .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNomeRelatorio)
+                            .addComponent(advogadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(filialComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(mesComboBox, 0, 167, Short.MAX_VALUE))))
                 .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
+                .addContainerGap(107, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEscolherFilial)
                     .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -124,7 +130,7 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNomeRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(advogadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(100, 100, 100)
                 .addComponent(btnGerarRelatorio)
                 .addGap(65, 65, 65))
@@ -134,7 +140,7 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
     private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
         
         String nomeFilial = (String) filialComboBox.getSelectedItem();
-        String nomeAdvogado = txtNomeRelatorio.getText();
+        String nomeAdvogado = (String) advogadoComboBox.getSelectedItem();
         String nomeMes = (String) mesComboBox.getSelectedItem();
         
         report.gerarRelatorioAdvogadosMensal(nomeAdvogado,nomeFilial,nomeMes); // ajeitar relatorios
@@ -146,12 +152,33 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox advogadoComboBox;
     private javax.swing.JButton btnGerarRelatorio;
     private javax.swing.JComboBox filialComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblEscolherFilial;
     private javax.swing.JComboBox mesComboBox;
-    private javax.swing.JTextField txtNomeRelatorio;
     // End of variables declaration//GEN-END:variables
+
+    public void setAdvogadosNoComboBox() {
+        List<Advogado> advogados = null;
+        try {
+            advogados = advogadoController.listarAdvogados();
+            Collections.sort(advogados);
+        } catch (BackendException ex) {
+            JOptionPane.showConfirmDialog(null, "Não foi possível carregar a lista de advogados");
+            advogados = new ArrayList<Advogado>();
+        }
+
+
+        List<String> advogadoNomes = new ArrayList<String>();
+        advogadoNomes.add("Todos");
+        for (Advogado adv : advogados) {
+            advogadoNomes.add(adv.getNome());
+        }
+        
+        advogadoComboBox.setModel(new javax.swing.DefaultComboBoxModel(advogadoNomes.toArray()));
+
+    }
 }

@@ -55,7 +55,7 @@ public class AdvogadoController {
 
     }
 
-    public List<Advogado> listarAdvogados() {
+    public List<Advogado> listarAdvogados() throws BackendException {
         return getBackend().list();
     }
 

@@ -4,6 +4,7 @@ import com.rochamarinho.backend.AdvogadoBackend;
 import com.rochamarinho.model.Advogado;
 import com.rochamarinho.utils.BackendException;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,11 +60,16 @@ public class MySQLAdvogadoBackend implements AdvogadoBackend {
     }
 
     @Override
-    public List<Advogado> list() {
-        Transaction tx = session.beginTransaction();
-        List<Advogado> list = session.createCriteria(Advogado.class).add(Restrictions.eq("ativo", true)).list();
-        tx.commit();
+    public List<Advogado> list() throws BackendException {
+        List<Advogado> list = null;
 
+        try {
+            Transaction tx = session.beginTransaction();
+            list = session.createCriteria(Advogado.class).add(Restrictions.eq("ativo", true)).list();
+            tx.commit();
+        } catch (HibernateException ex) {
+            throw new BackendException("backend problem on list", ex);
+        }
         return list;
     }
 

@@ -51,13 +51,13 @@ public class Report {
 
     public void gerarRelatorioAdvogadosMensal(String nomeAdvogado, String nomeFilial, String nomeMes) {
 
-        if (nomeAdvogado.equals("") && nomeFilial.equals("Todos")) // sem nome e sem filial
+        if (nomeAdvogado.equals("Todos") && nomeFilial.equals("Todos")) // sem nome e sem filial
         {
             gerarRelatorioGeralMes(nomeMes);
-        } else if (nomeAdvogado.equals("") && !nomeFilial.equals("Todos")) //sem nome e com filial
+        } else if (nomeAdvogado.equals("Todos") && !nomeFilial.equals("Todos")) //sem nome e com filial
         {
             gerarRelatorioFilialMes(nomeFilial, nomeMes);
-        } else if (!nomeAdvogado.equals("") && !nomeFilial.equals("Todos")) //com nome e com filial
+        } else if (!nomeAdvogado.equals("Todos") && !nomeFilial.equals("Todos")) //com nome e com filial
         {
             gerarRelatorioNomeEFilialMes(nomeAdvogado, nomeFilial, nomeMes);
 

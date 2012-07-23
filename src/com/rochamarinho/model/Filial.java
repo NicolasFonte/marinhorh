@@ -31,13 +31,9 @@ public class Filial implements Comparable<Filial>, Serializable {
     List<Advogado> advogados;
     private boolean ativo;
 
-    public Filial() {
-    
-        this.ativo = true;
-        
+    public Filial() {    
+        this.ativo = true;        
     }
-
-    
     
     public List<Advogado> getAdvogados() {
         if (advogados == null) {

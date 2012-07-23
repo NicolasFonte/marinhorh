@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -230,7 +232,13 @@ public class Principal extends javax.swing.JFrame {
             return;
         }
                 
-        List<Advogado> advogados = advController.listarAdvogados();
+        List<Advogado> advogados = null;
+        try {
+            advogados = advController.listarAdvogados();
+        } catch (BackendException ex) {
+            JOptionPane.showMessageDialog(null, "Problema de conexão com o banco.");
+            return;
+        }
 
         
         calendar.setTime(selecionada);
