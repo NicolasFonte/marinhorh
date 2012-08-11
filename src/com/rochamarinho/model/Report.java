@@ -195,12 +195,12 @@ public class Report {
              * 
              */
             
-            for ( int i = pagamentosMensais.size(); i != 0; i-- )
+            for ( int i = pagamentosMensais.size(); i > 0; i-- )
             {
                 Calendar c = Calendar.getInstance(Locale.ENGLISH);
-                c.setTime(pagamentosMensais.get(i).getDataPagamento());
+                c.setTime(pagamentosMensais.get(i-1).getDataPagamento());
                 int indexMonthExcel = c.get(Calendar.MONTH);
-                linha.createCell(indexMonthExcel+1).setCellValue(pagamentosMensais.get(i).getValorPago());
+                linha.createCell(indexMonthExcel+1).setCellValue(pagamentosMensais.get(i-1).getValorPago());
        
             }
             

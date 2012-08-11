@@ -58,9 +58,7 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("..:: Rocha, Marinho e Sales Advogados ::..");
-        setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
-        setPreferredSize(new java.awt.Dimension(600, 400));
         setResizable(false);
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rochamarinho/utils/logo.png"))); // NOI18N
@@ -100,6 +98,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(menuAdvogado);
 
         jMenu1.setText("Administração");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         itemMenuAlterarTaxa1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
         itemMenuAlterarTaxa1.setText("Definir Nova Taxa Padrão");
@@ -247,7 +250,7 @@ public class Principal extends javax.swing.JFrame {
         for (Advogado each : advogados) {
             Pagamento pg = new Pagamento();
             pg.setDataPagamento(selecionada);
-            pg.setValorPago(each.getValores().get(month).getValor());
+            pg.setValorPago(each.getValores().get(11-month).getValor());
             each.addPagamento(pg);
             try {
                 advController.getBackend().update(each);
@@ -272,6 +275,10 @@ public class Principal extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_itemMenuRelatorioAnualActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemMenuAdvogadosPorFilial;
