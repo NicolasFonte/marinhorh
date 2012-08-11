@@ -203,13 +203,15 @@ public class Report {
             numeroLinha++;
         }
 
-        FileOutputStream fileOut = new FileOutputStream("rhlibs/relatorioanual.xls");
+        FileOutputStream fileOut = new FileOutputStream("C:\\programaRH\\Relatorios\\relatorioanual.xls");
+        //FileOutputStream fileOut = new FileOutputStream("rhlibs/relatorioanual.xls");
         wb.write(fileOut);
         fileOut.close();
         
         if ( Desktop.isDesktopSupported() )
         {
-            File arquivoRelatorioAnual = new File("rhlibs/relatorioanual.xls");
+            File arquivoRelatorioAnual = new File("C:\\programaRH\\Relatorios\\relatorioanual.xls");
+            //File arquivoRelatorioAnual = new File("rhlibs/relatorioanual.xls");
             Desktop.getDesktop().open(arquivoRelatorioAnual);
         }
         
