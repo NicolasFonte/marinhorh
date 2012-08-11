@@ -64,8 +64,7 @@ public class Report {
             gerarRelatorioNomeEFilialMes(nomeAdvogado, nomeFilial, nomeMes);
 
         } else // creio que a unica chance seja com nome e sem filial
-        {
-            JOptionPane.showMessageDialog(null, "Ainda não suportado");
+        {            
             gerarRelatorioNomeMes(nomeAdvogado, nomeMes);
         }
 
@@ -115,9 +114,7 @@ public class Report {
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("mes", nomeMes);
-        map.put("nomefilial", nomeFilial);
-
-        nomeAdvogado = "%" + nomeAdvogado + "%"; // para pegar parte do nome.
+        map.put("nomefilial", nomeFilial);       
 
         map.put("nome_advogado", nomeAdvogado);
 
@@ -139,8 +136,7 @@ public class Report {
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("mes", nomeMes);
-
-        nomeAdvogado = "%" + nomeAdvogado + "%"; // para pegar parte do nome.
+       
         map.put("nome_advogado", nomeAdvogado);
 
         Connection con = Conexao.getConexao();
