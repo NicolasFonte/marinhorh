@@ -56,7 +56,8 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         setDefaultTaxaText();
         setFiliaisNoComboBox();
         setAdvogadoValores();
-       // setDefaultMasks();
+        lblAdvCadastrado.setText("");
+        // setDefaultMasks();
             
     }
 
@@ -79,6 +80,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         fmtAssociacao = new javax.swing.JFormattedTextField();
         lblDominio = new javax.swing.JLabel();
         txtDistribuicao = new javax.swing.JFormattedTextField();
+        lblAdvCadastrado = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
@@ -157,42 +159,52 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
             }
         });
 
+        lblAdvCadastrado.setText("Advogado Cadastrado Com Sucesso!");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblEmail)
-                    .addComponent(lblDistribuicao)
-                    .addComponent(lblOab)
-                    .addComponent(lblNomeAdvogado)
-                    .addComponent(lblAssociacao)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnAtualizarAdvogado)
-                        .addComponent(jLabel2)))
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fmtOab, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblEmail)
+                            .addComponent(lblDistribuicao)
+                            .addComponent(lblOab)
+                            .addComponent(lblAssociacao)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblNomeAdvogado)
+                                .addGap(6, 6, 6)))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(UfOabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fmtOab, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtDistribuicao)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblDominio))
+                            .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAdvCadastrado)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtDistribuicao)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDominio))
-                    .addComponent(fmtAssociacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                        .addGap(82, 82, 82)
+                        .addComponent(btnAtualizarAdvogado)))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(31, 31, 31)
+                .addComponent(lblAdvCadastrado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomeAdvogado)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -280,9 +292,9 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
             return;
         }
 
-        JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
-        this.setVisible(false);
-
+        mostrarSomenteMensagemDeConfirmacao();
+        
+        
     }//GEN-LAST:event_btnAtualizarAdvogadoActionPerformed
 
     private void fmtAssociacaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtAssociacaoFocusGained
@@ -366,6 +378,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField fmtAssociacao;
     private javax.swing.JFormattedTextField fmtOab;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblAdvCadastrado;
     private javax.swing.JLabel lblAssociacao;
     private javax.swing.JLabel lblDistribuicao;
     private javax.swing.JLabel lblDominio;
@@ -447,7 +460,12 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         }
         return -1;
     }
-    
-    
+
+    private void mostrarSomenteMensagemDeConfirmacao() {
+        
+        
+        lblAdvCadastrado.setText("Advogado atualizado com sucesso!");
+        
+    }
     
 }
