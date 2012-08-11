@@ -299,6 +299,9 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         frame.setPreferredSize(new Dimension(400, 600));
         frame.setContentPane(new EditarAdvogadoPanel(adv));
         frame.setVisible(true);
+       
+        
+        this.setVisible(false);
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
