@@ -297,7 +297,14 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Escolher UF");
             return;
-        }        
+        }
+        
+        if (nomeFilial.equals("Escolha Filial"))
+        {
+            JOptionPane.showMessageDialog(null, "Escolha uma Filial");
+            return;        
+        }
+        
         
         try {
             double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
@@ -401,24 +408,6 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         txtDistribuicao.setBorder(BorderFactory.createLineBorder(Color.gray));
     }//GEN-LAST:event_txtDistribuicaoFocusLost
 
-   // private void setDefaultMasks() {
-        //try {
-         //   fmtAssociacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-         //           new javax.swing.text.MaskFormatter("##/##/####")));
-
-        //    fmtOab.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-          //          new javax.swing.text.MaskFormatter("##.####")));
-
-          //  txtDistribuicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-           //         new javax.swing.text.MaskFormatter("##.###,##")));
-
-           // filialComboBox.setToolTipText("Escolha a Filial:");
-
-      //  } catch (ParseException ex) {
-          //  JOptionPane.showMessageDialog(null, "Por gentileza, Preecha os campos corretamente!");
-        //}
-    //}
-
     protected void setDefaultTaxaText() {
         Taxa taxa;
 
@@ -464,6 +453,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         }
 
         List<String> filiaisNomes = new ArrayList<String>();
+        filiaisNomes.add("Escolha Filial");
         for (Filial f : filiais) {
             filiaisNomes.add(f.getNome());
         }

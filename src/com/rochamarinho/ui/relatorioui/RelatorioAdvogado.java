@@ -74,6 +74,7 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
         mesComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         advogadoComboBox = new javax.swing.JComboBox();
+        btnCancelar = new javax.swing.JButton();
 
         filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos" }));
 
@@ -94,6 +95,13 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
 
         advogadoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default" }));
 
+        btnCancelar.setText("cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,7 +110,9 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(266, 266, 266)
-                        .addComponent(btnGerarRelatorio))
+                        .addComponent(btnGerarRelatorio)
+                        .addGap(60, 60, 60)
+                        .addComponent(btnCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(129, 129, 129)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +124,7 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
                             .addComponent(advogadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(filialComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mesComboBox, 0, 167, Short.MAX_VALUE))))
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +142,9 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(advogadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(100, 100, 100)
-                .addComponent(btnGerarRelatorio)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGerarRelatorio)
+                    .addComponent(btnCancelar))
                 .addGap(65, 65, 65))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -144,15 +156,21 @@ public class RelatorioAdvogado extends javax.swing.JPanel {
         String nomeMes = (String) mesComboBox.getSelectedItem();
         
         report.gerarRelatorioAdvogadosMensal(nomeAdvogado,nomeFilial,nomeMes); // ajeitar relatorios
-        
-        
+                
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+
+        this.setVisible(false);
+
+    }//GEN-LAST:event_btnCancelarActionPerformed
     
     
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox advogadoComboBox;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGerarRelatorio;
     private javax.swing.JComboBox filialComboBox;
     private javax.swing.JLabel jLabel1;
