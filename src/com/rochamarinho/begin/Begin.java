@@ -38,7 +38,7 @@ public class Begin {
         try {
             Taxa t = taxaMysql.read(1L);
             if (t == null) {
-                taxaMysql.create(new Taxa(10));
+                taxaMysql.create(new Taxa(5.26));
             }
         } catch (BackendException ex) {
         }
@@ -118,12 +118,12 @@ public class Begin {
 
             if (mesAtual != ultimoPagamento) {
                 JOptionPane.showMessageDialog(null, "A confirmacao pagamento desse mes nao foi efetuada");
-                
+
             }
 
         } catch (BackendException ex) {
             Logger.getLogger(Begin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 }

@@ -4,6 +4,8 @@ import com.rochamarinho.backend.AdvogadoBackend;
 import com.rochamarinho.backend.impl.MySQLAdvogadoBackend;
 import com.rochamarinho.utils.BackendException;
 import com.rochamarinho.utils.Conexao;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -122,9 +124,11 @@ public class Report {
         Connection con = Conexao.getConexao();
 
         try {
+        
             jasperReport = JasperCompileManager.compileReport("rhlibs/advogadosnomefilial.jrxml");
             JasperPrint print = JasperFillManager.fillReport(jasperReport, map, con);
             JasperViewer.viewReport(print, false);
+        
         } catch (JRException ex) {
             Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -151,6 +155,7 @@ public class Report {
     }
 
     public void gerarRelatorioAnual(int ano) throws FileNotFoundException, IOException, BackendException {
+        
         List<Advogado> advogados = backend.list();
 
         Workbook wb = new HSSFWorkbook();
@@ -160,28 +165,21 @@ public class Report {
         int numeroLinha = 0;
         int numeroCel = 0;
 
+        String [] celulas = { "Nome", "Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" };
         Row definicaoDeCelulas = sheet.createRow(numeroLinha);
-        definicaoDeCelulas.createCell(numeroCel).setCellValue(createHelper.createRichTextString("Nome"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Janeiro"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Fevereiro"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Marco"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Abril"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Maio"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Junho"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Julho"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Agosto"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Setembro"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Outubro"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Novembro"));
-        definicaoDeCelulas.createCell(++numeroCel).setCellValue(createHelper.createRichTextString("Dezembro"));
-
+        
+        for ( int i = 0; i < celulas.length; i ++ )
+        {
+            definicaoDeCelulas.createCell(numeroCel++).setCellValue(createHelper.createRichTextString(celulas[i]));
+        }
+        
         numeroLinha++;
         numeroCel = 0;
 
         for (Advogado each : advogados) {
             Row linha = sheet.createRow(numeroLinha);
             linha.createCell(numeroCel).setCellValue(createHelper.createRichTextString(each.getNome()));
-
+            
             List<Pagamento> todosPagamentos = each.getHistoricoPagamento();
             List<Pagamento> pagamentosMensais = filtrarPorAno(ano, todosPagamentos);
 
@@ -192,14 +190,19 @@ public class Report {
                 int indexMonthExcel = c.get(Calendar.MONTH);
                 linha.createCell(indexMonthExcel+1).setCellValue(eachPagamento.getValorPago());
             }
-
             numeroLinha++;
         }
 
         FileOutputStream fileOut = new FileOutputStream("rhlibs/relatorioanual.xls");
         wb.write(fileOut);
         fileOut.close();
-
+        
+        if ( Desktop.isDesktopSupported() )
+        {
+            File arquivoRelatorioAnual = new File("rhlibs/relatorioanual.xls");
+            Desktop.getDesktop().open(arquivoRelatorioAnual);
+        }
+        
     }
 
     public List<Pagamento> filtrarPorAno(int ano, List<Pagamento> todosPagamentos) {

@@ -22,7 +22,7 @@ import org.hibernate.annotations.NotFoundAction;
 public class Advogado implements Serializable, Comparable<Advogado> {
 
     public Advogado() {
-        ativo = true;
+        ativo = true;                
         valores = new ArrayList<ValorMes>();
     }
     @Id
@@ -32,11 +32,14 @@ public class Advogado implements Serializable, Comparable<Advogado> {
     private double distribuicao;
     @Column(nullable = false, unique = true)
     private String oab;
+    
     @OneToMany(cascade = CascadeType.ALL)
     @NotFound(action = NotFoundAction.IGNORE)
     private List<Pagamento> historicoPagamento;
+    
     @OneToMany(cascade = CascadeType.ALL)
     private List<ValorMes> valores;
+    
     private double salarioTotal;
     private String email;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -45,7 +48,16 @@ public class Advogado implements Serializable, Comparable<Advogado> {
     private Date nascimento;
     private String uf;
     private boolean ativo;
+    private boolean usaTaxa;
 
+    public boolean isUsaTaxa() {
+        return usaTaxa;
+    }
+
+    public void setUsaTaxa(boolean usaTaxa) {
+        this.usaTaxa = usaTaxa;
+    }
+    
     public String getUf() {
         return uf;
     }
@@ -124,7 +136,9 @@ public class Advogado implements Serializable, Comparable<Advogado> {
     }
 
     public void gerarSalarios(double taxa) {
-
+        
+        valores = new ArrayList<ValorMes>();
+        
         double salarioAnual = (12 * distribuicao) * (1 + (taxa / 100));
         this.salarioTotal = salarioAnual;
         System.out.println("salario anual " + salarioAnual);
@@ -169,10 +183,7 @@ public class Advogado implements Serializable, Comparable<Advogado> {
                 monthIndex--;
 
             }
-
         }
-
-
     }
 
     public double getSalarioTotal() {

@@ -44,7 +44,8 @@ public class AdvogadoController {
 
         adv.setAssociacao(associacaoData);
         adv.setNascimento(nascimentoData);
-
+        adv.setUsaTaxa(usaTaxa);    
+        
         double taxa = usaTaxa ? getTaxaBackend().read(1L).getValor() : 0.0;
 
         adv.gerarSalarios(taxa);// IMPORTANTE!
@@ -115,18 +116,15 @@ public class AdvogadoController {
         adv.setAssociacao(associacaoData);
         adv.setNascimento(nascimentoData);
 
-        double taxa = usaTaxa ? getTaxaBackend().read(1L).getValor() : 0.0;
+        double taxa = adv.isUsaTaxa() ? getTaxaBackend().read(1L).getValor() : 0.0;
 
         if ( Math.abs(distribuicaoAntiga - distribuicao) > 1.0)
         {
             adv.gerarSalarios(taxa);
         }
         
-        getBackend().update(adv);
-        
-        
+        getBackend().update(adv);        
         return true;
-
     }
 
     public void deletarAdvogado(String oab) throws BackendException {

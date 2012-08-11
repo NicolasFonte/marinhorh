@@ -5,9 +5,13 @@
  */
 package com.rochamarinho.ui;
 
+import com.mysql.jdbc.ResultSetImpl;
+import com.rochamarinho.controller.AdvogadoController;
 import com.rochamarinho.controller.TaxaController;
+import com.rochamarinho.model.Advogado;
 import com.rochamarinho.model.Taxa;
 import com.rochamarinho.utils.BackendException;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,7 +23,8 @@ import javax.swing.JOptionPane;
 public class AlterarTaxa extends javax.swing.JPanel {
 
     TaxaController taxaController = new TaxaController();
-    
+    AdvogadoController advController = new AdvogadoController();
+
     /** Creates new form AlterarTaxa */
     public AlterarTaxa() {
         initComponents();
@@ -114,21 +119,35 @@ public class AlterarTaxa extends javax.swing.JPanel {
 
     private void btnAlterarValorTaxaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarValorTaxaActionPerformed
 
-        String novoValorTaxaString = txtTaxaNovoValor.getText();        
+        String novoValorTaxaString = txtTaxaNovoValor.getText();
         double novoValorTaxa = 0.0;
         try {
-            novoValorTaxa = Double.valueOf(novoValorTaxaString); 
-        } catch ( NumberFormatException ex )
-        {
-            JOptionPane.showMessageDialog(null, "put a correct real number");
-        }
-        try {
+            novoValorTaxa = Double.valueOf(novoValorTaxaString);
             taxaController.atualizaTaxa(novoValorTaxa);
-        } catch (BackendException ex) {            
-            JOptionPane.showMessageDialog(null, "error on update");            
-        }
 
-        JOptionPane.showMessageDialog(null, "taxa atualizada com sucesso");        
+            for (Advogado each : advController.getBackend().list()) {
+                if (each.isUsaTaxa()) {
+                    each.gerarSalarios(novoValorTaxa);
+                    advController.getBackend().update(each);
+                
+                //Falta remover valores nao mais utilizado pelos advogados.
+                /**
+                     *  delete from ValorMes 
+                        where id not in ( select valores_id from Advogado_ValorMes  );
+                     */
+                
+                }
+            }
+            
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "put a correct real number");
+            return;
+        } catch (BackendException ex) {
+            JOptionPane.showMessageDialog(null, "error on update");
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(null, "taxa atualizada com sucesso");
         this.setVisible(false);
 
     }//GEN-LAST:event_btnAlterarValorTaxaActionPerformed
@@ -140,7 +159,6 @@ public class AlterarTaxa extends javax.swing.JPanel {
     private void txtTaxaNovoValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTaxaNovoValorFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTaxaNovoValorFocusGained
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarValorTaxa;
     private javax.swing.JButton btnCancelarAlteracaoTaxa;

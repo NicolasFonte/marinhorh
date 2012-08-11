@@ -94,7 +94,6 @@ public class RelatorioAnualAdvogados extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Erro, Verifique a conexão com o banco.");
         }
         
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
