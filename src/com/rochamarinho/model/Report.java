@@ -182,14 +182,28 @@ public class Report {
             
             List<Pagamento> todosPagamentos = each.getHistoricoPagamento();
             List<Pagamento> pagamentosMensais = filtrarPorAno(ano, todosPagamentos);
-
-            for (Pagamento eachPagamento: pagamentosMensais)
+            
+            
+            
+            /*for (Pagamento eachPagamento: pagamentosMensais)
             {
                 Calendar c = Calendar.getInstance(Locale.ENGLISH);
                 c.setTime(eachPagamento.getDataPagamento());
                 int indexMonthExcel = c.get(Calendar.MONTH);
                 linha.createCell(indexMonthExcel+1).setCellValue(eachPagamento.getValorPago());
             }
+             * 
+             */
+            
+            for ( int i = pagamentosMensais.size(); i != 0; i-- )
+            {
+                Calendar c = Calendar.getInstance(Locale.ENGLISH);
+                c.setTime(pagamentosMensais.get(i).getDataPagamento());
+                int indexMonthExcel = c.get(Calendar.MONTH);
+                linha.createCell(indexMonthExcel+1).setCellValue(pagamentosMensais.get(i).getValorPago());
+       
+            }
+            
             numeroLinha++;
         }
 
