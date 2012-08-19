@@ -152,7 +152,7 @@ public class Report {
 
     public void gerarRelatorioAnual(int ano) throws FileNotFoundException, IOException, BackendException {
         
-        List<Advogado> advogados = backend.list();
+        List<Advogado> advogados = backend.listAll();
 
         Workbook wb = new HSSFWorkbook();
         CreationHelper createHelper = wb.getCreationHelper();
@@ -179,17 +179,6 @@ public class Report {
             List<Pagamento> todosPagamentos = each.getHistoricoPagamento();
             List<Pagamento> pagamentosMensais = filtrarPorAno(ano, todosPagamentos);
             
-            
-            
-            /*for (Pagamento eachPagamento: pagamentosMensais)
-            {
-                Calendar c = Calendar.getInstance(Locale.ENGLISH);
-                c.setTime(eachPagamento.getDataPagamento());
-                int indexMonthExcel = c.get(Calendar.MONTH);
-                linha.createCell(indexMonthExcel+1).setCellValue(eachPagamento.getValorPago());
-            }
-             * 
-             */
             
             for ( int i = pagamentosMensais.size(); i > 0; i-- )
             {

@@ -13,5 +13,6 @@ public interface AdvogadoBackend extends CRUDBackend<Advogado> {
     List<Advogado> list() throws BackendException;
     Advogado byOab(String validOab) throws BackendException;
     List<Advogado> byNome(String nomeParcial) throws BackendException;
-
+    List<Advogado> listAll() throws BackendException;
+    
 }

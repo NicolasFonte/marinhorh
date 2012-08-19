@@ -73,6 +73,22 @@ public class MySQLAdvogadoBackend implements AdvogadoBackend {
         return list;
     }
 
+    
+    @Override
+    public List<Advogado> listAll() throws BackendException {
+        List<Advogado> list = null;
+
+        try {
+            Transaction tx = session.beginTransaction();
+            list = session.createCriteria(Advogado.class).list();
+            tx.commit();
+        } catch (HibernateException ex) {
+            throw new BackendException("backend problem on list", ex);
+        }
+        return list;
+    }
+
+    
     @Override
     public Advogado byOab(String validOab) throws BackendException {
         Transaction tx = session.beginTransaction();
