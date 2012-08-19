@@ -137,6 +137,7 @@ public class ReportTest {
     @Test
     public void importarDados()
     {
+        Advogado adv = new Advogado();
         
         
         

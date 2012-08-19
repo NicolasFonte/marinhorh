@@ -16,6 +16,7 @@
 		<![CDATA[select adv.nome, adv.email, adv.oab, adv.nascimento, adv.associacao, vm.valor, f.nome as filial
 from Advogado adv, Advogado_ValorMes avm, ValorMes vm, Filial f, Filial_Advogado where
 adv.id = avm.Advogado_id and
+adv.ativo = b'1' and
 adv.nome = $P{nome_advogado} and
 avm.valores_id = vm.id and
 f.id = Filial_Advogado.Filial_id and
