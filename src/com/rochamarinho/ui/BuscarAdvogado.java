@@ -325,7 +325,7 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
 
         int rowIndex = jTablePesquisar.getSelectedRow();
         
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         
         if (rowIndex == -1) {
             JOptionPane.showMessageDialog(null, "Primeiro deve ser buscado um advogado");
@@ -348,14 +348,16 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         }   catch (ParseException ex) {
             JOptionPane.showMessageDialog(null," Data no formato inválido!");
             Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+            return;
         } 
             catch (BackendException ex) {
             JOptionPane.showMessageDialog(null, "Problema de conexão ao buscar/deletar advogado pela oab: " + oab);
             Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+            return;
         }  
         
         JOptionPane.showMessageDialog(null, "Advogado desativado com sucesso!");
-        this.setVisible(true);
+        this.setVisible(false);
             
 
     }//GEN-LAST:event_btnDeletarActionPerformed
