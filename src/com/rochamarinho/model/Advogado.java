@@ -49,7 +49,19 @@ public class Advogado implements Serializable, Comparable<Advogado> {
     private String uf;
     private boolean ativo;
     private boolean usaTaxa;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date desativacao;
 
+    public Date getDesativacao() {
+        return desativacao;
+    }
+
+    public void setDesativacao(Date desativacao) {
+        this.desativacao = desativacao;
+    }
+    
+    
     public boolean isUsaTaxa() {
         return usaTaxa;
     }

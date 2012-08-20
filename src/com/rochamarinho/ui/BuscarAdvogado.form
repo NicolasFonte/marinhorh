@@ -60,7 +60,11 @@
               <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnDeletar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="407" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Component id="lblDataDesativacao" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="txtDataDesativacao" min="-2" pref="91" max="-2" attributes="0"/>
+              <EmptySpace pref="139" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -84,6 +88,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnDeletar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDataDesativacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDataDesativacao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
           </Group>
@@ -203,6 +209,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeletarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDataDesativacao">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDataDesativacao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data Desativa&#xe7;&#xe3;o:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

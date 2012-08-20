@@ -15,8 +15,10 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -82,6 +84,8 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePesquisar = new javax.swing.JTable();
         btnDeletar = new javax.swing.JButton();
+        txtDataDesativacao = new javax.swing.JTextField();
+        lblDataDesativacao = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
@@ -158,6 +162,8 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
             }
         });
 
+        lblDataDesativacao.setText("Data Desativação:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,7 +194,11 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
                 .addComponent(btnEditar)
                 .addGap(18, 18, 18)
                 .addComponent(btnDeletar)
-                .addContainerGap(407, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(lblDataDesativacao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtDataDesativacao, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +218,9 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
-                    .addComponent(btnDeletar))
+                    .addComponent(btnDeletar)
+                    .addComponent(lblDataDesativacao)
+                    .addComponent(txtDataDesativacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -312,7 +324,9 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
 
         int rowIndex = jTablePesquisar.getSelectedRow();
-
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        
         if (rowIndex == -1) {
             JOptionPane.showMessageDialog(null, "Primeiro deve ser buscado um advogado");
             return;
@@ -320,16 +334,25 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
 
         String oabFormatada = (String) jTablePesquisar.getValueAt(rowIndex, 1);
         String oab = oabFormatada.replace("-", "");
+        
         Advogado adv = null;
 
         try {
+        
+            Date desativacaoData = formatter.parse(txtDataDesativacao.getText());
             adv = advController.byOab(oab);
             adv.setAtivo(false);
+            adv.setDesativacao(desativacaoData);
             advController.getBackend().update(adv);
-        } catch (BackendException ex) {
+        
+        }   catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null," Data no formato inválido!");
+            Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+            catch (BackendException ex) {
             JOptionPane.showMessageDialog(null, "Problema de conexão ao buscar/deletar advogado pela oab: " + oab);
             Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }  
         
         JOptionPane.showMessageDialog(null, "Advogado desativado com sucesso!");
         this.setVisible(true);
@@ -348,7 +371,9 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTablePesquisar;
     private javax.swing.JFormattedTextField jftPesquisar;
+    private javax.swing.JLabel lblDataDesativacao;
     private javax.swing.JLabel lblPesquisar;
+    private javax.swing.JTextField txtDataDesativacao;
     // End of variables declaration//GEN-END:variables
 
     @Override
