@@ -11,13 +11,20 @@ import javax.persistence.Temporal;
  *
  * @author nicolas
  */
-
 @Entity
 public class Pagamento implements Serializable {
-    
-    @Id @GeneratedValue
-    private Long id;
 
+    public Pagamento() {
+    }
+
+    public Pagamento(Date dataPagamento, double valorPago) {
+
+        this.dataPagamento = dataPagamento;
+        this.valorPago = valorPago;
+    }
+    @Id
+    @GeneratedValue
+    private Long id;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataPagamento;
     private double valorPago;
@@ -45,5 +52,4 @@ public class Pagamento implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
 }

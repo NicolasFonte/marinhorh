@@ -16,6 +16,12 @@ public class ValorMes implements Serializable {
     
     public ValorMes() {
     }
+
+    public ValorMes( String mes, Double valor) {
+        this.mes = mes;
+        this.valor = valor;
+    }
+    
     
     @Id @GeneratedValue
     private Long id;
