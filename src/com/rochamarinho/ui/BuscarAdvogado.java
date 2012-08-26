@@ -42,6 +42,10 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
     public BuscarAdvogado() {
         initComponents();
         jRadioNome.setSelected(true);
+        txtDataDesativacao.setVisible(false);
+        lblDataDesativacao.setVisible(false);
+        btnDesativarOK.setVisible(false);
+        btnDesativarCancelar.setVisible(false);
         ButtonGroup group = new ButtonGroup();
         group.add(jRadioNome);
         group.add(jRadioOab);
@@ -84,8 +88,10 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePesquisar = new javax.swing.JTable();
         btnDeletar = new javax.swing.JButton();
-        txtDataDesativacao = new javax.swing.JTextField();
         lblDataDesativacao = new javax.swing.JLabel();
+        txtDataDesativacao = new javax.swing.JFormattedTextField();
+        btnDesativarOK = new javax.swing.JButton();
+        btnDesativarCancelar = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
@@ -164,6 +170,29 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
 
         lblDataDesativacao.setText("Data Desativação:");
 
+        txtDataDesativacao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDataDesativacaoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDataDesativacaoFocusLost(evt);
+            }
+        });
+
+        btnDesativarOK.setText("OK");
+        btnDesativarOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesativarOKActionPerformed(evt);
+            }
+        });
+
+        btnDesativarCancelar.setText("Cancelar");
+        btnDesativarCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesativarCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,18 +216,21 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnEditar)
-                .addGap(18, 18, 18)
-                .addComponent(btnDeletar)
-                .addGap(29, 29, 29)
-                .addComponent(lblDataDesativacao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtDataDesativacao, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEditar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDeletar)
+                        .addGap(29, 29, 29)
+                        .addComponent(lblDataDesativacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDataDesativacao, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDesativarOK)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDesativarCancelar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +252,9 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
                     .addComponent(btnEditar)
                     .addComponent(btnDeletar)
                     .addComponent(lblDataDesativacao)
-                    .addComponent(txtDataDesativacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDataDesativacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDesativarOK)
+                    .addComponent(btnDesativarCancelar))
                 .addGap(60, 60, 60))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -323,6 +357,13 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
 
+        txtDataDesativacao.setVisible(true);
+        lblDataDesativacao.setVisible(true);
+        btnDesativarOK.setVisible(true);
+        btnDesativarCancelar.setVisible(true);
+        
+       /* 
+        * Teste com o botão "OK"
         int rowIndex = jTablePesquisar.getSelectedRow();
         
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
@@ -358,13 +399,75 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
         
         JOptionPane.showMessageDialog(null, "Advogado desativado com sucesso!");
         this.setVisible(false);
-            
+            */
 
     }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void txtDataDesativacaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataDesativacaoFocusGained
+        txtDataDesativacao.setBorder(BorderFactory.createLineBorder(Color.yellow));
+        try {
+         txtDataDesativacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                        new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtDataDesativacaoFocusGained
+
+    private void txtDataDesativacaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataDesativacaoFocusLost
+        txtDataDesativacao.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+    }//GEN-LAST:event_txtDataDesativacaoFocusLost
+
+    private void btnDesativarOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesativarOKActionPerformed
+         int rowIndex = jTablePesquisar.getSelectedRow();
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        
+        if (rowIndex == -1) {
+            JOptionPane.showMessageDialog(null, "Primeiro deve ser buscado um advogado");
+            return;
+        }
+
+        String oabFormatada = (String) jTablePesquisar.getValueAt(rowIndex, 1);
+        String oab = oabFormatada.replace("-", "");
+        
+        Advogado adv = null;
+
+        try {
+        
+            Date desativacaoData = formatter.parse(txtDataDesativacao.getText());
+            adv = advController.byOab(oab);
+            adv.setAtivo(false);
+            adv.setDesativacao(desativacaoData);
+            advController.getBackend().update(adv);
+        
+        }   catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null," Data no formato inválido!");
+            Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        } 
+            catch (BackendException ex) {
+            JOptionPane.showMessageDialog(null, "Problema de conexão ao buscar/deletar advogado pela oab: " + oab);
+            Logger.getLogger(BuscarAdvogado.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }  
+        
+        JOptionPane.showMessageDialog(null, "Advogado desativado com sucesso!");
+        this.setVisible(false);
+    }//GEN-LAST:event_btnDesativarOKActionPerformed
+
+    private void btnDesativarCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesativarCancelarActionPerformed
+        txtDataDesativacao.setVisible(false);
+        lblDataDesativacao.setVisible(false);
+        btnDesativarOK.setVisible(false);
+        btnDesativarCancelar.setVisible(false);
+    }//GEN-LAST:event_btnDesativarCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnDesativarCancelar;
+    private javax.swing.JButton btnDesativarOK;
     private javax.swing.JButton btnEditar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton jRadioNome;
@@ -375,7 +478,7 @@ public class BuscarAdvogado extends javax.swing.JPanel implements ItemListener {
     private javax.swing.JFormattedTextField jftPesquisar;
     private javax.swing.JLabel lblDataDesativacao;
     private javax.swing.JLabel lblPesquisar;
-    private javax.swing.JTextField txtDataDesativacao;
+    private javax.swing.JFormattedTextField txtDataDesativacao;
     // End of variables declaration//GEN-END:variables
 
     @Override
