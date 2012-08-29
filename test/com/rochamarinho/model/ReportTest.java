@@ -196,6 +196,10 @@ public class ReportTest {
             adv.setValores(tabelaDeValores);
             adv.setHistoricoPagamento(valoresPagos);
             
+            
+            gerarRestanteDaTabelaDeValores(adv);
+            
+            
             Filial f = realFilialBackend.buscarPorNome(filial);
             f.addAdvogado(adv);
             realFilialBackend.update(f);
@@ -248,5 +252,52 @@ public class ReportTest {
 
     @After
     public void tearDown() {
+    }
+
+    private void gerarRestanteDaTabelaDeValores(Advogado adv) {
+        
+        double valorRecebido = 0.0;
+        List<ValorMes> valores = adv.getValores();
+        
+        for ( ValorMes each: adv.getValores() )
+        {
+            valorRecebido += each.getValor();
+        }
+        
+        double taxa = 5.26;
+        double salarioAnual = (12 * adv.getDistribuicao()) * (1 + (taxa / 100));
+        double valorAReceber = salarioAnual - valorRecebido;
+        double mediaAnual = valorAReceber / 4;
+        double valorMes;
+        boolean aumentarOuDiminuir;
+        
+        String meses[] = {"setembro","outubro", "novembro", "dezembro"};
+        
+        for (int i = 0 ; i < 4; i ++)
+        {
+            double porcentagemParaAddOuSubtrair = Math.random(); 
+            double decidirSeSomaOuSubtrai = Math.random();
+            double valorMensal = 0.0;
+            aumentarOuDiminuir = decidirSeSomaOuSubtrai >= 0.5 ? true : false;
+            
+            
+            if (aumentarOuDiminuir) {
+                valorMensal = mediaAnual + (mediaAnual * (porcentagemParaAddOuSubtrair / 100));
+            } else {
+                valorMensal = mediaAnual - (mediaAnual * (porcentagemParaAddOuSubtrair / 100));
+            }
+            
+            valores.add(new ValorMes(meses[i], valorMensal));
+            
+            
+        }
+        
+        
+        
+        
+        adv.setValores(valores);
+        
+        
+        
     }
 }
