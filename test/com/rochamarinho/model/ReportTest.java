@@ -146,12 +146,54 @@ public class ReportTest {
     }
 
     @Test
+    @Ignore
+    public void gerandoFiliais() throws BackendException {
+        MySQLFilialBackend realFilialBackend = new MySQLFilialBackend();
+        Filial f1 = new Filial();
+        f1.setNome("João Pessoa");
+        Filial f2 = new Filial();
+        f2.setNome("Anexo");
+        Filial f3 = new Filial();
+        f3.setNome("Campina Grande");
+        Filial f4 = new Filial();
+        f4.setNome("Teresina");
+        Filial f5 = new Filial();
+        f5.setNome("Recife");
+        Filial f6 = new Filial();
+        f6.setNome("Florianópolis");
+        Filial f7 = new Filial();
+        f7.setNome("Matriz");
+        Filial f8 = new Filial();
+        f8.setNome("Brasília");
+        Filial f9 = new Filial();
+        f9.setNome("Goiânia");
+        Filial f10 = new Filial();
+        f10.setNome("Patos");
+        Filial f11 = new Filial();
+        f11.setNome("Natal");
+        Filial f12 = new Filial();
+        f12.setNome("Blumenau");
+
+
+        realFilialBackend.create(f1);
+        realFilialBackend.create(f2);
+        realFilialBackend.create(f3);
+        realFilialBackend.create(f4);
+        realFilialBackend.create(f5);
+        realFilialBackend.create(f6);
+        realFilialBackend.create(f7);
+        realFilialBackend.create(f8);
+        realFilialBackend.create(f9);
+        realFilialBackend.create(f10);
+        realFilialBackend.create(f11);
+        realFilialBackend.create(f12);
+
+    }
+
+    @Test
     public void importarDados() throws FileNotFoundException, IOException, InvalidFormatException, ParseException, BackendException {
 
-
-
         Advogado adv;
-        MySQLAdvogadoBackend realAdvogadoBackend = new MySQLAdvogadoBackend();
         MySQLFilialBackend realFilialBackend = new MySQLFilialBackend();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         InputStream inp = new FileInputStream("rhlibs/DadosRH.xlsx");
@@ -192,22 +234,15 @@ public class ReportTest {
             adv.setAssociacao(formatter.parse(associacao));
             adv.setNascimento(formatter.parse(nascimento));
 
-
             adv.setValores(tabelaDeValores);
             adv.setHistoricoPagamento(valoresPagos);
-            
-            
+
             gerarRestanteDaTabelaDeValores(adv);
-            
-            
+
             Filial f = realFilialBackend.buscarPorNome(filial);
             f.addAdvogado(adv);
             realFilialBackend.update(f);
-
-
         }
-
-
 
     }
 
@@ -250,54 +285,84 @@ public class ReportTest {
         return pagamentos;
     }
 
-    @After
-    public void tearDown() {
-    }
+    protected void gerarRestanteDaTabelaDeValores(Advogado adv) {
 
-    private void gerarRestanteDaTabelaDeValores(Advogado adv) {
-        
         double valorRecebido = 0.0;
         List<ValorMes> valores = adv.getValores();
-        
-        for ( ValorMes each: adv.getValores() )
-        {
+
+        for (ValorMes each : adv.getValores()) {
             valorRecebido += each.getValor();
         }
-        
+
         double taxa = 5.26;
         double salarioAnual = (12 * adv.getDistribuicao()) * (1 + (taxa / 100));
         double valorAReceber = salarioAnual - valorRecebido;
         double mediaAnual = valorAReceber / 4;
         double valorMes;
         boolean aumentarOuDiminuir;
-        
-        String meses[] = {"setembro","outubro", "novembro", "dezembro"};
-        
-        for (int i = 0 ; i < 4; i ++)
-        {
-            double porcentagemParaAddOuSubtrair = Math.random(); 
+
+        String meses[] = {"setembro", "outubro", "novembro", "dezembro"};
+
+        for (int i = 0; i < 4; i++) {
+            double porcentagemParaAddOuSubtrair = Math.random();
             double decidirSeSomaOuSubtrai = Math.random();
             double valorMensal = 0.0;
             aumentarOuDiminuir = decidirSeSomaOuSubtrai >= 0.5 ? true : false;
-            
-            
+
+
             if (aumentarOuDiminuir) {
                 valorMensal = mediaAnual + (mediaAnual * (porcentagemParaAddOuSubtrair / 100));
             } else {
                 valorMensal = mediaAnual - (mediaAnual * (porcentagemParaAddOuSubtrair / 100));
             }
-            
+
+            if (i == 3) { //ultimo
+                ValorMes ultimoValor = new ValorMes();
+                ultimoValor.setMes("dezembro");
+                ultimoValor.setValor(valorAReceber);  // para garantir que seja o restante que falta para completar o salarioAnual
+                valores.add(ultimoValor);
+                break;
+                //i++;
+
+            }
             valores.add(new ValorMes(meses[i], valorMensal));
-            
-            
+            valorAReceber = valorAReceber - valorMensal;
+
         }
-        
-        
-        
-        
         adv.setValores(valores);
+
+    }
+
+    @Test
+    public void testarValoresCorretosParaAdvogados() throws BackendException
+    {
+        MySQLAdvogadoBackend realBackend = new MySQLAdvogadoBackend();
+        double valorCadaAdvogado = 0.0;
+        double valorPelaFormula = 0.0;
+        int i = 0;
+        for ( Advogado adv : realBackend.list() )
+        {
+            
+            valorPelaFormula = (12 * adv.getDistribuicao()) * (1 + (5.26 / 100));
         
-        
-        
+            for ( ValorMes each : adv.getValores() )
+            {
+                
+                valorCadaAdvogado += each.getValor();
+            
+            }
+            
+            System.out.println(i + " || " + valorPelaFormula + " || " + valorCadaAdvogado );
+            assertEquals(valorPelaFormula, valorCadaAdvogado,0.1);
+            valorCadaAdvogado = 0.0;
+            valorPelaFormula = 0.0;
+            i++;
+        }
+    
+    }
+    
+    
+    @After
+    public void tearDown() {
     }
 }
