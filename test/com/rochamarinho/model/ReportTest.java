@@ -212,8 +212,8 @@ public class ReportTest {
             String email = row.getCell(3).getRichStringCellValue().getString();
             double distribuicao = row.getCell(4).getNumericCellValue();
             String taxa = row.getCell(5).getRichStringCellValue().getString();
-            String nascimento = "02/12/2000";//row.getCell(6).getRichStringCellValue().getString();
-            String associacao = "02/12/2000";//row.getCell(7).getRichStringCellValue().getString();
+            String nascimento = row.getCell(6).getRichStringCellValue().getString();
+            String associacao = row.getCell(7).getRichStringCellValue().getString();
             String filial = row.getCell(8).getRichStringCellValue().getString();
 
             List<ValorMes> tabelaDeValores = gerarValores(row);
@@ -223,7 +223,7 @@ public class ReportTest {
                     + uf + "||" + oab + "||" + email + "||"
                     + distribuicao + "||" + taxa + "||" + nascimento + "||" + associacao + "||" + filial + "||");
 
-
+            
             adv.setNome(nome);
             adv.setUf(uf);
             adv.setOab(oab + uf);
@@ -233,7 +233,8 @@ public class ReportTest {
             adv.setUsaTaxa(true);
             adv.setAssociacao(formatter.parse(associacao));
             adv.setNascimento(formatter.parse(nascimento));
-
+            adv.setSalarioTotal((12 * adv.getDistribuicao()) * (1 + (5.26 / 100)));
+            
             adv.setValores(tabelaDeValores);
             adv.setHistoricoPagamento(valoresPagos);
 
@@ -248,13 +249,13 @@ public class ReportTest {
 
     protected List<ValorMes> gerarValores(Row row) {
         List<ValorMes> valores = new ArrayList<ValorMes>();
-        valores.add(new ValorMes("janeiro", row.getCell(10).getNumericCellValue()));
-        valores.add(new ValorMes("fevereiro", row.getCell(11).getNumericCellValue()));
-        valores.add(new ValorMes("marco", row.getCell(12).getNumericCellValue()));
-        valores.add(new ValorMes("abril", row.getCell(13).getNumericCellValue()));
-        valores.add(new ValorMes("maio", row.getCell(14).getNumericCellValue()));
-        valores.add(new ValorMes("junho", row.getCell(15).getNumericCellValue()));
-        valores.add(new ValorMes("julho", row.getCell(16).getNumericCellValue()));
+        valores.add(new ValorMes("janeiro", row.getCell(9).getNumericCellValue()));
+        valores.add(new ValorMes("fevereiro", row.getCell(10).getNumericCellValue()));
+        valores.add(new ValorMes("marco", row.getCell(11).getNumericCellValue()));
+        valores.add(new ValorMes("abril", row.getCell(12).getNumericCellValue()));
+        valores.add(new ValorMes("maio", row.getCell(13).getNumericCellValue()));
+        valores.add(new ValorMes("junho", row.getCell(14).getNumericCellValue()));
+        valores.add(new ValorMes("julho", row.getCell(15).getNumericCellValue()));
         valores.add(new ValorMes("agosto", row.getCell(16).getNumericCellValue()));
         return valores;
     }
