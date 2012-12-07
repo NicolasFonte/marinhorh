@@ -15,6 +15,7 @@ import com.rochamarinho.backend.impl.MySQLFilialBackend;
 import com.rochamarinho.utils.BackendException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class ReportTest {
     AdvogadoBackend advBackend;
 
     public ReportTest() {
+        super();
     }
 
     @Before
@@ -145,6 +147,11 @@ public class ReportTest {
 
     }
 
+    /**
+     * Primeiro script
+     * 
+     * @throws BackendException 
+     */
     @Test
     @Ignore
     public void gerandoFiliais() throws BackendException {
@@ -173,6 +180,8 @@ public class ReportTest {
         f11.setNome("Natal");
         Filial f12 = new Filial();
         f12.setNome("Blumenau");
+        Filial f13 = new Filial();
+        f13.setNome("Sousa");
 
 
         realFilialBackend.create(f1);
@@ -187,9 +196,19 @@ public class ReportTest {
         realFilialBackend.create(f10);
         realFilialBackend.create(f11);
         realFilialBackend.create(f12);
+        realFilialBackend.create(f13);
 
     }
-
+    /**
+     * 
+     * 
+     * 
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws InvalidFormatException
+     * @throws ParseException
+     * @throws BackendException 
+     */
     @Test
     public void importarDados() throws FileNotFoundException, IOException, InvalidFormatException, ParseException, BackendException {
 
@@ -205,10 +224,14 @@ public class ReportTest {
             adv = new Advogado();
             System.out.println(i);
             Row row = sheet.getRow(i);
-
+      
             String nome = row.getCell(0).getRichStringCellValue().getString();
             String uf = row.getCell(1).getRichStringCellValue().getString();
-            double oab = row.getCell(2).getNumericCellValue();
+           // remover as casas decimais
+            DecimalFormat decimal = new DecimalFormat("0.#");
+            double oabDouble = row.getCell(2).getNumericCellValue();
+            //transformar o double em String e sem a casa decimal 
+            String oab = decimal.format(oabDouble);
             String email = row.getCell(3).getRichStringCellValue().getString();
             double distribuicao = row.getCell(4).getNumericCellValue();
             String taxa = row.getCell(5).getRichStringCellValue().getString();
@@ -216,7 +239,8 @@ public class ReportTest {
             String associacao = row.getCell(7).getRichStringCellValue().getString();
             String filial = row.getCell(8).getRichStringCellValue().getString();
 
-            List<ValorMes> tabelaDeValores = gerarValores(row);
+
+            //List<ValorMes> tabelaDeValores = gerarValores(row);
             List<Pagamento> valoresPagos = gerarHistoricoDePagamento(row);
 
             System.out.println("advogado " + nome + "||"
@@ -226,7 +250,7 @@ public class ReportTest {
             
             adv.setNome(nome);
             adv.setUf(uf);
-            adv.setOab(oab + uf);
+            adv.setOab(uf + oab);
             adv.setAtivo(true);
             adv.setEmail(email);
             adv.setDistribuicao(distribuicao);
@@ -235,10 +259,7 @@ public class ReportTest {
             adv.setNascimento(formatter.parse(nascimento));
             adv.setSalarioTotal((12 * adv.getDistribuicao()) * (1 + (5.26 / 100)));
             
-            adv.setValores(tabelaDeValores);
             adv.setHistoricoPagamento(valoresPagos);
-
-            gerarRestanteDaTabelaDeValores(adv);
 
             Filial f = realFilialBackend.buscarPorNome(filial);
             f.addAdvogado(adv);
@@ -246,19 +267,10 @@ public class ReportTest {
         }
 
     }
-
-    protected List<ValorMes> gerarValores(Row row) {
-        List<ValorMes> valores = new ArrayList<ValorMes>();
-        valores.add(new ValorMes("janeiro", row.getCell(9).getNumericCellValue()));
-        valores.add(new ValorMes("fevereiro", row.getCell(10).getNumericCellValue()));
-        valores.add(new ValorMes("marco", row.getCell(11).getNumericCellValue()));
-        valores.add(new ValorMes("abril", row.getCell(12).getNumericCellValue()));
-        valores.add(new ValorMes("maio", row.getCell(13).getNumericCellValue()));
-        valores.add(new ValorMes("junho", row.getCell(14).getNumericCellValue()));
-        valores.add(new ValorMes("julho", row.getCell(15).getNumericCellValue()));
-        valores.add(new ValorMes("agosto", row.getCell(16).getNumericCellValue()));
-        return valores;
-    }
+    
+   
+    
+    
 
     protected List<Pagamento> gerarHistoricoDePagamento(Row row) throws ParseException {
 
@@ -267,6 +279,8 @@ public class ReportTest {
         calendar.setTime(date);
 
         List<Pagamento> pagamentos = new ArrayList<Pagamento>();
+        pagamentos.add(new Pagamento(calendar.getTime(), row.getCell(9).getNumericCellValue()));
+        calendar.add(Calendar.MONTH, 1);
         pagamentos.add(new Pagamento(calendar.getTime(), row.getCell(10).getNumericCellValue()));
         calendar.add(Calendar.MONTH, 1);
         pagamentos.add(new Pagamento(calendar.getTime(), row.getCell(11).getNumericCellValue()));
@@ -281,60 +295,24 @@ public class ReportTest {
         calendar.add(Calendar.MONTH, 1);
         pagamentos.add(new Pagamento(calendar.getTime(), row.getCell(16).getNumericCellValue()));
         calendar.add(Calendar.MONTH, 1);
-        pagamentos.add(new Pagamento(calendar.getTime(), row.getCell(16).getNumericCellValue()));
-
+        pagamentos.add(new Pagamento(calendar.getTime(), row.getCell(17).getNumericCellValue()));
+        calendar.add(Calendar.MONTH, 1);
+        pagamentos.add(new Pagamento(calendar.getTime(), row.getCell(18).getNumericCellValue()));
+        calendar.add(Calendar.MONTH, 1);
+        pagamentos.add(new Pagamento(calendar.getTime(), row.getCell(19).getNumericCellValue()));
+        calendar.add(Calendar.MONTH, 1);
+        pagamentos.add(new Pagamento(calendar.getTime(), row.getCell(20).getNumericCellValue()));
+        calendar.add(Calendar.MONTH, 1);
+        
+        
         return pagamentos;
     }
 
-    protected void gerarRestanteDaTabelaDeValores(Advogado adv) {
+    
+    
+    
 
-        double valorRecebido = 0.0;
-        List<ValorMes> valores = adv.getValores();
-
-        for (ValorMes each : adv.getValores()) {
-            valorRecebido += each.getValor();
-        }
-
-        double taxa = 5.26;
-        double salarioAnual = (12 * adv.getDistribuicao()) * (1 + (taxa / 100));
-        double valorAReceber = salarioAnual - valorRecebido;
-        double mediaAnual = valorAReceber / 4;
-        double valorMes;
-        boolean aumentarOuDiminuir;
-
-        String meses[] = {"setembro", "outubro", "novembro", "dezembro"};
-
-        for (int i = 0; i < 4; i++) {
-            double porcentagemParaAddOuSubtrair = Math.random();
-            double decidirSeSomaOuSubtrai = Math.random();
-            double valorMensal = 0.0;
-            aumentarOuDiminuir = decidirSeSomaOuSubtrai >= 0.5 ? true : false;
-
-
-            if (aumentarOuDiminuir) {
-                valorMensal = mediaAnual + (mediaAnual * (porcentagemParaAddOuSubtrair / 100));
-            } else {
-                valorMensal = mediaAnual - (mediaAnual * (porcentagemParaAddOuSubtrair / 100));
-            }
-
-            if (i == 3) { //ultimo
-                ValorMes ultimoValor = new ValorMes();
-                ultimoValor.setMes("dezembro");
-                ultimoValor.setValor(valorAReceber);  // para garantir que seja o restante que falta para completar o salarioAnual
-                valores.add(ultimoValor);
-                break;
-                //i++;
-
-            }
-            valores.add(new ValorMes(meses[i], valorMensal));
-            valorAReceber = valorAReceber - valorMensal;
-
-        }
-        adv.setValores(valores);
-
-    }
-
-    @Test
+    @Test 
     public void testarValoresCorretosParaAdvogados() throws BackendException
     {
         MySQLAdvogadoBackend realBackend = new MySQLAdvogadoBackend();
@@ -366,4 +344,17 @@ public class ReportTest {
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void gerarSalariosAnuaisFuturos() throws BackendException
+    {
+        MySQLAdvogadoBackend advogadoBackend = new MySQLAdvogadoBackend();
+        for ( Advogado each : advogadoBackend.listAll() )
+        {
+            each.gerarSalarios(5.26);
+            advogadoBackend.update(each);
+        }
+        
+    }
+
 }
