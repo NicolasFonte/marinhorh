@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +23,7 @@ public class AdvogadoController {
     private MySQLAdvogadoBackend advogadoBackend;
     private MySQLFilialBackend filialBackend;
     private MySQLTaxaBackend taxaBackend;
-    static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     public AdvogadoController() {
     }
@@ -98,10 +99,10 @@ public class AdvogadoController {
         this.filialBackend = filialBackend;
     }
 
-    public boolean atualizarAdvogado(String oab, String nome, double distribuicao,
+    public boolean atualizarAdvogado(Advogado advAntigo,String oab, String nome, double distribuicao,
             String filialNome, String associacaoTexto, String nascimentoTexto, String email, String uf, boolean usaTaxa) throws BackendException, ParseException {
 
-        Advogado adv = getBackend().byOab(oab);
+        Advogado adv = getBackend().byOab(advAntigo.getOab());
         double distribuicaoAntiga = adv.getDistribuicao();
 
         adv.setOab(oab);
@@ -111,11 +112,9 @@ public class AdvogadoController {
         adv.setUf(uf);
 
         Date associacaoData = formatter.parse(associacaoTexto);
-        Date nascimentoData = formatter.parse(nascimentoTexto);
-
+        
         adv.setAssociacao(associacaoData);
-        adv.setNascimento(nascimentoData);
-
+        
         double taxa = adv.isUsaTaxa() ? getTaxaBackend().read(1L).getValor() : 0.0;
 
         if ( Math.abs(distribuicaoAntiga - distribuicao) > 1.0)
@@ -124,6 +123,38 @@ public class AdvogadoController {
         }
         
         getBackend().update(adv);        
+        
+        //atualizar filial
+        
+        //remover da filial antiga
+        List<Filial> filiais = filialBackend.list();
+        for (int i = 0; i < filiais.size(); i ++)
+        {
+            List<Advogado> advs = filiais.get(i).getAdvogados();
+            for (int j = 0;  j < advs.size(); j ++ )
+            {
+                
+                if (advs.get(j).getId().equals(adv.getId()))
+                {
+                    advs.remove(j);
+                    break;
+                }
+            }
+        filiais.get(i).setAdvogados(advs);
+        getFilialBackend().update(filiais.get(i));        
+        }
+        
+        // adicionar na nova filial
+         
+        Filial filialASerAtualizada = getFilialBackend().buscarPorNome(filialNome);
+        filialASerAtualizada.addAdvogado(adv);
+        getFilialBackend().update(filialASerAtualizada);  
+        
+        //
+        
+        
+        
+        JOptionPane.showMessageDialog(null, "Advogado Atualizado com sucesso");
         return true;
     }
 

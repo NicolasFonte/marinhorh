@@ -274,7 +274,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         
         try {
             double distribuicaoDouble = Double.valueOf(advDistribuicaoText);
-            advController.atualizarAdvogado(advOabText, advNomeText,
+            advController.atualizarAdvogado(this.adv, advOabText, advNomeText,
                     distribuicaoDouble, nomeFilial, dataAssociacaoTexto, dataNascimentoTexto, email, ufTexto,usaTaxa);
 
         } catch (NumberFormatException nfe)
@@ -391,6 +391,8 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void setFiliaisNoComboBox() {
+        
+        //preenchendo filiais
         List<Filial> filiais = null;
         try {
             filiais = filialController.listarFiliais();
@@ -398,13 +400,45 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
             JOptionPane.showConfirmDialog(null, "Nao foi possivel carregar a lista de filiais");
             filiais = new ArrayList<Filial>();
         }
-
-
+        
         List<String> filiaisNomes = new ArrayList<String>();
         for (Filial f : filiais) {
             filiaisNomes.add(f.getNome());
         }
         filialComboBox.setModel(new javax.swing.DefaultComboBoxModel(filiaisNomes.toArray()));
+        
+        //mostrar filial corrente.
+        
+        //Pega filial do advogado
+        String filialDoAdvogado = "";
+        for (Filial each : filiais )
+        {
+            for (Advogado eachAdvogado : each.getAdvogados())
+            {
+                if (eachAdvogado.getNome().equals(this.adv.getNome()))
+                {
+                    filialDoAdvogado = each.getNome();
+                    break;
+                }
+            }
+        }
+        
+        //seta essa filial no combobox
+        int indiceComAFilial = 0;
+        for (int i = 0; i < filialComboBox.getItemCount(); i++ )
+        {
+            String nome = (String) filialComboBox.getItemAt(i);            
+            if (nome.equals(filialDoAdvogado)){
+                indiceComAFilial = i;
+                break;
+            }                    
+        }
+        
+        filialComboBox.setSelectedIndex(indiceComAFilial);
+        
+        
+        
+        
     }
 
     private boolean existeFilial() {
@@ -434,7 +468,7 @@ public class EditarAdvogadoPanel extends javax.swing.JPanel {
         txtEmail.setText(partes[0]);
         
         
-        txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()));
+        txtDistribuicao.setText(String.valueOf(adv.getDistribuicao()).replace(".", ","));
                 
         fmtAssociacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(adv.getAssociacao()));        
         
