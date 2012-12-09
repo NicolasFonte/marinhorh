@@ -45,8 +45,8 @@ public class AdvogadoController {
 
         adv.setAssociacao(associacaoData);
         adv.setNascimento(nascimentoData);
-        adv.setUsaTaxa(usaTaxa);    
-        
+        adv.setUsaTaxa(usaTaxa);
+
         double taxa = usaTaxa ? getTaxaBackend().read(1L).getValor() : 0.0;
 
         adv.gerarSalarios(taxa);// IMPORTANTE!
@@ -99,7 +99,7 @@ public class AdvogadoController {
         this.filialBackend = filialBackend;
     }
 
-    public boolean atualizarAdvogado(Advogado advAntigo,String oab, String nome, double distribuicao,
+    public boolean atualizarAdvogado(Advogado advAntigo, String oab, String nome, double distribuicao,
             String filialNome, String associacaoTexto, String nascimentoTexto, String email, String uf, boolean usaTaxa) throws BackendException, ParseException {
 
         Advogado adv = getBackend().byOab(advAntigo.getOab());
@@ -112,48 +112,48 @@ public class AdvogadoController {
         adv.setUf(uf);
 
         Date associacaoData = formatter.parse(associacaoTexto);
-        
+
         adv.setAssociacao(associacaoData);
-        
+
         double taxa = adv.isUsaTaxa() ? getTaxaBackend().read(1L).getValor() : 0.0;
 
-        if ( Math.abs(distribuicaoAntiga - distribuicao) > 1.0)
-        {
+        if (Math.abs(distribuicaoAntiga - distribuicao) > 1.0) {
             adv.gerarSalarios(taxa);
         }
-        
-        getBackend().update(adv);        
-        
+
+        getBackend().update(adv);
+
         //atualizar filial
-        
+
         //remover da filial antiga
-        List<Filial> filiais = filialBackend.list();
-        for (int i = 0; i < filiais.size(); i ++)
-        {
+        List<Filial> filiais = getFilialBackend().list();
+        boolean isDeleted = false;
+        for (int i = 0; i < filiais.size(); i++) {
             List<Advogado> advs = filiais.get(i).getAdvogados();
-            for (int j = 0;  j < advs.size(); j ++ )
-            {
-                
-                if (advs.get(j).getId().equals(adv.getId()))
-                {
+            for (int j = 0; j < advs.size(); j++) {
+
+                if (advs.get(j).getId().equals(adv.getId())) {
                     advs.remove(j);
-                    break;
+                    filiais.get(i).setAdvogados(advs);
+                    getFilialBackend().update(filiais.get(i));
+                    isDeleted = true;
                 }
             }
-        filiais.get(i).setAdvogados(advs);
-        getFilialBackend().update(filiais.get(i));        
+            if (isDeleted) {
+                break;
+            }
         }
-        
+
         // adicionar na nova filial
-         
+
         Filial filialASerAtualizada = getFilialBackend().buscarPorNome(filialNome);
         filialASerAtualizada.addAdvogado(adv);
-        getFilialBackend().update(filialASerAtualizada);  
-        
+        getFilialBackend().update(filialASerAtualizada);
+
         //
-        
-        
-        
+
+
+
         JOptionPane.showMessageDialog(null, "Advogado Atualizado com sucesso");
         return true;
     }
