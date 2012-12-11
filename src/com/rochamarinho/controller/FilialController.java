@@ -30,12 +30,17 @@ public class FilialController {
         this.backend = backend;
     }
     
-    public void cadastrarFilial(String nome) throws BackendException
+    public boolean cadastrarFilial(String nome) throws BackendException
     {
+        if (getBackend().buscarPorNome(nome) != null)
+        {
+            return false;
+        }               
         Filial filial = new Filial();
         filial.setNome(nome);
         
         getBackend().create(filial);
+        return true;
     }
     
     public List<Filial> listarFiliais() throws BackendException

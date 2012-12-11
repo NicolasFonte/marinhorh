@@ -170,9 +170,16 @@ public class CadastrarFilial extends javax.swing.JPanel {
         String filNomeText = txtNome.getText();
 
         try {
-            filialController.cadastrarFilial(filNomeText);
+            boolean naoCadastrada = filialController.cadastrarFilial(filNomeText);
+            
+            if (!naoCadastrada)
+            {
+                JOptionPane.showMessageDialog(null, "Filial já cadastrada!");
+                return;
+            }
+            
         } catch (BackendException ex) {
-            JOptionPane.showMessageDialog(null, "Filial não Cadastrada!");
+            JOptionPane.showMessageDialog(null, "Filial não Cadastrada devido a um problema de conexão!");
         }
         JOptionPane.showMessageDialog(null, "Filial cadastrado com sucesso!");
         setFiliaisNoComboBox();
