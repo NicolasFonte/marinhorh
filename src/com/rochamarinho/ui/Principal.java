@@ -220,7 +220,7 @@ public class Principal extends javax.swing.JFrame {
     private void itemMenuEfetuarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {                                                         
         
         
-        Date selecionada = new Date();
+        Date selecionada = new Date(System.currentTimeMillis());
         Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
         
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja efetuar o pagamento de " + numeroMes.get(calendar.get(Calendar.MONTH)) + " ?" );

@@ -63,12 +63,16 @@ public class Begin {
             calendarioAtual.setTime(atual);
 
             Calendar calendarioUltimoPagamento = Calendar.getInstance(Locale.ENGLISH);
-            calendarioUltimoPagamento.setTime(atual);
+            calendarioUltimoPagamento.setTime(pg.getDataPagamento());
 
             int mesAtual = calendarioAtual.get(Calendar.MONTH);
             int ultimoPagamento = calendarioUltimoPagamento.get(Calendar.MONTH);
+            
+            int anoAtual = calendarioAtual.get(Calendar.YEAR);
+            int anoUltimoPagamento = calendarioUltimoPagamento.get(Calendar.YEAR);
+            
 
-            if (mesAtual != ultimoPagamento) {
+            if ((mesAtual != ultimoPagamento) || (anoAtual != anoUltimoPagamento)) {
                 return false;
             }
 
