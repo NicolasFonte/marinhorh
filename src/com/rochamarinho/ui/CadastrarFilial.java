@@ -168,6 +168,12 @@ public class CadastrarFilial extends javax.swing.JPanel {
 
     private void btnCadastrarFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFilialActionPerformed
         String filNomeText = txtNome.getText();
+        
+        if ("".equals(filNomeText))
+        {
+            JOptionPane.showMessageDialog(null, "Digite um nome não vazio!");
+            return;
+        }
 
         try {
             boolean naoCadastrada = filialController.cadastrarFilial(filNomeText);
