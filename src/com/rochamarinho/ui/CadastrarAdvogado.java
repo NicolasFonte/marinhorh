@@ -273,7 +273,7 @@ public class CadastrarAdvogado extends javax.swing.JPanel {
         boolean usaTaxa = checkBoxTaxa.isSelected();
         
         String advNomeText = txtNome.getText();
-        String advOabText = fmtOab.getText().replace(".", "").replace(" ", "");
+        String advOabText = fmtOab.getText().replace(".", "").replace(" ", "").replace(",", "");
 
         String advDistribuicaoText = txtDistribuicao.getText().replace(".", "").replace(",", ".");
         String nomeFilial = (String) filialComboBox.getSelectedItem();
